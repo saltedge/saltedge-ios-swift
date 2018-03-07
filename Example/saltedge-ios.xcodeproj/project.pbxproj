@@ -1,0 +1,759 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		607FACD81AFB9204008FA782 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ConnectViewController.swift */; };
+		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		62A65552EFF1E84D582977D7 /* Pods_saltedge_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */; };
+		AE05129D201F3EE1000E5F64 /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE05129C201F3EE1000E5F64 /* OptionsButton.swift */; };
+		AE1BFDE41FFE722200AD44D5 /* HTTPServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0CB9F51FFE46FC00006FF2 /* HTTPServiceSpec.swift */; };
+		AE21EFCA20233C8C0016A096 /* SERequestManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21EFC920233C8C0016A096 /* SERequestManagerSpec.swift */; };
+		AE22B306202347380048C907 /* ParametersEncodableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22B305202347380048C907 /* ParametersEncodableSpec.swift */; };
+		AE22B308202351530048C907 /* URLEncodableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22B307202351530048C907 /* URLEncodableSpec.swift */; };
+		AE22B30B20235E1B0048C907 /* DateUtilsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22B30A20235E1B0048C907 /* DateUtilsSpec.swift */; };
+		AE22B30D202360FC0048C907 /* DictionaryExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22B30C202360FC0048C907 /* DictionaryExtensionsSpec.swift */; };
+		AE22B30F202369670048C907 /* URLExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22B30E202369670048C907 /* URLExtensionsSpec.swift */; };
+		AE299B4320178F440033FCFB /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE299B4220178F440033FCFB /* UserDefaultsHelper.swift */; };
+		AE299B472017A3460033FCFB /* AccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE299B462017A3450033FCFB /* AccountsViewController.swift */; };
+		AE299B492017A8F80033FCFB /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE299B482017A8F80033FCFB /* TransactionsViewController.swift */; };
+		AE299B4E2017AD4E0033FCFB /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE299B4D2017AD4E0033FCFB /* TransactionTableViewCell.swift */; };
+		AE31B4BC201B5EC700D00382 /* CredentialTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE31B4BB201B5EC700D00382 /* CredentialTextField.swift */; };
+		AE3859B2202207DB009A2991 /* HeadersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3859B1202207DB009A2991 /* HeadersSpec.swift */; };
+		AE3859B420220D98009A2991 /* RoutableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3859B320220D98009A2991 /* RoutableSpec.swift */; };
+		AE9F52CA20164A7A0057FE09 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52C920164A7A0057FE09 /* CreateViewController.swift */; };
+		AE9F52CC20164A870057FE09 /* LoginsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CB20164A870057FE09 /* LoginsViewController.swift */; };
+		AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */; };
+		AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851412018E65700127D70 /* AttemptsViewController.swift */; };
+		AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851432018E9B200127D70 /* AttemptViewController.swift */; };
+		AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = AEEB6CF62050583D00E5A673 /* saltedge.com.cer */; };
+		AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */; };
+		EC29ED2E297026BA53E579C4 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = "saltedge-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		2F8F836515E2FE1D73FFCE62 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
+		607FACD01AFB9204008FA782 /* saltedge-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "saltedge-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		607FACE51AFB9204008FA782 /* saltedge-ios_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "saltedge-ios_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		85538029745105922B2922DF /* SaltEdge-iOS-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "SaltEdge-iOS-Swift.podspec"; path = "../SaltEdge-iOS-Swift.podspec"; sourceTree = "<group>"; };
+		AE05129C201F3EE1000E5F64 /* OptionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsButton.swift; sourceTree = "<group>"; };
+		AE0CB9F51FFE46FC00006FF2 /* HTTPServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceSpec.swift; sourceTree = "<group>"; };
+		AE21EFC920233C8C0016A096 /* SERequestManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERequestManagerSpec.swift; sourceTree = "<group>"; };
+		AE22B305202347380048C907 /* ParametersEncodableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersEncodableSpec.swift; sourceTree = "<group>"; };
+		AE22B307202351530048C907 /* URLEncodableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEncodableSpec.swift; sourceTree = "<group>"; };
+		AE22B30A20235E1B0048C907 /* DateUtilsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilsSpec.swift; sourceTree = "<group>"; };
+		AE22B30C202360FC0048C907 /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
+		AE22B30E202369670048C907 /* URLExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionsSpec.swift; sourceTree = "<group>"; };
+		AE299B4220178F440033FCFB /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		AE299B462017A3450033FCFB /* AccountsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsViewController.swift; sourceTree = "<group>"; };
+		AE299B482017A8F80033FCFB /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
+		AE299B4D2017AD4E0033FCFB /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		AE31B4BB201B5EC700D00382 /* CredentialTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTextField.swift; sourceTree = "<group>"; };
+		AE3859B1202207DB009A2991 /* HeadersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersSpec.swift; sourceTree = "<group>"; };
+		AE3859B320220D98009A2991 /* RoutableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutableSpec.swift; sourceTree = "<group>"; };
+		AE9F52C920164A7A0057FE09 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		AE9F52CB20164A870057FE09 /* LoginsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginsViewController.swift; sourceTree = "<group>"; };
+		AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
+		AEB851412018E65700127D70 /* AttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsViewController.swift; sourceTree = "<group>"; };
+		AEB851432018E9B200127D70 /* AttemptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptViewController.swift; sourceTree = "<group>"; };
+		AEEB6CF62050583D00E5A673 /* saltedge.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = saltedge.com.cer; sourceTree = "<group>"; };
+		AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A5E9B41CDB74D9850DC586 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		607FACCD1AFB9204008FA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62A65552EFF1E84D582977D7 /* Pods_saltedge_ios_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE21AFB9204008FA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC29ED2E297026BA53E579C4 /* Pods_saltedge_ios_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		607FACC71AFB9204008FA782 = {
+			isa = PBXGroup;
+			children = (
+				607FACF51AFB993E008FA782 /* Podspec Metadata */,
+				607FACD21AFB9204008FA782 /* Example for saltedge-ios */,
+				607FACE81AFB9204008FA782 /* Tests */,
+				607FACD11AFB9204008FA782 /* Products */,
+				96F79481E74988E602F5869F /* Pods */,
+				B215E65FF7AE825B3D8F36C6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		607FACD11AFB9204008FA782 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD01AFB9204008FA782 /* saltedge-ios_Example.app */,
+				607FACE51AFB9204008FA782 /* saltedge-ios_Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		607FACD21AFB9204008FA782 /* Example for saltedge-ios */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				AE299B3E20178F160033FCFB /* View Controllers */,
+				AE31B4BA201B5EB300D00382 /* Components */,
+				AE299B4120178F370033FCFB /* Utils */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACD31AFB9204008FA782 /* Supporting Files */,
+			);
+			name = "Example for saltedge-ios";
+			path = "saltedge-ios";
+			sourceTree = "<group>";
+		};
+		607FACD31AFB9204008FA782 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AEEB6CF62050583D00E5A673 /* saltedge.com.cer */,
+				607FACD41AFB9204008FA782 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		607FACE81AFB9204008FA782 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AE0CB9F41FFE46DF00006FF2 /* API */,
+				AE22B30920235E010048C907 /* Extensions */,
+				607FACE91AFB9204008FA782 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		607FACE91AFB9204008FA782 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				607FACEA1AFB9204008FA782 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				85538029745105922B2922DF /* SaltEdge-iOS-Swift.podspec */,
+				2F8F836515E2FE1D73FFCE62 /* README.md */,
+				E2A5E9B41CDB74D9850DC586 /* LICENSE */,
+			);
+			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		96F79481E74988E602F5869F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */,
+				418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */,
+				21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */,
+				61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AE0CB9F41FFE46DF00006FF2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				AE0CB9F51FFE46FC00006FF2 /* HTTPServiceSpec.swift */,
+				AE3859B1202207DB009A2991 /* HeadersSpec.swift */,
+				AE3859B320220D98009A2991 /* RoutableSpec.swift */,
+				AE21EFC920233C8C0016A096 /* SERequestManagerSpec.swift */,
+				AE21EFCB202345480016A096 /* Protocols */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		AE21EFCB202345480016A096 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AE22B305202347380048C907 /* ParametersEncodableSpec.swift */,
+				AE22B307202351530048C907 /* URLEncodableSpec.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		AE22B30920235E010048C907 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE22B30A20235E1B0048C907 /* DateUtilsSpec.swift */,
+				AE22B30C202360FC0048C907 /* DictionaryExtensionsSpec.swift */,
+				AE22B30E202369670048C907 /* URLExtensionsSpec.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AE299B3E20178F160033FCFB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AE299B462017A3450033FCFB /* AccountsViewController.swift */,
+				607FACD71AFB9204008FA782 /* ConnectViewController.swift */,
+				AE9F52C920164A7A0057FE09 /* CreateViewController.swift */,
+				AE9F52CB20164A870057FE09 /* LoginsViewController.swift */,
+				AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */,
+				AE299B482017A8F80033FCFB /* TransactionsViewController.swift */,
+				AEB851412018E65700127D70 /* AttemptsViewController.swift */,
+				AEB851432018E9B200127D70 /* AttemptViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		AE299B4120178F370033FCFB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AE299B4220178F440033FCFB /* UserDefaultsHelper.swift */,
+				AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AE299B4A2017ACD10033FCFB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AE299B4D2017AD4E0033FCFB /* TransactionTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AE31B4BA201B5EB300D00382 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AE299B4A2017ACD10033FCFB /* Cells */,
+				AE31B4BB201B5EC700D00382 /* CredentialTextField.swift */,
+				AE05129C201F3EE1000E5F64 /* OptionsButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B215E65FF7AE825B3D8F36C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */,
+				0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		607FACCF1AFB9204008FA782 /* saltedge-ios_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Example" */;
+			buildPhases = (
+				73BD0AF59DF41DAEBDEA1188 /* [CP] Check Pods Manifest.lock */,
+				607FACCC1AFB9204008FA782 /* Sources */,
+				607FACCD1AFB9204008FA782 /* Frameworks */,
+				607FACCE1AFB9204008FA782 /* Resources */,
+				F45E5544F2FA28E007F5F2C7 /* [CP] Embed Pods Frameworks */,
+				6812AD4E85B19149A1A6E321 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "saltedge-ios_Example";
+			productName = "saltedge-ios";
+			productReference = 607FACD01AFB9204008FA782 /* saltedge-ios_Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		607FACE41AFB9204008FA782 /* saltedge-ios_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Tests" */;
+			buildPhases = (
+				A162C43EFBD37602D776E64C /* [CP] Check Pods Manifest.lock */,
+				607FACE11AFB9204008FA782 /* Sources */,
+				607FACE21AFB9204008FA782 /* Frameworks */,
+				607FACE31AFB9204008FA782 /* Resources */,
+				6EE6234AAEF2419C2B545402 /* [CP] Embed Pods Frameworks */,
+				B0BC895A79FF983345088918 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+			);
+			name = "saltedge-ios_Tests";
+			productName = Tests;
+			productReference = 607FACE51AFB9204008FA782 /* saltedge-ios_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		607FACC81AFB9204008FA782 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = CocoaPods;
+				TargetAttributes = {
+					607FACCF1AFB9204008FA782 = {
+						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0900;
+					};
+					607FACE41AFB9204008FA782 = {
+						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0900;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+				};
+			};
+			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "saltedge-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 607FACC71AFB9204008FA782;
+			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				607FACCF1AFB9204008FA782 /* saltedge-ios_Example */,
+				607FACE41AFB9204008FA782 /* saltedge-ios_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		607FACCE1AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */,
+				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE31AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6812AD4E85B19149A1A6E321 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6EE6234AAEF2419C2B545402 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73BD0AF59DF41DAEBDEA1188 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-saltedge-ios_Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A162C43EFBD37602D776E64C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-saltedge-ios_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0BC895A79FF983345088918 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F45E5544F2FA28E007F5F2C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SaltEdge-iOS-Swift/SaltEdge.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SaltEdge.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		607FACCC1AFB9204008FA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */,
+				AE299B4320178F440033FCFB /* UserDefaultsHelper.swift in Sources */,
+				AE9F52CC20164A870057FE09 /* LoginsViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* ConnectViewController.swift in Sources */,
+				AE31B4BC201B5EC700D00382 /* CredentialTextField.swift in Sources */,
+				AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */,
+				AE05129D201F3EE1000E5F64 /* OptionsButton.swift in Sources */,
+				AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */,
+				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				AE299B472017A3460033FCFB /* AccountsViewController.swift in Sources */,
+				AE299B492017A8F80033FCFB /* TransactionsViewController.swift in Sources */,
+				AE299B4E2017AD4E0033FCFB /* TransactionTableViewCell.swift in Sources */,
+				AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */,
+				AE9F52CA20164A7A0057FE09 /* CreateViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		607FACE11AFB9204008FA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE22B30F202369670048C907 /* URLExtensionsSpec.swift in Sources */,
+				AE1BFDE41FFE722200AD44D5 /* HTTPServiceSpec.swift in Sources */,
+				AE21EFCA20233C8C0016A096 /* SERequestManagerSpec.swift in Sources */,
+				AE3859B2202207DB009A2991 /* HeadersSpec.swift in Sources */,
+				AE22B30D202360FC0048C907 /* DictionaryExtensionsSpec.swift in Sources */,
+				AE22B30B20235E1B0048C907 /* DateUtilsSpec.swift in Sources */,
+				AE3859B420220D98009A2991 /* RoutableSpec.swift in Sources */,
+				AE22B308202351530048C907 /* URLEncodableSpec.swift in Sources */,
+				AE22B306202347380048C907 /* ParametersEncodableSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* saltedge-ios_Example */;
+			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				607FACDA1AFB9204008FA782 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				607FACDF1AFB9204008FA782 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		607FACED1AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		607FACEE1AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		607FACF01AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "saltedge-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saltedge.Salt-Edge-API-Swift-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		607FACF11AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "saltedge-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.saltedge.Salt-Edge-API-Swift-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		607FACF31AFB9204008FA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		607FACF41AFB9204008FA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "saltedge-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACED1AFB9204008FA782 /* Debug */,
+				607FACEE1AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACF01AFB9204008FA782 /* Debug */,
+				607FACF11AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				607FACF31AFB9204008FA782 /* Debug */,
+				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
+}
