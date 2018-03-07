@@ -26,7 +26,7 @@ Import SDK into your app
 ## Connecting logins using the sample app
 
 1. Install dependencies by running `$ pod install`
-2. Replace the `clientId`, `secret` and `customerIdentifier` constants in [AppDelegate.m:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.m#L49-L51) with your Client ID and corresponding App secret
+2. Replace the `clientId`, `secret` and `customerIdentifier` constants in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51) with your Client ID and corresponding App secret
 3. Run the app
 
 *Note*: You can find your Client ID and App secret at your [secrets](https://www.saltedge.com/clients/profile/secrets) page.
@@ -166,7 +166,7 @@ Documentation is available for all of the components. Use quick documentation (A
 ## Running the demo
 
 To run the demo app contained in here, you have to provide the demo with your client ID, app secret, and a customer identifier.
-Set up the `clientId`, `appSecret` and `customerIdentifier` constants to your Client ID and corresponding App secret in [AppDelegate.m:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.m#L49-L51).
+Set up the `clientId`, `appSecret` and `customerIdentifier` constants to your Client ID and corresponding App secret in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51).
 
 ## Versioning
 
