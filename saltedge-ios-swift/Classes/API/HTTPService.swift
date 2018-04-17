@@ -22,6 +22,7 @@
 //  THE SOFTWARE.
 
 import Foundation
+import TrustKit
 
 /**
  Used to represent whether a request was successful or encountered an error.
@@ -37,7 +38,6 @@ public enum SEResult<T: Decodable> {
     case failure(Error)
 }
 
-// NOTE: Add SSL pinning
 struct SessionManager {
     static var shared: URLSession {
         guard sharedManager == nil else { return sharedManager }
@@ -49,57 +49,44 @@ struct SessionManager {
     private static var sharedManager: URLSession!
     
     static func initializeManager(isSSLPinningEnabled: Bool = true) {
+        sharedManager = createSession(isSSLPinningEnabled: isSSLPinningEnabled)
+    }
+    
+    static func createSession(isSSLPinningEnabled: Bool = true) -> URLSession {
         let config: URLSessionConfiguration = .default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        
-        if isSSLPinningEnabled && Bundle.main.path(forResource: "saltedge.com", ofType: "cer") == nil {
-            preconditionFailure("The saltedge.com SSL certificate could not be located in the app bundle (saltedge.com.cer). SSL pinning will not be possible without it.")
-        }
-        sharedManager = URLSession(configuration: config, delegate: URLSessionPinningDelegate(isSSLPinningEnabled: isSSLPinningEnabled), delegateQueue: nil)
+    
+        return URLSession(
+            configuration: config,
+            delegate: URLSessionPinningDelegate(isSSLPinningEnabled: isSSLPinningEnabled),
+            delegateQueue: nil
+        )
     }
 }
 
-class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
+private class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
     let isSSLPinningEnabled: Bool
     
     init(isSSLPinningEnabled: Bool) {
         self.isSSLPinningEnabled = isSSLPinningEnabled
         super.init()
     }
-    
+  
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
                     completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
             let serverTrust = challenge.protectionSpace.serverTrust {
             
-            var secResult = SecTrustResultType.invalid
-            let status = SecTrustEvaluate(serverTrust, &secResult)
-            
             guard isSSLPinningEnabled else {
                 completionHandler(.useCredential, URLCredential(trust: serverTrust))
                 return
             }
-
-            if errSecSuccess == status,
-                let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
-                
-                let serverCertificateData = SecCertificateCopyData(serverCertificate)
-                let data = CFDataGetBytePtr(serverCertificateData)
-                let size = CFDataGetLength(serverCertificateData)
-                let remoteCertificateData = NSData(bytes: data, length: size)
-
-                if let localCertificate = Bundle.main.path(forResource: "saltedge.com", ofType: "cer"),
-                    let localCertificateData = NSData(contentsOfFile: localCertificate),
-                    remoteCertificateData.isEqual(to: localCertificateData as Data) {
-                    completionHandler(.useCredential, URLCredential(trust: serverTrust))
-                    return
-                }
+            
+            if !TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completionHandler) {
+                completionHandler(.performDefaultHandling, nil)
             }
         }
-
-        completionHandler(.cancelAuthenticationChallenge, nil)
-        print("*** SSL Pinning FAILED *** Request to \(challenge.protectionSpace.host) cancelled.")
     }
 }
 
@@ -168,7 +155,14 @@ struct HTTPService<T: Decodable> {
                 DispatchQueue.main.async { completion?(.failure(error)) }
             }
         }
-        task.resume()
+
+        TrustKitHelper.setup { error in
+            if let error = error {
+                completion?(.failure(error))
+            } else {
+                task.resume()
+            }
+        }
     }
 }
 
@@ -189,6 +183,29 @@ func handleResponse(from data: Data?, error: Error?, decoder: JSONDecoder) -> (D
     }
     
     return (jsonData, nil)
+}
+
+
+extension URLRequest {
+    func debugLog() {
+        print("\n\nRequest:")
+        debugPrint(self)
+        print("\n\n")
+        
+        if let body = self.httpBody {
+            print("\n\nBody:")
+            debugPrint(String(data: body, encoding: .utf8))
+            print("\n\n")
+        }
+    }
+}
+
+extension Data {
+    func debugLog() {
+        print("\n\nResponse:")
+        debugPrint(String(data: self, encoding: .utf8))
+        print("\n\n")
+    }
 }
 
 

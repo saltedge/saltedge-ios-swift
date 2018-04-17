@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '10.0'
   s.module_name = 'SaltEdge'
+  s.dependency 'TrustKit'
 
   s.source_files = 'saltedge-ios-swift/Classes/**/*'
 end
