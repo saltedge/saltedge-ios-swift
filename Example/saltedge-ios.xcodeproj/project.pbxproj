@@ -34,7 +34,6 @@
 		AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851412018E65700127D70 /* AttemptsViewController.swift */; };
 		AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851432018E9B200127D70 /* AttemptViewController.swift */; };
 		AEDCBB0920860F1A004D0A43 /* HPKPParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */; };
-		AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = AEEB6CF62050583D00E5A673 /* saltedge.com.cer */; };
 		AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */; };
 		AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */; };
 		D33E24B0AA9D041B85E197C7 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */; };
@@ -89,7 +88,6 @@
 		AEB851412018E65700127D70 /* AttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsViewController.swift; sourceTree = "<group>"; };
 		AEB851432018E9B200127D70 /* AttemptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptViewController.swift; sourceTree = "<group>"; };
 		AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPKPParserSpec.swift; sourceTree = "<group>"; };
-		AEEB6CF62050583D00E5A673 /* saltedge.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = saltedge.com.cer; sourceTree = "<group>"; };
 		AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEUserDefaultHelperSpec.swift; sourceTree = "<group>"; };
 		E2A5E9B41CDB74D9850DC586 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AEEB6CF62050583D00E5A673 /* saltedge.com.cer */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -383,7 +380,6 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
