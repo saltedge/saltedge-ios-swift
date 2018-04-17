@@ -184,28 +184,3 @@ func handleResponse(from data: Data?, error: Error?, decoder: JSONDecoder) -> (D
     
     return (jsonData, nil)
 }
-
-
-extension URLRequest {
-    func debugLog() {
-        print("\n\nRequest:")
-        debugPrint(self)
-        print("\n\n")
-        
-        if let body = self.httpBody {
-            print("\n\nBody:")
-            debugPrint(String(data: body, encoding: .utf8))
-            print("\n\n")
-        }
-    }
-}
-
-extension Data {
-    func debugLog() {
-        print("\n\nResponse:")
-        debugPrint(String(data: self, encoding: .utf8))
-        print("\n\n")
-    }
-}
-
-
