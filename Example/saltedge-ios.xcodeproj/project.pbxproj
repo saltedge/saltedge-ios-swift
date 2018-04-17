@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4910DA9CF8C95D0FAB8400ED /* Pods_saltedge_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9091C52E7B273302ABC0152C /* Pods_saltedge_ios_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ConnectViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		62A65552EFF1E84D582977D7 /* Pods_saltedge_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */; };
 		AE05129D201F3EE1000E5F64 /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE05129C201F3EE1000E5F64 /* OptionsButton.swift */; };
 		AE1BFDE41FFE722200AD44D5 /* HTTPServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0CB9F51FFE46FC00006FF2 /* HTTPServiceSpec.swift */; };
 		AE21EFCA20233C8C0016A096 /* SERequestManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21EFC920233C8C0016A096 /* SERequestManagerSpec.swift */; };
@@ -33,9 +33,10 @@
 		AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */; };
 		AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851412018E65700127D70 /* AttemptsViewController.swift */; };
 		AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851432018E9B200127D70 /* AttemptViewController.swift */; };
-		AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = AEEB6CF62050583D00E5A673 /* saltedge.com.cer */; };
+		AEDCBB0920860F1A004D0A43 /* HPKPParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */; };
 		AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */; };
-		EC29ED2E297026BA53E579C4 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */; };
+		AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */; };
+		D33E24B0AA9D041B85E197C7 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,10 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		088762EB23D8C3470C71837E /* Pods-saltedge-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		08D24DDB328B0CE27A561D9C /* Pods-saltedge-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2F8F836515E2FE1D73FFCE62 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
+		34DF42CCB71418C78C58590B /* Pods-saltedge-ios_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* saltedge-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "saltedge-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,8 +64,9 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* saltedge-ios_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "saltedge-ios_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		85538029745105922B2922DF /* SaltEdge-iOS-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "SaltEdge-iOS-Swift.podspec"; path = "../SaltEdge-iOS-Swift.podspec"; sourceTree = "<group>"; };
+		85538029745105922B2922DF /* SaltEdge-iOS-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "SaltEdge-iOS-Swift.podspec"; path = "../SaltEdge-iOS-Swift.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9091C52E7B273302ABC0152C /* Pods_saltedge_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9272D600EC690297D58E6E14 /* Pods-saltedge-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AE05129C201F3EE1000E5F64 /* OptionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsButton.swift; sourceTree = "<group>"; };
 		AE0CB9F51FFE46FC00006FF2 /* HTTPServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServiceSpec.swift; sourceTree = "<group>"; };
 		AE21EFC920233C8C0016A096 /* SERequestManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERequestManagerSpec.swift; sourceTree = "<group>"; };
@@ -84,11 +87,10 @@
 		AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		AEB851412018E65700127D70 /* AttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsViewController.swift; sourceTree = "<group>"; };
 		AEB851432018E9B200127D70 /* AttemptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptViewController.swift; sourceTree = "<group>"; };
-		AEEB6CF62050583D00E5A673 /* saltedge.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = saltedge.com.cer; sourceTree = "<group>"; };
+		AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPKPParserSpec.swift; sourceTree = "<group>"; };
 		AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEUserDefaultHelperSpec.swift; sourceTree = "<group>"; };
 		E2A5E9B41CDB74D9850DC586 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62A65552EFF1E84D582977D7 /* Pods_saltedge_ios_Example.framework in Frameworks */,
+				4910DA9CF8C95D0FAB8400ED /* Pods_saltedge_ios_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,13 +106,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC29ED2E297026BA53E579C4 /* Pods_saltedge_ios_Tests.framework in Frameworks */,
+				D33E24B0AA9D041B85E197C7 /* Pods_saltedge_ios_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EA4FC67AB51303AC8D7CF1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9272D600EC690297D58E6E14 /* Pods-saltedge-ios_Example.debug.xcconfig */,
+				08D24DDB328B0CE27A561D9C /* Pods-saltedge-ios_Example.release.xcconfig */,
+				34DF42CCB71418C78C58590B /* Pods-saltedge-ios_Tests.debug.xcconfig */,
+				088762EB23D8C3470C71837E /* Pods-saltedge-ios_Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -118,8 +131,8 @@
 				607FACD21AFB9204008FA782 /* Example for saltedge-ios */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				96F79481E74988E602F5869F /* Pods */,
-				B215E65FF7AE825B3D8F36C6 /* Frameworks */,
+				1EA4FC67AB51303AC8D7CF1F /* Pods */,
+				8C4973361C6D0C0129B04A09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,7 +164,6 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AEEB6CF62050583D00E5A673 /* saltedge.com.cer */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -162,6 +174,7 @@
 			children = (
 				AE0CB9F41FFE46DF00006FF2 /* API */,
 				AE22B30920235E010048C907 /* Extensions */,
+				AEDCBB0620860EF4004D0A43 /* Helpers */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -185,15 +198,13 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		96F79481E74988E602F5869F /* Pods */ = {
+		8C4973361C6D0C0129B04A09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */,
-				418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */,
-				21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */,
-				61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */,
+				9091C52E7B273302ABC0152C /* Pods_saltedge_ios_Example.framework */,
+				012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AE0CB9F41FFE46DF00006FF2 /* API */ = {
@@ -269,13 +280,13 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		B215E65FF7AE825B3D8F36C6 /* Frameworks */ = {
+		AEDCBB0620860EF4004D0A43 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				B12F3CC55B7FF4085D80A349 /* Pods_saltedge_ios_Example.framework */,
-				0790D5A28F234BA647B5AF2A /* Pods_saltedge_ios_Tests.framework */,
+				AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */,
+				AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */,
 			);
-			name = Frameworks;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,12 +296,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Example" */;
 			buildPhases = (
-				73BD0AF59DF41DAEBDEA1188 /* [CP] Check Pods Manifest.lock */,
+				FB88496BC950CCBCCC2F52B1 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				F45E5544F2FA28E007F5F2C7 /* [CP] Embed Pods Frameworks */,
-				6812AD4E85B19149A1A6E321 /* [CP] Copy Pods Resources */,
+				6E50AFB669EA0AF75DC0F3B1 /* [CP] Embed Pods Frameworks */,
+				BBE2C95E65F5B9054284C684 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -305,12 +316,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "saltedge-ios_Tests" */;
 			buildPhases = (
-				A162C43EFBD37602D776E64C /* [CP] Check Pods Manifest.lock */,
+				7DD3830A2231DB78E98765F7 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				6EE6234AAEF2419C2B545402 /* [CP] Embed Pods Frameworks */,
-				B0BC895A79FF983345088918 /* [CP] Copy Pods Resources */,
+				992E0267C28C1114341277AA /* [CP] Embed Pods Frameworks */,
+				A2F4D96A42A3530DC96BBAAC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,7 +380,6 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,22 +394,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6812AD4E85B19149A1A6E321 /* [CP] Copy Pods Resources */ = {
+		6E50AFB669EA0AF75DC0F3B1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SaltEdge-iOS-Swift/SaltEdge.framework",
+				"${BUILT_PRODUCTS_DIR}/TrustKit/TrustKit.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SaltEdge.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6EE6234AAEF2419C2B545402 /* [CP] Embed Pods Frameworks */ = {
+		7DD3830A2231DB78E98765F7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-saltedge-ios_Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		992E0267C28C1114341277AA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -419,7 +454,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		73BD0AF59DF41DAEBDEA1188 /* [CP] Check Pods Manifest.lock */ = {
+		A2F4D96A42A3530DC96BBAAC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBE2C95E65F5B9054284C684 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB88496BC950CCBCCC2F52B1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -435,59 +500,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A162C43EFBD37602D776E64C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-saltedge-ios_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0BC895A79FF983345088918 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F45E5544F2FA28E007F5F2C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SaltEdge-iOS-Swift/SaltEdge.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SaltEdge.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -518,8 +530,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */,
 				AE22B30F202369670048C907 /* URLExtensionsSpec.swift in Sources */,
 				AE1BFDE41FFE722200AD44D5 /* HTTPServiceSpec.swift in Sources */,
+				AEDCBB0920860F1A004D0A43 /* HPKPParserSpec.swift in Sources */,
 				AE21EFCA20233C8C0016A096 /* SERequestManagerSpec.swift in Sources */,
 				AE3859B2202207DB009A2991 /* HeadersSpec.swift in Sources */,
 				AE22B30D202360FC0048C907 /* DictionaryExtensionsSpec.swift in Sources */,
@@ -661,7 +675,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3B2E0C95D64890E40B110F3 /* Pods-saltedge-ios_Example.debug.xcconfig */;
+			baseConfigurationReference = 9272D600EC690297D58E6E14 /* Pods-saltedge-ios_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "saltedge-ios/Info.plist";
@@ -677,7 +691,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 418AB98C32F416B89EA4F635 /* Pods-saltedge-ios_Example.release.xcconfig */;
+			baseConfigurationReference = 08D24DDB328B0CE27A561D9C /* Pods-saltedge-ios_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "saltedge-ios/Info.plist";
@@ -693,7 +707,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21AB86C3DA2693A1AA0EEA39 /* Pods-saltedge-ios_Tests.debug.xcconfig */;
+			baseConfigurationReference = 34DF42CCB71418C78C58590B /* Pods-saltedge-ios_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -711,7 +725,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61E5D3168433D310F5359F68 /* Pods-saltedge-ios_Tests.release.xcconfig */;
+			baseConfigurationReference = 088762EB23D8C3470C71837E /* Pods-saltedge-ios_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
