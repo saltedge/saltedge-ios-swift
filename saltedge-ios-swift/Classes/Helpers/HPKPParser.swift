@@ -10,6 +10,7 @@ import Foundation
 enum HPKPParserError: Error {
     case pinsMissing
     case maxAgeMissing
+    case couldNotParseMaxAge
 }
 
 struct HPKPParser {
@@ -25,23 +26,24 @@ struct HPKPParser {
         var maxAge: Double!
         var includeSubdomains: Bool = false
         
-        let separatedData = string.components(separatedBy: "; ")
+        let separatedData = string.split(separator: ";", omittingEmptySubsequences: true)
 
         for parameter in separatedData {
-            let cleanedParameter = parameter.replacingOccurrences(of: "\"", with: "")
+            let cleanedParameter = parameter.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\"", with: "")
             let array = cleanedParameter.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true)
             
+           print(array)
             if array[0] == Keys.includeSubDomains {
                 includeSubdomains = true
                 continue
             }
-            
+
             let (key, value) = (String(array[0]), String(array[1]))
             switch key {
             case Keys.pinSha:
                 pins.append(value)
             case Keys.maxAge:
-                guard let age = Double(value) else { throw HPKPParserError.maxAgeMissing }
+                guard let age = Double(value) else { throw HPKPParserError.couldNotParseMaxAge }
                 
                 maxAge = age
             default: break
@@ -49,7 +51,8 @@ struct HPKPParser {
         }
         
         guard !pins.isEmpty else { throw HPKPParserError.pinsMissing }
-        
+        guard maxAge != nil else { throw HPKPParserError.maxAgeMissing }
+
         return (pins: pins, maxAge: maxAge, includeSubdomains: includeSubdomains)
     }
 }

@@ -13,7 +13,7 @@ struct TrustKitHelper {
     private static var alreadySet: Bool = false
         
     static func setup(completion: @escaping (Error?) -> Void) {
-        if let maxAge = SEUserDefaultsHelper.maxAge, maxAge > Date().timeIntervalSince1970 {
+        if SEUserDefaultsHelper.maxAge > Date().timeIntervalSince1970 {
             if !alreadySet {
                 initTrustKit()
             }
@@ -31,7 +31,7 @@ struct TrustKitHelper {
     }
 
     private static func initTrustKit() {
-        guard let pins = SEUserDefaultsHelper.pins, let maxAge = SEUserDefaultsHelper.maxAge else { return }
+        guard let pins = SEUserDefaultsHelper.pins, SEUserDefaultsHelper.maxAge != 0.0 else { return }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -40,7 +40,7 @@ struct TrustKitHelper {
             kTSKSwizzleNetworkDelegates: false,
             kTSKPinnedDomains: [
                 "saltedge.com": [
-                    kTSKExpirationDate: dateFormatter.string(from: Date(timeIntervalSinceNow: maxAge)),
+                    kTSKExpirationDate: dateFormatter.string(from: Date(timeIntervalSinceNow: SEUserDefaultsHelper.maxAge)),
                     kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes: pins,
                     kTSKIncludeSubdomains: SEUserDefaultsHelper.includeSubdomains

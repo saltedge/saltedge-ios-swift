@@ -26,7 +26,7 @@ struct SEUserDefaultsHelper {
         }
     }
     
-    static var maxAge: TimeInterval? {
+    static var maxAge: TimeInterval {
         set {
             defaults.set(newValue, forKey: DefaultsKeys.maxAge.rawValue)
             defaults.synchronize()

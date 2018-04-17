@@ -33,8 +33,10 @@
 		AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */; };
 		AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851412018E65700127D70 /* AttemptsViewController.swift */; };
 		AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851432018E9B200127D70 /* AttemptViewController.swift */; };
+		AEDCBB0920860F1A004D0A43 /* HPKPParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */; };
 		AEEB6D1E2050647100E5A673 /* saltedge.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = AEEB6CF62050583D00E5A673 /* saltedge.com.cer */; };
 		AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */; };
+		AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */; };
 		D33E24B0AA9D041B85E197C7 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,8 +88,10 @@
 		AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		AEB851412018E65700127D70 /* AttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsViewController.swift; sourceTree = "<group>"; };
 		AEB851432018E9B200127D70 /* AttemptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptViewController.swift; sourceTree = "<group>"; };
+		AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPKPParserSpec.swift; sourceTree = "<group>"; };
 		AEEB6CF62050583D00E5A673 /* saltedge.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = saltedge.com.cer; sourceTree = "<group>"; };
 		AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEUserDefaultHelperSpec.swift; sourceTree = "<group>"; };
 		E2A5E9B41CDB74D9850DC586 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +177,7 @@
 			children = (
 				AE0CB9F41FFE46DF00006FF2 /* API */,
 				AE22B30920235E010048C907 /* Extensions */,
+				AEDCBB0620860EF4004D0A43 /* Helpers */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -276,6 +281,15 @@
 				AE05129C201F3EE1000E5F64 /* OptionsButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		AEDCBB0620860EF4004D0A43 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AEDCBB0720860F16004D0A43 /* HPKPParserSpec.swift */,
+				AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,8 +534,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */,
 				AE22B30F202369670048C907 /* URLExtensionsSpec.swift in Sources */,
 				AE1BFDE41FFE722200AD44D5 /* HTTPServiceSpec.swift in Sources */,
+				AEDCBB0920860F1A004D0A43 /* HPKPParserSpec.swift in Sources */,
 				AE21EFCA20233C8C0016A096 /* SERequestManagerSpec.swift in Sources */,
 				AE3859B2202207DB009A2991 /* HeadersSpec.swift in Sources */,
 				AE22B30D202360FC0048C907 /* DictionaryExtensionsSpec.swift in Sources */,
