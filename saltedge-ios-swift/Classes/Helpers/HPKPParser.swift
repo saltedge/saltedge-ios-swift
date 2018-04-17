@@ -32,7 +32,6 @@ struct HPKPParser {
             let cleanedParameter = parameter.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\"", with: "")
             let array = cleanedParameter.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true)
             
-           print(array)
             if array[0] == Keys.includeSubDomains {
                 includeSubdomains = true
                 continue
