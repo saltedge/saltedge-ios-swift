@@ -174,7 +174,11 @@ The current version of the SDK is [1.1.0](https://github.com/saltedge/saltedge-i
 
 ## Security
 
-The SDK has SSL pinning enabled. That means that every API request that originates in `SEAPIRequestManager` will have SSL certificate validation. The current Salt Edge SSL certificate will expire on 1st of May 2018, meaning that it will be renewed in the first week of April 2018. Following the SSL certificate renewal, the SDK will be updated to use the new certificate for SSL pinning. As a result of that, usage of older versions of the SDK will not be possible since every request will fail because of the old SSL certificate. Salt Edge clients will be notified about this and there will be enough time in order to update the apps to the newer version of the SDK.
+The SDK has SSL pinning enabled. That means that every API request that originates in `SEAPIRequestManager` will have SSL certificate validation.
+
+#### Since version 1.1.0
+
+The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/guides/security/#http_public_key_pinning_(hpkp))
 
 ## License
 
