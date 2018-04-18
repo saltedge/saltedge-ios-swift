@@ -40,15 +40,15 @@ struct TrustKitHelper {
             kTSKSwizzleNetworkDelegates: false,
             kTSKPinnedDomains: [
                 "saltedge.com": [
-                    kTSKExpirationDate: dateFormatter.string(from: Date(timeIntervalSinceNow: SEUserDefaultsHelper.maxAge)),
+                    kTSKExpirationDate: dateFormatter.string(from: Date(timeIntervalSince1970: SEUserDefaultsHelper.maxAge)),
                     kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes: pins,
                     kTSKIncludeSubdomains: SEUserDefaultsHelper.includeSubdomains
                 ]
             ]
-        ] as [String : Any]
+        ] as [String: Any]
         
-        TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
+        TrustKit.initSharedInstance(withConfiguration: trustKitConfig)
         alreadySet = true
     }
     
