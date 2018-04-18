@@ -12,7 +12,7 @@ iOS 10.0+, Swift 4+
 Add the pod to your `Podfile`
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 1.1.0'
+pod 'SaltEdge-iOS-Swift', '~> 1.1.1'
 ```
 
 Install the pod
@@ -170,7 +170,7 @@ Set up the `clientId`, `appSecret` and `customerIdentifier` constants to your Cl
 
 ## Versioning
 
-The current version of the SDK is [1.1.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/v1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [1.1.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/v1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 

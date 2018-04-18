@@ -46,9 +46,9 @@ struct TrustKitHelper {
                     kTSKIncludeSubdomains: SEUserDefaultsHelper.includeSubdomains
                 ]
             ]
-        ] as [String : Any]
+        ] as [String: Any]
         
-        TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
+        TrustKit.initSharedInstance(withConfiguration: trustKitConfig)
         alreadySet = true
     }
     
