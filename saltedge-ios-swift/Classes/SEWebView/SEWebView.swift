@@ -46,12 +46,12 @@ public class SEWebView: WKWebView {
      */
     public weak var stateDelegate: SEWebViewDelegate?
     
-    init(frame: CGRect) {
+    public init(frame: CGRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
         self.navigationDelegate = self
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.navigationDelegate = self
     }
