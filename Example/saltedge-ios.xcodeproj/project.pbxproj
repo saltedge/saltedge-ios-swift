@@ -301,7 +301,6 @@
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				6E50AFB669EA0AF75DC0F3B1 /* [CP] Embed Pods Frameworks */,
-				BBE2C95E65F5B9054284C684 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -321,7 +320,6 @@
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
 				992E0267C28C1114341277AA /* [CP] Embed Pods Frameworks */,
-				A2F4D96A42A3530DC96BBAAC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -452,36 +450,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2F4D96A42A3530DC96BBAAC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBE2C95E65F5B9054284C684 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB88496BC950CCBCCC2F52B1 /* [CP] Check Pods Manifest.lock */ = {

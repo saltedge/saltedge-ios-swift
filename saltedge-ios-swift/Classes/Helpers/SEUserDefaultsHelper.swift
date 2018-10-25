@@ -42,7 +42,7 @@ struct SEUserDefaultsHelper {
             defaults.synchronize()
         }
         get {
-            return defaults.bool(forKey: DefaultsKeys.includeSubdomains.rawValue) ?? false
+            return defaults.bool(forKey: DefaultsKeys.includeSubdomains.rawValue)
         }
     }
     

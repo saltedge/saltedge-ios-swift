@@ -41,7 +41,6 @@ struct TrustKitHelper {
             kTSKPinnedDomains: [
                 "saltedge.com": [
                     kTSKExpirationDate: dateFormatter.string(from: Date(timeIntervalSince1970: SEUserDefaultsHelper.maxAge)),
-                    kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes: pins,
                     kTSKIncludeSubdomains: SEUserDefaultsHelper.includeSubdomains
                 ]
