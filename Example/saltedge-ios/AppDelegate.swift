@@ -24,20 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var createViewController: CreateViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let createVC = tabBarVCs[1].childViewControllers[0] as? CreateViewController {
+        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let createVC = tabBarVCs[1].children[0] as? CreateViewController {
             return createVC
         }
         return nil
     }
     
     var connectViewController: ConnectViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let connectVC = tabBarVCs[0].childViewControllers[0] as? ConnectViewController {
+        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let connectVC = tabBarVCs[0].children[0] as? ConnectViewController {
             return connectVC
         }
         return nil
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if let createVC = createViewController {
             HUD.show(.labeledProgress(title: "Fetching OAuth Login", subtitle: nil))
             SERequestManager.shared.handleOpen(url: url, loginFetchingDelegate: createVC)
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appSecret: String = "your-app-secret"
         let customerId: String = "customer-secret"
         
-        // By default SSL Pinning is enabled to disabled it use:
+        // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)

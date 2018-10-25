@@ -13,7 +13,7 @@ DEPENDENCIES:
   - SaltEdge-iOS-Swift (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Nimble
     - PKHUD
     - Quick
@@ -32,4 +32,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd670ed98866b50e0737d4be621438e65edd84e4
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

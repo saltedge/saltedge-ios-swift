@@ -255,4 +255,3 @@ extension CreateViewController: SELoginFetchingDelegate {
         switchToLoginsController()
     }
 }
-
