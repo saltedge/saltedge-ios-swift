@@ -12,7 +12,7 @@ iOS 10.0+, Swift 4+
 Add the pod to your `Podfile`
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 1.1.1'
+pod 'SaltEdge-iOS-Swift', '~> 1.1.2'
 ```
 
 Install the pod
@@ -60,9 +60,9 @@ Implement the `SEWebViewDelegate` methods in the controller:
 
 func webView(_ webView: SEWebView, didReceiveCallbackWithResponse response: SEConnectResponse) {
     switch response.stage {
-    case .success: 
+    case .success:
 	    // Login successfully connected
-    case .fetching: 
+    case .fetching:
 	    // Login is fetching. You can safe login secret if it is present.
     case .error:
 	    // Handle error
@@ -86,7 +86,7 @@ SERequestManager.shared.createToken(params: tokenParams) { response in
 	case .failure(let error):
 		// Handle error
 	}
-} 
+}
 
 ```
 
@@ -116,9 +116,9 @@ SERequestManager.shared.createCustomer(with: params) { response in
 		// Save customer secret to your storage and the link it with API manager
 		SERequestManager.shared.set(customerSecret: value.data.secret)
 	case .failure(let error):
-		// Handle error 
+		// Handle error
 	}
-}	
+}
 ```
 
 Use the manager to interact with the provided API:
@@ -130,10 +130,10 @@ let loginParams = SELoginParams(countryCode: "XF",
                                 fetchType: "recent")
 SERequestManager.shared.createLogin(with: loginParams) { response in
     switch response {
-    case .success(let value): 
+    case .success(let value):
 	    // value.data is a valid SELogin
-    case .failure(let error): 
-    	// Handle error 
+    case .failure(let error):
+    	// Handle error
     }
 }
 ```
@@ -170,7 +170,7 @@ Set up the `clientId`, `appSecret` and `customerIdentifier` constants to your Cl
 
 ## Versioning
 
-The current version of the SDK is [1.1.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/v1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [1.1.2](https://github.com/saltedge/saltedge-ios-swift/releases/tag/v1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
