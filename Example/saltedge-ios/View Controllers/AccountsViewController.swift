@@ -222,5 +222,3 @@ extension AccountsViewController: SELoginFetchingDelegate {
         reloadAccounts()
     }
 }
-
-
