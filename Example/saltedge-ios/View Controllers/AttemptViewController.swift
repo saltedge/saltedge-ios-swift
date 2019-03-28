@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ final class AttemptViewController: UIViewController {
     
     private var stages: [SEStage] = []
     private var attemptId: String!
-    private var loginSecret: String!
+    private var connectionSecret: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ final class AttemptViewController: UIViewController {
     
     func requestAttempt() {
         HUD.show(.labeledProgress(title: "Fething Attempt", subtitle: nil))
-        SERequestManager.shared.showAttempt(id: attemptId, loginSecret: loginSecret) { [weak self] response in
+        SERequestManager.shared.showAttempt(id: attemptId, connectionSecret: connectionSecret) { [weak self] response in
             switch response {
             case .success(let value):
                 if let stages = value.data.stages {
@@ -68,12 +68,12 @@ extension AttemptViewController: UITableViewDataSource {
 }
 
 extension AttemptViewController {
-    static func create(attemptId: String, loginSecret: String) -> AttemptViewController? {
+    static func create(attemptId: String, connectionSecret: String) -> AttemptViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "AttemptViewController") as? AttemptViewController else { return nil }
         vc.attemptId = attemptId
-        vc.loginSecret = loginSecret
+        vc.connectionSecret = connectionSecret
         
         return vc
     }

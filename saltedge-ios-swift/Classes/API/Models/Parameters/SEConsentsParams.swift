@@ -1,7 +1,8 @@
 //
-//  RemovedLoginResponse.swift
+//  SEConsentsParams.swift
+//  SaltEdge-iOS-Swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +24,38 @@
 
 import Foundation
 
-public struct SERemovedLoginResponse: Decodable {
-    public let id: String
-    public let removed: Bool
+public class SEBaseConsentsParams: Encodable, ParametersEncodable {
+    let id: String?
+    let connectionId: String?
+    let customerId: String?
+
+    public init(id: String? = nil,
+                connectionId: String? = nil,
+                customerId: String? = nil) {
+        self.id = id
+        self.connectionId = connectionId
+        self.customerId = customerId
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case connectionId = "connection_id"
+        case customerId = "customer_id"
+    }
+}
+
+public class SEConsentsListParams: SEBaseConsentsParams {
+    let fromId: String?
+
+    public init(fromId: String? = nil,
+                id: String? = nil,
+                connectionId: String? = nil,
+                customerId: String? = nil) {
+        self.fromId = fromId
+
+        super.init(id: id, connectionId: connectionId, customerId: customerId)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case fromId = "from_id"
+    }
 }

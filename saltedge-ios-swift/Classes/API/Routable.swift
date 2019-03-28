@@ -1,7 +1,7 @@
 //
 //  Routable.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import Foundation
 
 struct APIEndpoints {
     static let rootURL: URL = URL(string: "https://www.saltedge.com")!
-    static let baseURL: URL = rootURL.appendingPathComponent("api/v4")
+    static let baseURL: URL = rootURL.appendingPathComponent("api/v5")
 }
 
 enum HTTPMethod: String {

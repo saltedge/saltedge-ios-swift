@@ -1,7 +1,7 @@
 //
-//  SETokenResponse.swift
+//  RemovedConnectionResponse.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,26 +23,7 @@
 
 import Foundation
 
-public struct SETokenResponse: Decodable {
-    public let token: String
-    public let expiresAt: Date
-    public let connectUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case token
-        case expiresAt = "expires_at"
-        case connectUrl = "connect_url"
-    }
-}
-
-public struct SEOAuthResponse: Decodable {
-    public let token: String
-    public let expiresAt: Date
-    public let redirectUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case token
-        case expiresAt = "expires_at"
-        case redirectUrl = "redirect_url"
-    }
+public struct SERemovedConnectionResponse: Decodable {
+    public let id: String
+    public let removed: Bool
 }

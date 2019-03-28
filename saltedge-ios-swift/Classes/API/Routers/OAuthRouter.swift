@@ -1,7 +1,7 @@
 //
 //  OAuthRouter.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,8 @@ import Foundation
 
 enum OAuthRouter: Routable {
     case create(SECreateOAuthParams)
-    case reconnect(LoginSecret, SEUpdateOAuthParams)
-    case refresh(LoginSecret, SEUpdateOAuthParams)
+    case reconnect(ConnectionSecret, SEUpdateOAuthParams)
+    case refresh(ConnectionSecret, SEUpdateOAuthParams)
     
     var method: HTTPMethod {
         return .post
@@ -43,7 +43,7 @@ enum OAuthRouter: Routable {
     var headers: Headers {
         switch self {
         case .create: return SEHeaders.cached.sessionHeaders
-        case .reconnect(let secret, _), .refresh(let secret, _): return SEHeaders.cached.with(loginSecret: secret)
+        case .reconnect(let secret, _), .refresh(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
     

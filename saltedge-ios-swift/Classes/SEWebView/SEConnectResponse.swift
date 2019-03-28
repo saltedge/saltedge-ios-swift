@@ -1,7 +1,7 @@
 //
 //  SEConnectResponse.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,21 +27,21 @@ public struct SEConnectResponse: Decodable {
     public enum Stage: String, Decodable {
         /** Fetching data is in progress */
         case fetching
-        /** A change in the data we store for the login has occured */
+        /** A change in the data we store for the connection has occured */
         case success
         /** An error has occured during fetching process */
         case error
     }
     
-    public let loginId: String?
-    public let duplicatedLoginId: String?
+    public let connectionId: String?
+    public let duplicatedConnectionId: String?
     public let stage: Stage
     public let secret: String?
     public let customFields: [String: String]?
     
     private enum CodingKeys: String, CodingKey {
-        case loginId = "login_id"
-        case duplicatedLoginId = "duplicated_login_id"
+        case connectionId = "connection_id"
+        case duplicatedConnectionId = "duplicated_connection_id"
         case stage
         case secret
         case customFields = "custom_fields"

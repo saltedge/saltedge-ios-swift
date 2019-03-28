@@ -1,7 +1,7 @@
 //
 //  Headers.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,12 @@ import Foundation
 
 /* HTTP Headers */
 struct HeaderKeys {
-    static let accept         = "Accept"
-    static let contentType    = "Content-Type"
-    static let secret         = "Secret"
-    static let appId          = "App-id"
+    static let accept = "Accept"
+    static let contentType = "Content-Type"
+    static let secret = "Secret"
+    static let appId = "App-id"
     static let customerSecret = "Customer-secret"
-    static let loginSecret    = "Login-secret"
+    static let connectionSecret = "Connection-secret"
 }
 
 typealias Headers = [String: String]
@@ -55,7 +55,7 @@ class SEHeaders {
         sessionHeaders = sessionHeaders.mergeWith([ HeaderKeys.customerSecret: customerSecret ])
     }
     
-    func with(loginSecret: String) -> Headers {
-        return sessionHeaders.mergeWith([ HeaderKeys.loginSecret: loginSecret ])
+    func with(connectionSecret: String) -> Headers {
+        return sessionHeaders.mergeWith([ HeaderKeys.connectionSecret: connectionSecret ])
     }
 }

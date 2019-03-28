@@ -3,7 +3,7 @@
 //  saltedge-ios_Tests
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import Quick
@@ -67,7 +67,7 @@ class URLExtensionsSpec: QuickSpec {
         describe("callbackParameters") {
             context("when response is a SEConnectResposne") {
                 it("should return SeConnectResponse and nil error") {
-                    let connectParams = "{\"data\": {\"login_id\": \"1\", \"stage\":\"success\"}}"
+                    let connectParams = "{\"data\": {\"connection_id\": \"1\", \"stage\":\"success\"}}"
                     let url = URL(string: "saltbridge://connect/")?.appendingPathComponent(connectParams)
                    
                     let decoder = JSONDecoder()
@@ -76,14 +76,14 @@ class URLExtensionsSpec: QuickSpec {
                     let (params, error) = url!.callbackParameters
                     
                     expect(error).to(beNil())
-                    expect(params?.loginId).to(equal(expectedConnectParams.data.loginId))
+                    expect(params?.connectionId).to(equal(expectedConnectParams.data.connectionId))
                     expect(params?.stage).to(equal(expectedConnectParams.data.stage))
                 }
             }
             
             context("when response is a SEConnectResposne") {
                 it("should return nil SeConnectResponse and error") {
-                    let connectParams = "{\"data\": {\"login_id\": \"1\"}}"
+                    let connectParams = "{\"data\": {\"connection_id\": \"1\"}}"
                     let url = URL(string: "saltbridge://connect/")?.appendingPathComponent(connectParams)
                     
                     let decoder = JSONDecoder()

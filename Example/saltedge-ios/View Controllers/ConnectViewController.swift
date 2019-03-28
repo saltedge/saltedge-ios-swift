@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -35,38 +35,51 @@ final class ConnectViewController: UIViewController {
         present(navVC, animated: true)
     }
     
-    func requestToken(login: SELogin? = nil, refresh: Bool = false) {
+    func requestToken(connection: SEConnection? = nil, refresh: Bool = false) {
         HUD.show(.labeledProgress(title: "Requesting Token", subtitle: nil))
-        if let login = login {
+        if let connection = connection {
+            let consent = SEConsent(scopes: ["account_details", "transactions_details"])
             if refresh {
-                // Set javascriptCallbackType to "iframe" to receive callback with login_id and login_secret
+                // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
                 // see https://docs.saltedge.com/guides/connect
-                let params = SERefreshTokenParams(returnTo: "http://httpbin.org", javascriptCallbackType: "iframe")
-                SERequestManager.shared.refreshToken(with: login.secret, params: params) { [weak self] response in
-                    self?.handleTokenResponse(response)
+                let params = SERefreshSessionsParams(
+                    attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                    javascriptCallbackType: "iframe"
+                )
+                SERequestManager.shared.refreshSession(with: connection.secret, params: params) { [weak self] response in
+                    self?.handleConnectSessionResponse(response)
                 }
             } else {
-                // Set javascriptCallbackType to "iframe" to receive callback with login_id and login_secret
+                // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
                 // see https://docs.saltedge.com/guides/connect
-                let params = SEReconnectTokenParams(returnTo: "http://httpbin.org", javascriptCallbackType: "iframe")
-                SERequestManager.shared.reconnectToken(with: login.secret, params: params) { [weak self] response in
-                    self?.handleTokenResponse(response)
+                let params = SEReconnectSessionsParams(
+                    attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                    javascriptCallbackType: "iframe",
+                    consent: consent
+                )
+                SERequestManager.shared.reconnectSession(with: connection.secret, params: params) { [weak self] response in
+                    self?.handleConnectSessionResponse(response)
                 }
             }
         } else {
             guard let provider = provider else { return }
             
-            // Set javascriptCallbackType to "iframe" to receive callback with login_id and login_secret
+            // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
             // see https://docs.saltedge.com/guides/connect
-            let tokenParams = SECreateTokenParams(fetchScopes: ["accounts", "transactions"], providerCode: provider.code, returnTo: "http://httpbin.org", javascriptCallbackType: "iframe")
-            // Check if SERequestManager will call handleTokenResponse
-            SERequestManager.shared.createToken(params: tokenParams) { [weak self] response in
-                self?.handleTokenResponse(response)
+            let connectSessionsParams = SECreateSessionsParams(
+                attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                providerCode: provider.code,
+                javascriptCallbackType: "iframe",
+                consent: SEConsent(scopes: ["account_details", "transactions_details"])
+            )
+            // Check if SERequestManager will call handleConnectSessionResponse
+            SERequestManager.shared.createConnectSession(params: connectSessionsParams) { [weak self] response in
+                self?.handleConnectSessionResponse(response)
             }
         }
     }
     
-    private func handleTokenResponse(_ response: SEResult<SEResponse<SETokenResponse>>) {
+    private func handleConnectSessionResponse(_ response: SEResult<SEResponse<SEConnectSessionResponse>>) {
         switch response {
         case .success(let value):
             HUD.hide(animated: true)
@@ -80,7 +93,7 @@ final class ConnectViewController: UIViewController {
         }
     }
 
-    private func switchToLoginsController() {
+    private func switchToConnectionsController() {
         tabBarController?.selectedIndex = 2
     }
 }
@@ -89,20 +102,20 @@ extension ConnectViewController: SEWebViewDelegate {
     func webView(_ webView: SEWebView, didReceiveCallbackWithResponse response: SEConnectResponse) {
         switch response.stage {
         case .success:
-            switchToLoginsController()
+            switchToConnectionsController()
         case .fetching:
-            guard let loginSecret = response.secret else { return }
+            guard let connectionSecret = response.secret else { return }
             
-            if var logins = UserDefaultsHelper.logins {
-                if !logins.contains(loginSecret) {
-                    logins.append(loginSecret)
-                    UserDefaultsHelper.logins = logins
+            if var connections = UserDefaultsHelper.connections {
+                if !connections.contains(connectionSecret) {
+                    connections.append(connectionSecret)
+                    UserDefaultsHelper.connections = connections
                 }
             } else {
-                UserDefaultsHelper.logins = [loginSecret]
+                UserDefaultsHelper.connections = [connectionSecret]
             }
         case .error:
-            HUD.flash(.labeledError(title: "Cannot Fetch Login", subtitle: nil), delay: 3.0)
+            HUD.flash(.labeledError(title: "Cannot Fetch Connection", subtitle: nil), delay: 3.0)
         }
     }
     

@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -19,8 +19,8 @@ final class AccountsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var accounts: [SEAccount] = []
-    private var login: SELogin!
-    private var loginProvider: SEProvider!
+    private var connection: SEConnection!
+    private var connectionProvider: SEProvider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,14 @@ final class AccountsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = login.providerName
+        title = connection.providerName
         reloadAccounts()
     }
     
     @IBAction func actionsPressed(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let remove = UIAlertAction(title: "Remove", style: .destructive) { [weak self] action in
-            self?.removeLogin()
+            self?.removeconnection()
         }
         let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
             self?.chooseMethodFotAction(for: .reconnect)
@@ -48,7 +48,7 @@ final class AccountsViewController: UIViewController {
             self?.chooseMethodFotAction(for: .refresh)
         }
         let viewAttempts = UIAlertAction(title: "View Attempts", style: .default) { [weak self] action in
-            guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(loginSecret: weakSelf.login.secret) else { return }
+            guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(connectionSecret: weakSelf.connection.secret) else { return }
             
             weakSelf.navigationController?.pushViewController(attemtsVC, animated: true)
         }
@@ -60,18 +60,18 @@ final class AccountsViewController: UIViewController {
         present(actionSheet, animated: true)
     }
     
-    private func removeLogin() {
-        HUD.show(.labeledProgress(title: "Removing Login", subtitle: nil))
+    private func removeconnection() {
+        HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
         
-        SERequestManager.shared.removeLogin(with: login.secret) { [weak self] response in
+        SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
             switch response {
             case .success(let value):
                 guard let weakSelf = self else { return }
                 if value.data.removed {
-                    var logins = UserDefaultsHelper.logins
-                    if let index = logins?.index(of: weakSelf.login.secret) {
-                        logins?.remove(at: index)
-                        UserDefaultsHelper.logins = logins
+                    var connections = UserDefaultsHelper.connections
+                    if let index = connections?.index(of: weakSelf.connection.secret) {
+                        connections?.remove(at: index)
+                        UserDefaultsHelper.connections = connections
                     }
                     weakSelf.navigationController?.popViewController(animated: true)
                 }
@@ -87,17 +87,17 @@ final class AccountsViewController: UIViewController {
         let webViewActions = UIAlertAction(title: "Web View", style: .default) { [weak self] action in
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let connectVC = appDelegate.connectViewController else { return }
             
-            connectVC.requestToken(login: self?.login, refresh: connectAction == .refresh)
+            connectVC.requestToken(connection: self?.connection, refresh: connectAction == .refresh)
             self?.tabBarController?.selectedIndex = 0
         }
         let apiAction = UIAlertAction(title: "API", style: .default) { [weak self] action in
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let createVC = appDelegate.createViewController else { return }
             
             if connectAction == .reconnect {
-                createVC.login = self?.login
+                createVC.connection = self?.connection
                 self?.tabBarController?.selectedIndex = 1
             } else {
-               self?.refreshLoginUsingAPI()
+               self?.refreshconnectionUsingAPI()
             }
         }
         
@@ -111,10 +111,10 @@ final class AccountsViewController: UIViewController {
     
     private func reloadAccounts() {
         HUD.show(.labeledProgress(title: "Fetching Accounts", subtitle: nil))
-        SERequestManager.shared.getProvider(code: login.providerCode) { response in
+        SERequestManager.shared.getProvider(code: connection.providerCode) { response in
             switch response {
             case .success(let value):
-                self.loginProvider = value.data
+                self.connectionProvider = value.data
                 self.requestAccounts()
             case .failure(let error):
                 HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
@@ -123,7 +123,7 @@ final class AccountsViewController: UIViewController {
     }
     
     private func requestAccounts() {
-        SERequestManager.shared.getAllAccounts(for: login.secret, params: nil) { [weak self] response in
+        SERequestManager.shared.getAllAccounts(for: connection.secret, params: nil) { [weak self] response in
             switch response {
             case .success(let value):
                 self?.accounts = value.data
@@ -135,11 +135,11 @@ final class AccountsViewController: UIViewController {
         }
     }
     
-    private func refreshLoginUsingAPI() {
+    private func refreshconnectionUsingAPI() {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
-        if loginProvider.isOAuth {
+        if connectionProvider.isOAuth {
             let params = SEUpdateOAuthParams(returnTo: AppDelegate.applicationURLString)
-            SERequestManager.shared.refreshOAuthLogin(with: login.secret, params: params) { response in
+            SERequestManager.shared.refreshOAuthConnection(with: connection.secret, params: params) { response in
                 switch response {
                 case .success(let value):
                     guard let url = URL(string: value.data.redirectUrl) else { return }
@@ -150,10 +150,10 @@ final class AccountsViewController: UIViewController {
                 }
             }
         } else {
-            SERequestManager.shared.refreshLogin(with: login.secret, fetchingDelegate: self) { response in
+            SERequestManager.shared.refreshConnection(with: connection.secret, fetchingDelegate: self) { response in
                 switch response {
                 case .success(let value):
-                    // Nothing here. Need to wait for SELoginFetchingDelegate callbacks
+                    // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks
                     print(value.data)
                 case .failure(let error):
                     HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
@@ -189,7 +189,7 @@ extension AccountsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let account = accounts[indexPath.row]
-        guard let transactionsVC = TransactionsViewController.create(with: login.secret, account: account) else { return }
+        guard let transactionsVC = TransactionsViewController.create(with: connection.secret, account: account) else { return }
         
         navigationController?.pushViewController(transactionsVC, animated: true)
     }
@@ -197,28 +197,28 @@ extension AccountsViewController: UITableViewDelegate {
 
 
 extension AccountsViewController {
-    static func create(with login: SELogin) -> AccountsViewController? {
+    static func create(with connection: SEConnection) -> AccountsViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "AccountsViewController") as? AccountsViewController else { return nil }
         
-        vc.login = login
+        vc.connection = connection
         
         return vc
     }
 }
 
-extension AccountsViewController: SELoginFetchingDelegate {
-    func failedToFetch(login: SELogin?, message: String) {
+extension AccountsViewController: SEConnectionFetchingDelegate {
+    func failedToFetch(connection: SEConnection?, message: String) {
         HUD.flash(.labeledError(title: "Error", subtitle: message), delay: 3.0)
     }
     
-    func interactiveInputRequested(for login: SELogin) {
-        // not possible, we only refresh logins here in this view controller
+    func interactiveInputRequested(for connection: SEConnection) {
+        // not possible, we only refresh connections here in this view controller
     }
     
-    func successfullyFinishedFetching(login: SELogin) {
-        self.login = login
+    func successfullyFinishedFetching(connection: SEConnection) {
+        self.connection = connection
         reloadAccounts()
     }
 }

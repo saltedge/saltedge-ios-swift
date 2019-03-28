@@ -1,7 +1,7 @@
 //
-//  TokenRouter.swift
+//  SEConnectSessionResponse.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +23,24 @@
 
 import Foundation
 
-enum TokenRouter: Routable {
-    case create(SECreateTokenParams)
-    case reconnect(LoginSecret, SEReconnectTokenParams)
-    case refresh(LoginSecret, SERefreshTokenParams)
+public struct SEConnectSessionResponse: Decodable {
+    public let expiresAt: Date
+    public let connectUrl: String
     
-    var method: HTTPMethod {
-        return .post
+    enum CodingKeys: String, CodingKey {
+        case expiresAt = "expires_at"
+        case connectUrl = "connect_url"
     }
+}
+
+public struct SEOAuthResponse: Decodable {
+    public let token: String
+    public let expiresAt: Date
+    public let redirectUrl: String
     
-    var url: URL {
-        switch self {
-        case .create: return APIEndpoints.baseURL.appendingPathComponent("tokens/create")
-        case .reconnect: return APIEndpoints.baseURL.appendingPathComponent("tokens/reconnect")
-        case .refresh: return APIEndpoints.baseURL.appendingPathComponent("tokens/refresh")
-        }
-    }
-    
-    var headers: Headers {
-        switch self {
-        case .create: return SEHeaders.cached.sessionHeaders
-        case .reconnect(let secret, _), .refresh(let secret, _): return SEHeaders.cached.with(loginSecret: secret)
-        }
-    }
-    
-    var parameters: ParametersEncodable? {
-        switch self {
-        case .create(let params): return params
-        case .reconnect(_, let params): return params
-        case .refresh(_, let params): return params
-        }
+    enum CodingKeys: String, CodingKey {
+        case token
+        case expiresAt = "expires_at"
+        case redirectUrl = "redirect_url"
     }
 }
