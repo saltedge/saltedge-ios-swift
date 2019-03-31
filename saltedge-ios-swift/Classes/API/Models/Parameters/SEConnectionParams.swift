@@ -88,31 +88,37 @@ public class SEExtendedConnectionParams: SEBaseConnectionParams {
 }
 
 public class SEConnectionRefreshParams: SEExtendedConnectionParams {
-    let excludeAccounts: [Int]?
-    
-    public init(fetchScopes: [String]? = nil,
+    let attempt: SEAttempt?
+    let categorization: String?
+
+    public init(attempt: SEAttempt? = nil,
+                categorization: String? = nil,
+                fetchScopes: [String]? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 dailyRefresh: Bool? = nil,
                 locale: String? = nil,
                 includeFakeProviders: Bool? = nil,
                 categorize: Bool? = nil,
-                storeCredentials: Bool? = nil,
-                excludeAccounts: [Int]? = nil) {
-        self.excludeAccounts = excludeAccounts
-        
+                storeCredentials: Bool? = nil) {
+        self.attempt = attempt
+        self.categorization = categorization
+
         super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
                    dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
-    
+
     private enum CodingKeys: String, CodingKey {
-        case exludeAccounts = "exlude_accounts"
+        case attempt = "attempt"
+        case dailyRefresh = "daily_refresh"
+        case categorization = "categorziation"
     }
-    
+
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(excludeAccounts, forKey: .exludeAccounts)
+        try container.encodeIfPresent(attempt, forKey: .attempt)
+        try container.encodeIfPresent(categorization, forKey: .categorization)
 
         try super.encode(to: encoder)
     }

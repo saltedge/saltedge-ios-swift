@@ -123,5 +123,3 @@ extension ConnectViewController: SEWebViewDelegate {
         HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
     }
 }
-
-

@@ -29,8 +29,8 @@ public struct SEError: Decodable {
     public let documentationUrl: String
     
     private enum CodingKeys: String, CodingKey {
-        case errorClass = "error_class"
-        case errorMessage = "error_message"
+        case errorClass = "class"
+        case errorMessage = "message"
         case documentationUrl = "documentation_url"
     }
 }

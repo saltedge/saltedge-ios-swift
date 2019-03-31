@@ -138,19 +138,13 @@ final class AccountsViewController: UIViewController {
     private func refreshconnectionUsingAPI() {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
         if connectionProvider.isOAuth {
-            let params = SEUpdateOAuthParams(returnTo: AppDelegate.applicationURLString)
-            SERequestManager.shared.refreshOAuthConnection(with: connection.secret, params: params) { response in
-                switch response {
-                case .success(let value):
-                    guard let url = URL(string: value.data.redirectUrl) else { return }
-                    
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                case .failure(let error):
-                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
-                }
-            }
-        } else {
-            SERequestManager.shared.refreshConnection(with: connection.secret, fetchingDelegate: self) { response in
+            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+
+            SERequestManager.shared.refreshConnection(
+                with: connection.secret,
+                params: connectionProvider.isOAuth ? params :nil,
+                fetchingDelegate: self
+            ) { response in
                 switch response {
                 case .success(let value):
                     // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks

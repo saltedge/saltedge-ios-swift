@@ -91,12 +91,20 @@ class CreateViewController: UIViewController {
         HUD.show(.labeledProgress(title: "Reconnecting Connection", subtitle: nil))
 
         if provider.isOAuth {
-            let params = SEUpdateOAuthParams(returnTo: AppDelegate.applicationURLString)
-            SERequestManager.shared.refreshOAuthConnection(with: connection.secret, params: params) { response in
-                self.handleOAuthResponse(response)
+            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+
+            SERequestManager.shared.refreshConnection(with: connection.secret, params: params, fetchingDelegate: self) { response in
+                switch response {
+                case .success(let value):
+                    // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks
+                    print(value.data)
+                case .failure(let error):
+                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+                }
             }
         } else {
             let params = SEConnectionReconnectParams(credentials: gatherCredentials())
+
             SERequestManager.shared.reconnectConnection(with: connection.secret, with: params, fetchingDelegate: self) { response in
                 self.handleConnectionResponse(response)
             }

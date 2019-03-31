@@ -245,7 +245,7 @@ public struct SERequestManager {
     public func removeConnection(with secret: String, completion: SEHTTPResponse<SERemovedConnectionResponse>) {
         HTTPService<SERemovedConnectionResponse>.makeRequest(ConnectionRouter.remove(secret), completion: completion)
     }
-    
+
     // MARK: OAuth Providers
     /**
      Creates a OAuth connection with given parameters.
@@ -254,12 +254,12 @@ public struct SERequestManager {
          - params: The parameters of the OAuth connection that is to be created.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#oauth_providers-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#oauth_providers-create)
      */
     public func createOAuthConnection(params: SECreateOAuthParams, completion: SEHTTPResponse<SEOAuthResponse>) {
         HTTPService<SEOAuthResponse>.makeRequest(OAuthRouter.create(params), completion: completion)
     }
-    
+
     /**
      Reconnects a OAuth connection with given parameters.
      
@@ -268,26 +268,12 @@ public struct SERequestManager {
          - params: The parameters of the OAuth connection that is to be reconnected.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#oauth_providers-reconnect)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#oauth_providers-reconnect)
      */
     public func reconnectOAuthConnection(with secret: String, params: SEUpdateOAuthParams, completion: SEHTTPResponse<SEOAuthResponse>) {
         HTTPService<SEOAuthResponse>.makeRequest(OAuthRouter.reconnect(secret, params), completion: completion)
     }
-    
-    /**
-     Refreshes a OAuth connection with given parameters.
-     
-     - parameters:
-         - secret: The secret of the OAuth connection to refresh.
-         - params: The parameters of the OAuth connection that is to be refreshed.
-         - completion: The code to be executed once the request has finished.
-     
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#oauth_providers-refresh)
-     */
-    public func refreshOAuthConnection(with secret: String, params: SEUpdateOAuthParams, completion: SEHTTPResponse<SEOAuthResponse>) {
-        HTTPService<SEOAuthResponse>.makeRequest(OAuthRouter.refresh(secret, params), completion: completion)
-    }
-    
+
     /**
      Handles a openURL call from your application delegate class when connecting an OAuth provider.
      
@@ -318,43 +304,43 @@ public struct SERequestManager {
         }
     }
     
-    // MARK: Token
+    // MARK: Connect Session
     /**
-     Requests a token for connecting a connection via a web view.
+     Requests a Connect Session for connecting a Connection via a web view.
      
      - parameters:
          - params: The parameters that will go in the request payload.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#tokens-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connect_sessions-create)
      */
     public func createConnectSession(params: SECreateSessionsParams, completion: SEHTTPResponse<SEConnectSessionResponse>) {
         HTTPService<SEConnectSessionResponse>.makeRequest(ConnectSessionsRouter.create(params), completion: completion)
     }
     
     /**
-     Requests a token for reconnecting a connection via a web view.
+     Allows you to create a connect session, which will be used to access Salt Edge Connect to reconnect a connection.
      
      - parameters:
-         - connectionSecret: The connection secret for which the reconnect token is requested.
+         - connectionSecret: The connection secret for which the Reconnect Session is requested.
          - params: The parameters that will go in the request payload.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#tokens-reconnect)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connect_sessions-reconnect)
      */
     public func reconnectSession(with secret: String, params: SEReconnectSessionsParams, completion: SEHTTPResponse<SEConnectSessionResponse>) {
         HTTPService<SEConnectSessionResponse>.makeRequest(ConnectSessionsRouter.reconnect(secret, params), completion: completion)
     }
     
     /**
-     Requests a token for refreshing a connection via a web view.
+     Allows you to create a connect session, which will be used to access Salt Edge Connect to refresh a connection.
      
      - parameters:
          - connectionSecret: The connection secret for which the refresh token is requested.
          - params: The parameters that will go in the request payload.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#tokens-refresh)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connect_sessions-refresh)
      */
     public func refreshSession(with secret: String, params: SERefreshSessionsParams, completion: SEHTTPResponse<SEConnectSessionResponse>) {
         HTTPService<SEConnectSessionResponse>.makeRequest(ConnectSessionsRouter.refresh(secret, params), completion: completion)
@@ -369,7 +355,7 @@ public struct SERequestManager {
          - params: Optional constraints set to the fetch query. You can set **from_id** to fetch paginated results manually. **next_id** could be obtained from response meta.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#accounts-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#accounts-list)
      */
     public func getAccounts(for connectionSecret: String, params: SEAccountParams?, completion: SEHTTPResponse<[SEAccount]>) {
         HTTPService<[SEAccount]>.makeRequest(AccountRouter.list(connectionSecret, params), completion: completion)
@@ -383,7 +369,7 @@ public struct SERequestManager {
          - params: Optional constraints set to the fetch query. You can set **from_id** to start fetching all account from particular **account_id**
          - completion: The code to be executed once the request has finished.
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#accounts-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#accounts-list)
      */
     public func getAllAccounts(for connectionSecret: String, params: SEAccountParams?, completion: SEHTTPResponse<[SEAccount]>) {
         HTTPPaginatedService<SEAccount>.makeRequest(AccountRouter.list(connectionSecret, params), completion: completion)
@@ -394,11 +380,11 @@ public struct SERequestManager {
      Fetches page of transactions for a connection.
      
      - parameters:
-         - connectionSecret: The connection secret of the accounts' connection.
+         - connectionSecret: The connection secret of the accounts connection.
          - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#transactions-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-list)
      */
     public func getTransactions(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
         HTTPService<[SETransaction]>.makeRequest(TransactionRouter.list(connectionSecret, params), completion: completion)
@@ -412,7 +398,7 @@ public struct SERequestManager {
      - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching all transactions from particular **transaction_id**
      - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#transactions-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-list)
      */
     public func getAllTransactions(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
         HTTPPaginatedService<SETransaction>.makeRequest(TransactionRouter.list(connectionSecret, params), completion: completion)
@@ -426,7 +412,7 @@ public struct SERequestManager {
      - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
      - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#transactions-pending)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-pending)
      */
     public func getPendingTransations(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
         HTTPService<[SETransaction]>.makeRequest(TransactionRouter.pending(connectionSecret, params), completion: completion)
@@ -440,7 +426,7 @@ public struct SERequestManager {
      - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
      - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#transactions-duplicates)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-duplicates)
      */
     public func getduplicatedTransations(params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
         HTTPService<[SETransaction]>.makeRequest(TransactionRouter.duplicates(params), completion: completion)
@@ -454,21 +440,21 @@ public struct SERequestManager {
          - params: Struct containing array of transaction_ids that should be set as duplicated.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#transactions-duplicate)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-duplicate)
      */
     public func markAsDuplicated(params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEDuplicateTransactionResponse>) {
         HTTPService<SEDuplicateTransactionResponse>.makeRequest(TransactionRouter.duplicate(params), completion: completion)
     }
     
     /**
-     Mark a list of transactions as duplicated.
+     Remove duplicated flag from a list of transactions.
      
      - parameters:
          - connectionSecret: The connection secret of the accounts' connection.
          - params: Struct containing array of transaction_ids that should be set as unduplicated.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#transactions-unduplicate)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-unduplicate)
      */
     public func markAsUnduplicated(params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEUnduplicateTransactionResponse>) {
         HTTPService<SEUnduplicateTransactionResponse>.makeRequest(TransactionRouter.unduplicate(params), completion: completion)
@@ -480,7 +466,7 @@ public struct SERequestManager {
      
      - parameter completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#currencies-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#currencies-list)
      */
     public func getCurrencies(completion: SEHTTPResponse<[SECurrency]>) {
         HTTPService<[SECurrency]>.makeRequest(CurrencyRouter.list, completion: completion)
@@ -491,7 +477,7 @@ public struct SERequestManager {
      
      - parameter completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#rates-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#rates-list)
      */
     public func getRates(params: SERatesParameters? = nil, completion: SEHTTPResponse<[SERate]>) {
         HTTPService<[SERate]>.makeRequest(CurrencyRouter.rates(params), completion: completion)
@@ -506,19 +492,23 @@ public struct SERequestManager {
          - customer_id: Optional. The id of the customer containing the consents. Note: Will be ignored if connection_id is present.
          - from_id: Optional. The id from which the next page of consents starts.
          - completion: The code to be executed once the request has finished.
+
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#consents-list)
      */
     public func getConsents(params: SEConsentsListParams, completion: SEHTTPResponse<[SEConsent]>) {
         HTTPService<[SEConsent]>.makeRequest(ConsentRouter.list(params), completion: completion)
     }
 
     /**
-     Returns the consents object.
+     Returns the consent object.
 
      - parameters:
         - id: The id of the consent.
         - connection_id: Optional. The id of the connection containing the consents
         - customer_id: Optional. The id of the customer containing the consents. Note: Will be ignored if connection_id is present.
         - completion: The code to be executed once the request has finished.
+
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#consents-show)
     */
     public func getConsent(by id: String, params: SEBaseConsentsParams, completion: SEHTTPResponse<SEConsent>) {
         HTTPService<SEConsent>.makeRequest(ConsentRouter.show(id, params), completion: completion)
@@ -532,6 +522,8 @@ public struct SERequestManager {
         - connection_id: Optional. The id of the connection containing the consents
         - customer_id: Optional. The id of the customer containing the consents. Note: Will be ignored if connection_id is present.
         - completion: The code to be executed once the request has finished.
+
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#consents-revoke)
      */
     public func revokeConsent(with id: String, params: SEBaseConsentsParams, completion: SEHTTPResponse<SEConsent>) {
         HTTPService<SEConsent>.makeRequest(ConsentRouter.revoke(id, params), completion: completion)
@@ -545,7 +537,7 @@ public struct SERequestManager {
          - connectionSecret: The secret of the connection whose attempts will be requested.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#attempts-stages)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-list)
      */
     public func getAttempts(for connectionSecret: String, completion: SEHTTPResponse<[SEAttempt]>) {
         HTTPService<[SEAttempt]>.makeRequest(AttemptRouter.list(connectionSecret), completion: completion)
@@ -558,7 +550,7 @@ public struct SERequestManager {
          - connectionSecret: The secret of the connection whose attempts will be requested.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#attempts-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-list)
      */
     public func getAllAttempts(for connectionSecret: String, completion: SEHTTPResponse<[SEAttempt]>) {
         HTTPPaginatedService<SEAttempt>.makeRequest(AttemptRouter.list(connectionSecret), completion: completion)
@@ -572,7 +564,7 @@ public struct SERequestManager {
          - connectionSecret: The secret of the connection whose attempt will be requested.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#attempts-show)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-show)
      */
     public func showAttempt(id: String, connectionSecret: String, completion: SEHTTPResponse<SEAttempt>) {
         HTTPService<SEAttempt>.makeRequest(AttemptRouter.show(connectionSecret, id), completion: completion)
@@ -584,7 +576,7 @@ public struct SERequestManager {
      
      - parameter completion: The code to be executed once the request has finished.
 
-     [Salt Edge API Reference](https://docs.saltedge.com/v4_apps/reference/#categories-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#categories-list)
      */
     public func getCategories(completion: SEHTTPResponse<[String: [String]]>) {
        HTTPService<[String: [String]]>.makeRequest(CategoryRouter.list, completion: completion)
@@ -597,7 +589,7 @@ public struct SERequestManager {
         - params: Struct containing array of structs with *transaction_id* and *category_code* that should be set learned.
         - completion: The code to be executed once the request has finished.
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#categories-learn)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#categories-learn)
      */
     public func learnCategory(params: SELearnCategories, completion: SEHTTPResponse<SELearnedCategory>) {
         HTTPService<SELearnedCategory>.makeRequest(CategoryRouter.learn(params), completion: completion)

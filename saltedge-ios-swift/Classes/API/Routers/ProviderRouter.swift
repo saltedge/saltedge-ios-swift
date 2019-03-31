@@ -24,8 +24,8 @@
 import Foundation
 
 typealias ProviderCode = String
-enum ProviderRouter: Routable {
 
+enum ProviderRouter: Routable {
     case list(SEProviderParams?)
     case show(ProviderCode)
     
