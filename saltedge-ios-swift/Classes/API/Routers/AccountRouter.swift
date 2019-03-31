@@ -1,7 +1,7 @@
 //
 //  AccountRouter.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 import Foundation
 
 enum AccountRouter: Routable {
-    case list(LoginSecret, SEAccountParams?)
+    case list(ConnectionSecret, SEAccountParams?)
     
     var method: HTTPMethod {
         return .get
@@ -36,7 +36,7 @@ enum AccountRouter: Routable {
     
     var headers: Headers {
         switch self {
-        case .list(let secret, _): return SEHeaders.cached.with(loginSecret: secret)
+        case .list(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
     

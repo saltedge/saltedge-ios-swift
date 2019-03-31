@@ -1,7 +1,7 @@
 //
 //  SEError.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +26,11 @@ import Foundation
 public struct SEError: Decodable {
     public let errorClass: String
     public let errorMessage: String
+    public let documentationUrl: String
     
     private enum CodingKeys: String, CodingKey {
-        case errorClass = "error_class"
-        case errorMessage = "error_message"
+        case errorClass = "class"
+        case errorMessage = "message"
+        case documentationUrl = "documentation_url"
     }
 }

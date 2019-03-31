@@ -29,7 +29,7 @@
 		AE3859B2202207DB009A2991 /* HeadersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3859B1202207DB009A2991 /* HeadersSpec.swift */; };
 		AE3859B420220D98009A2991 /* RoutableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3859B320220D98009A2991 /* RoutableSpec.swift */; };
 		AE9F52CA20164A7A0057FE09 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52C920164A7A0057FE09 /* CreateViewController.swift */; };
-		AE9F52CC20164A870057FE09 /* LoginsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CB20164A870057FE09 /* LoginsViewController.swift */; };
+		AE9F52CC20164A870057FE09 /* ConnectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CB20164A870057FE09 /* ConnectionsViewController.swift */; };
 		AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */; };
 		AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851412018E65700127D70 /* AttemptsViewController.swift */; };
 		AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB851432018E9B200127D70 /* AttemptViewController.swift */; };
@@ -83,7 +83,7 @@
 		AE3859B1202207DB009A2991 /* HeadersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadersSpec.swift; sourceTree = "<group>"; };
 		AE3859B320220D98009A2991 /* RoutableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutableSpec.swift; sourceTree = "<group>"; };
 		AE9F52C920164A7A0057FE09 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
-		AE9F52CB20164A870057FE09 /* LoginsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginsViewController.swift; sourceTree = "<group>"; };
+		AE9F52CB20164A870057FE09 /* ConnectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsViewController.swift; sourceTree = "<group>"; };
 		AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidersViewController.swift; sourceTree = "<group>"; };
 		AEB851412018E65700127D70 /* AttemptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsViewController.swift; sourceTree = "<group>"; };
 		AEB851432018E9B200127D70 /* AttemptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptViewController.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				AE299B462017A3450033FCFB /* AccountsViewController.swift */,
 				607FACD71AFB9204008FA782 /* ConnectViewController.swift */,
 				AE9F52C920164A7A0057FE09 /* CreateViewController.swift */,
-				AE9F52CB20164A870057FE09 /* LoginsViewController.swift */,
+				AE9F52CB20164A870057FE09 /* ConnectionsViewController.swift */,
 				AE9F52CD20164BF10057FE09 /* ProvidersViewController.swift */,
 				AE299B482017A8F80033FCFB /* TransactionsViewController.swift */,
 				AEB851412018E65700127D70 /* AttemptsViewController.swift */,
@@ -398,7 +398,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SaltEdge-iOS-Swift/SaltEdge.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustKit/TrustKit.framework",
@@ -411,7 +411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7DD3830A2231DB78E98765F7 /* [CP] Check Pods Manifest.lock */ = {
@@ -438,7 +438,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -449,7 +449,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-saltedge-ios_Tests/Pods-saltedge-ios_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB88496BC950CCBCCC2F52B1 /* [CP] Check Pods Manifest.lock */ = {
@@ -479,7 +479,7 @@
 			files = (
 				AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */,
 				AE299B4320178F440033FCFB /* UserDefaultsHelper.swift in Sources */,
-				AE9F52CC20164A870057FE09 /* LoginsViewController.swift in Sources */,
+				AE9F52CC20164A870057FE09 /* ConnectionsViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ConnectViewController.swift in Sources */,
 				AE31B4BC201B5EC700D00382 /* CredentialTextField.swift in Sources */,
 				AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */,

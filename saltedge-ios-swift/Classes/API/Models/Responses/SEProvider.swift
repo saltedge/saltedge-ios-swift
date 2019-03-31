@@ -1,7 +1,7 @@
 //
 //  SEProvider.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,6 @@ public struct SEProvider: Decodable {
     public let instruction: String
     public let homeURL: String
     public let loginURL: String
-    public let forumURL: String
     public let countryCode: String
     public let refreshTimeout: Int
     public let holderInfo: [String]
@@ -59,7 +58,6 @@ public struct SEProvider: Decodable {
         case instruction = "instruction"
         case homeURL = "home_url"
         case loginURL = "login_url"
-        case forumURL = "forum_url"
         case countryCode = "country_code"
         case refreshTimeout = "refresh_timeout"
         case holderInfo = "holder_info"

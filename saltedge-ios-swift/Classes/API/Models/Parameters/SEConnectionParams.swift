@@ -1,7 +1,7 @@
 //
-//  SELoginParams.swift
+//  SEConnectionParams.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class SEBaseLoginParams: Encodable, ParametersEncodable {
+public class SEBaseConnectionParams: Encodable, ParametersEncodable {
     let fetchScopes: [String]?
     let fromDate: Date?
     let toDate: Date?
@@ -41,10 +41,9 @@ public class SEBaseLoginParams: Encodable, ParametersEncodable {
         case fromDate  = "from_date"
         case toDate    = "to_date"
     }
-    
 }
 
-public class SEExtendedLoginParams: SEBaseLoginParams {
+public class SEExtendedConnectionParams: SEBaseConnectionParams {
     let dailyRefresh: Bool?
     let locale: String?
     let includeFakeProviders: Bool?
@@ -88,9 +87,46 @@ public class SEExtendedLoginParams: SEBaseLoginParams {
     }
 }
 
-public class SELoginRefreshParams: SEExtendedLoginParams {
-    let excludeAccounts: [Int]?
-    
+public class SEConnectionRefreshParams: SEExtendedConnectionParams {
+    let attempt: SEAttempt?
+    let categorization: String?
+
+    public init(attempt: SEAttempt? = nil,
+                categorization: String? = nil,
+                fetchScopes: [String]? = nil,
+                fromDate: Date? = nil,
+                toDate: Date? = nil,
+                dailyRefresh: Bool? = nil,
+                locale: String? = nil,
+                includeFakeProviders: Bool? = nil,
+                categorize: Bool? = nil,
+                storeCredentials: Bool? = nil) {
+        self.attempt = attempt
+        self.categorization = categorization
+
+        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
+                   dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
+                   categorize: categorize, storeCredentials: storeCredentials)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case attempt = "attempt"
+        case dailyRefresh = "daily_refresh"
+        case categorization = "categorziation"
+    }
+
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(attempt, forKey: .attempt)
+        try container.encodeIfPresent(categorization, forKey: .categorization)
+
+        try super.encode(to: encoder)
+    }
+}
+
+public class SEConnectionUpdateStatusParams: SEExtendedConnectionParams {
+    let status: String?
+
     public init(fetchScopes: [String]? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
@@ -99,27 +135,27 @@ public class SELoginRefreshParams: SEExtendedLoginParams {
                 includeFakeProviders: Bool? = nil,
                 categorize: Bool? = nil,
                 storeCredentials: Bool? = nil,
-                excludeAccounts: [Int]? = nil) {
-        self.excludeAccounts = excludeAccounts
-        
+                status: String? = nil) {
+        self.status = status
+
         super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
                    dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
-    
+
     private enum CodingKeys: String, CodingKey {
-        case exludeAccounts = "exlude_accounts"
+        case status = "status"
     }
-    
+
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(excludeAccounts, forKey: .exludeAccounts)
-
+        try container.encodeIfPresent(status, forKey: .status)
+        
         try super.encode(to: encoder)
     }
 }
 
-public class SELoginReconnectParams: SEExtendedLoginParams {
+public class SEConnectionReconnectParams: SEExtendedConnectionParams {
     let credentials: [String: String]
     
     public init(credentials: [String: String],
@@ -150,7 +186,7 @@ public class SELoginReconnectParams: SEExtendedLoginParams {
     }
 }
 
-public class SELoginInteractiveParams: SEBaseLoginParams {
+public class SEConnectionInteractiveParams: SEBaseConnectionParams {
     let credentials: [String:  String]
     
     public init(credentials: [String: String],
@@ -174,7 +210,7 @@ public class SELoginInteractiveParams: SEBaseLoginParams {
     }
 }
 
-public class SELoginParams: SEExtendedLoginParams {
+public class SEConnectionParams: SEExtendedConnectionParams {
     let countryCode: String
     let providerCode: String
     let credentials: [String: String]

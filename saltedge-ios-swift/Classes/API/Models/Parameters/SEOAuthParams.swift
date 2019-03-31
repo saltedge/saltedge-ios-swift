@@ -1,7 +1,7 @@
 //
 //  SEOAuthParams.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
     let fromDate: Date?
     let toDate: Date?
     let locale: String?
-    let returnLoginId: Bool?
+    let returnConnectionId: Bool?
     let categorize: Bool?
     let includeFakeProvider: Bool?
     
@@ -42,7 +42,7 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil) {
         self.returnTo = returnTo
@@ -52,7 +52,7 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
         self.fromDate = fromDate
         self.toDate = toDate
         self.locale = locale
-        self.returnLoginId = returnLoginId
+        self.returnConnectionId = returnConnectionId
         self.categorize = categorize
         self.includeFakeProvider = includeFakeProvider
     }
@@ -65,7 +65,7 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
         case fromDate = "from_date"
         case toDate = "to_date"
         case locale
-        case returnLoginId = "return_login_id"
+        case returnConnectionId = "return_connection_id"
         case categorize
         case includeFakeProvider = "include_fake_provider"
     }
@@ -84,7 +84,7 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil) {
         self.providerCode = providerCode
@@ -97,7 +97,7 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
                    fromDate: fromDate,
                    toDate: toDate,
                    locale: locale,
-                   returnLoginId: returnLoginId,
+                   returnConnectionId: returnConnectionId,
                    categorize: categorize,
                    includeFakeProvider: includeFakeProvider)
     }
@@ -126,7 +126,7 @@ public class SEUpdateOAuthParams: SEBasicOAuthParams {
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil,
                 excludeAccounts: [Int]? = nil) {
@@ -139,7 +139,7 @@ public class SEUpdateOAuthParams: SEBasicOAuthParams {
                    fromDate: fromDate,
                    toDate: toDate,
                    locale: locale,
-                   returnLoginId: returnLoginId,
+                   returnConnectionId: returnConnectionId,
                    categorize: categorize,
                    includeFakeProvider: includeFakeProvider)
     }

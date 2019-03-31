@@ -1,7 +1,7 @@
 //
-//  LoginRouter.swift
+//  ConnectionRouter.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,23 @@
 
 import Foundation
 
-typealias LoginSecret = String
-enum LoginRouter: Routable {
-    case create(SELoginParams)
-    case show(LoginSecret)
-    case reconnect(SELoginReconnectParams, LoginSecret)
-    case interactive(SELoginInteractiveParams, LoginSecret)
-    case refresh(SELoginRefreshParams?, LoginSecret)
-    case remove(LoginSecret)
-    case inactivate(LoginSecret)
-    case destroyCredentials(LoginSecret)
+typealias ConnectionSecret = String
+typealias ConnectionId = String
+
+enum ConnectionRouter: Routable {
+    case create(SEConnectionParams)
+    case show(ConnectionSecret)
+    case update(SEConnectionUpdateStatusParams, ConnectionId, ConnectionSecret)
+    case reconnect(SEConnectionReconnectParams, ConnectionSecret)
+    case interactive(SEConnectionInteractiveParams, ConnectionSecret)
+    case refresh(SEConnectionRefreshParams?, ConnectionSecret)
+    case remove(ConnectionSecret)
     
     var method: HTTPMethod {
         switch self {
         case .show: return .get
         case .create: return .post
-        case .reconnect, .interactive, .refresh, .inactivate, .destroyCredentials: return .put
+        case .update, .reconnect, .interactive, .refresh: return .put
         case .remove: return .delete
         }
     }
@@ -46,18 +47,15 @@ enum LoginRouter: Routable {
     var url: URL {
         switch self {
         case .show, .create, .remove:
-            return APIEndpoints.baseURL.appendingPathComponent("login")
+            return APIEndpoints.baseURL.appendingPathComponent("connection")
         case .reconnect:
-            return APIEndpoints.baseURL.appendingPathComponent("login/reconnect")
+            return APIEndpoints.baseURL.appendingPathComponent("connection/reconnect")
         case .interactive:
-            return APIEndpoints.baseURL.appendingPathComponent("login/interactive")
+            return APIEndpoints.baseURL.appendingPathComponent("connection/interactive")
         case .refresh:
-            return APIEndpoints.baseURL.appendingPathComponent("login/refresh")
-        case .inactivate:
-            return APIEndpoints.baseURL.appendingPathComponent("login/inactivate")
-        case .destroyCredentials:
-            return APIEndpoints.baseURL.appendingPathComponent("login/destroy_credentials")
-            
+            return APIEndpoints.baseURL.appendingPathComponent("connection/refresh")
+        case .update(_, let id, _):
+            return APIEndpoints.baseURL.appendingPathComponent("connection/update/\(id)")
         }
     }
     
@@ -66,19 +64,19 @@ enum LoginRouter: Routable {
         case .create:
             return SEHeaders.cached.sessionHeaders
         case .show(let secret),
+             .update(_, _, let secret),
              .reconnect(_, let secret),
              .interactive(_, let secret),
              .refresh(_, let secret),
-             .remove(let secret),
-             .inactivate(let secret),
-             .destroyCredentials(let secret):
-            return SEHeaders.cached.with(loginSecret: secret)
+             .remove(let secret):
+            return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
     
     var parameters: ParametersEncodable? {
         switch self {
         case .create(let params): return params
+        case .update(let params, _, _): return params
         case .reconnect(let params, _): return params
         case .refresh(let params, _): return params
         case .interactive(let params, _): return params
