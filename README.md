@@ -181,6 +181,8 @@ The SDK has SSL pinning enabled. That means that every API request that originat
 
 The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/guides/security/#http_public_key_pinning_(hpkp))
 
+## [Changelog](CHANGELOG.md)
+
 ## License
 
 See the LICENSE file.
