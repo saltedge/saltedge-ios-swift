@@ -1,7 +1,7 @@
 //
-//  SETokenParams.swift
+//  SEConnectSessionsParams.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,44 +23,41 @@
 
 import Foundation
 
-public class SEBaseTokenParams: Encodable, ParametersEncodable {
-    let fetchScopes: [String]?
+public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
     let customFields: String?
     let dailyRefresh: Bool?
     let fromDate: Date?
     let toDate: Date?
     let locale: String?
-    let returnTo: String?
-    let returnLoginId: Bool?
+    let returnConnectionId: Bool?
     let providerModes: [String]?
     let categorize: Bool?
     let javascriptCallbackType: String?
     let includeFakeProviders: Bool?
     let lostConnectionNotify: Bool?
     let showConsentConfirmation: Bool?
+    let attempt: SEAttempt?
 
-    init(fetchScopes: [String]? = nil,
+    init(attempt: SEAttempt? = nil,
          customFields: String? = nil,
          dailyRefresh: Bool? = nil,
          fromDate: Date? = nil,
          toDate: Date? = nil,
          locale: String? = nil,
-         returnTo: String? = nil,
-         returnLoginId: Bool? = nil,
+         returnConnectionId: Bool? = nil,
          providerModes: [String]? = nil,
          categorize: Bool? = nil,
          javascriptCallbackType: String? = nil,
          includeFakeProviders: Bool? = nil,
          lostConnectionNotify: Bool? = nil,
          showConsentConfirmation: Bool? = nil) {
-        self.fetchScopes = fetchScopes
+        self.attempt = attempt
         self.customFields = customFields
         self.dailyRefresh = dailyRefresh
         self.fromDate = fromDate
         self.toDate = toDate
         self.locale = locale
-        self.returnTo = returnTo
-        self.returnLoginId = returnLoginId
+        self.returnConnectionId = returnConnectionId
         self.providerModes = providerModes
         self.categorize = categorize
         self.javascriptCallbackType = javascriptCallbackType
@@ -70,14 +67,13 @@ public class SEBaseTokenParams: Encodable, ParametersEncodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case fetchScopes = "fetch_scopes"
+        case attempt = "attempt"
         case customFields = "custom_fields"
         case dailyRefresh = "daily_refresh"
         case fromDate = "from_date"
         case toDate = "to_date"
         case locale = "locale"
-        case returnTo = "return_to"
-        case returnLoginId = "return_login_id"
+        case returnConnectionId = "return_connection_id"
         case providerModes = "provider_modes"
         case categorize = "categorize"
         case javascriptCallbackType = "javascript_callback_type"
@@ -87,40 +83,41 @@ public class SEBaseTokenParams: Encodable, ParametersEncodable {
     }
 }
 
-public class SECreateTokenParams: SEBaseTokenParams {
+public class SECreateSessionsParams: SEBaseConnectSessionsParams {
     let allowedCountries: [String]?
-    let providerCode: String?
+    let consent: SEConsent
     let credentialsStrategy: String?
+    let providerCode: String?
 
     public init(allowedCountries: [String]? = nil,
-                fetchScopes: [String],
+                attempt: SEAttempt? = nil,
                 providerCode: String? = nil,
                 customFields: String? = nil,
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnTo: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
                 javascriptCallbackType: String? = nil,
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil,
-                credentialsStrategy: String? = nil) {
+                credentialsStrategy: String? = nil,
+                consent: SEConsent) {
         self.allowedCountries = allowedCountries
         self.providerCode = providerCode
         self.credentialsStrategy = credentialsStrategy
+        self.consent = consent
 
-        super.init(fetchScopes: fetchScopes,
+        super.init(attempt: attempt,
                    customFields: customFields,
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
                    locale: locale,
-                   returnTo: returnTo,
-                   returnLoginId: returnLoginId,
+                   returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
                    javascriptCallbackType: javascriptCallbackType,
@@ -130,6 +127,7 @@ public class SECreateTokenParams: SEBaseTokenParams {
     }
     
     private enum CodingKeys: String, CodingKey {
+        case consent = "consent"
         case allowedCountries = "allowed_countries"
         case providerCode = "provider_code"
         case credentialsStrategy = "credentials_strategy"
@@ -140,23 +138,23 @@ public class SECreateTokenParams: SEBaseTokenParams {
         try container.encodeIfPresent(allowedCountries, forKey: .allowedCountries)
         try container.encodeIfPresent(providerCode, forKey: .providerCode)
         try container.encodeIfPresent(credentialsStrategy, forKey: .credentialsStrategy)
+        try container.encode(consent, forKey: .consent)
         
         try super.encode(to: encoder)
     }
 }
 
-public class SERefreshTokenParams: SEBaseTokenParams {
+public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
     let excludeAccounts: [Int]?
     
     public init(excludeAccounts: [Int]? = nil,
-                fetchScopes: [String]? = nil,
+                attempt: SEAttempt? = nil,
                 customFields: String? = nil,
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnTo: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
                 javascriptCallbackType: String? = nil,
@@ -165,14 +163,13 @@ public class SERefreshTokenParams: SEBaseTokenParams {
                 showConsentConfirmation: Bool? = nil) {
         self.excludeAccounts = excludeAccounts
 
-        super.init(fetchScopes: fetchScopes,
+        super.init(attempt: attempt,
                    customFields: customFields,
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
                    locale: locale,
-                   returnTo: returnTo,
-                   returnLoginId: returnLoginId,
+                   returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
                    javascriptCallbackType: javascriptCallbackType,
@@ -194,37 +191,38 @@ public class SERefreshTokenParams: SEBaseTokenParams {
 
 }
 
-public class SEReconnectTokenParams: SEBaseTokenParams {
+public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
     let excludeAccounts: [Int]?
     let credentialsStrategy: String?
+    let consent: SEConsent
     
     public init(excludeAccounts: [Int]? = nil,
-                fetchScopes: [String]? = nil,
+                attempt: SEAttempt? = nil,
                 customFields: String? = nil,
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 locale: String? = nil,
-                returnTo: String? = nil,
-                returnLoginId: Bool? = nil,
+                returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
                 javascriptCallbackType: String? = nil,
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil,
-                credentialsStrategy: String? = nil) {
+                credentialsStrategy: String? = nil,
+                consent: SEConsent) {
         self.excludeAccounts = excludeAccounts
         self.credentialsStrategy = credentialsStrategy
+        self.consent = consent
         
-        super.init(fetchScopes: fetchScopes,
+        super.init(attempt: attempt,
                    customFields: customFields,
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
                    locale: locale,
-                   returnTo: returnTo,
-                   returnLoginId: returnLoginId,
+                   returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
                    javascriptCallbackType: javascriptCallbackType,
@@ -236,12 +234,14 @@ public class SEReconnectTokenParams: SEBaseTokenParams {
     private enum CodingKeys: String, CodingKey {
         case excludeAccounts = "exclude_accounts"
         case credentialsStrategy = "credentials_strategy"
+        case consent = "consent"
     }
     
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(excludeAccounts, forKey: .excludeAccounts)
         try container.encodeIfPresent(credentialsStrategy, forKey: .credentialsStrategy)
+        try container.encode(consent, forKey: .consent)
         
         try super.encode(to: encoder)
     }

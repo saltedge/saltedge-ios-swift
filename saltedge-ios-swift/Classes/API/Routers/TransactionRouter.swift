@@ -1,7 +1,7 @@
 //
 //  TransactionRouter.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,15 @@
 import Foundation
 
 enum TransactionRouter: Routable {
-    case list(LoginSecret, SETransactionParams?)
-    case pending(LoginSecret, SETransactionParams?)
+    case list(ConnectionSecret, SETransactionParams?)
+    case pending(ConnectionSecret, SETransactionParams?)
     case duplicate(SEDuplicateTransactionsParams)
+    case duplicates(SETransactionParams?)
     case unduplicate(SEDuplicateTransactionsParams)
 
     var method: HTTPMethod {
         switch self {
-        case .list, .pending: return .get
+        case .list, .pending, .duplicates: return .get
         case .duplicate, .unduplicate: return .put
         }
     }
@@ -41,23 +42,22 @@ enum TransactionRouter: Routable {
         case .list: return APIEndpoints.baseURL.appendingPathComponent("transactions")
         case .pending: return APIEndpoints.baseURL.appendingPathComponent("transactions/pending")
         case .duplicate: return APIEndpoints.baseURL.appendingPathComponent("transactions/duplicate")
+        case .duplicates: return APIEndpoints.baseURL.appendingPathComponent("transactions/duplicates")
         case .unduplicate: return APIEndpoints.baseURL.appendingPathComponent("transactions/unduplicate")
         }
     }
     
     var headers: Headers {
         switch self {
-        case .list(let secret, _), .pending(let secret, _): return SEHeaders.cached.with(loginSecret: secret)
-        case .duplicate, .unduplicate: return SEHeaders.cached.sessionHeaders
+        case .list(let secret, _), .pending(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
+        case .duplicate, .duplicates, .unduplicate: return SEHeaders.cached.sessionHeaders
         }
     }
     
     var parameters: ParametersEncodable? {
         switch self {
-        case .list(_, let params), .pending(_, let params): return params
+        case .list(_, let params), .pending(_, let params), .duplicates(let params): return params
         case .duplicate(let params), .unduplicate(let params): return params
         }
     }
 }
-
-

@@ -3,7 +3,7 @@
 //  saltedge-ios_Tests
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import Quick
@@ -40,15 +40,16 @@ class HTTPServiceSpec: QuickSpec {
                 it("should return SEError as data and nil error") {
                     let errorJson = """
                                         {
-                                          "error_class": "LoginNotFound",
-                                          "error_message": "Login with id: '987' was not found."
+                                          "class": "ConnectionNotFound",
+                                          "message": "Connection with id: '987' was not found.",
+                                          "documentation_url": "https://test.com"
                                         }
                                     """
                     let (data, error) = handleResponse(from: errorJson.data(using: .utf8) , error: nil, decoder: JSONDecoder())
                     
                     expect(data).toNot(beNil())
                     expect(error).toNot(beNil())
-                    expect(error?.localizedDescription).to(equal("Login with id: '987' was not found."))
+                    expect(error?.localizedDescription).to(equal("Connection with id: '987' was not found."))
                 }
             }
             

@@ -23,7 +23,7 @@ Import SDK into your app
 
 `import SaltEdge`
 
-## Connecting logins using the sample app
+## Connecting Connections using the sample app
 
 1. Install dependencies by running `$ pod install`
 2. Replace the `clientId`, `secret` and `customerIdentifier` constants in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51) with your Client ID and corresponding App secret
@@ -61,9 +61,9 @@ Implement the `SEWebViewDelegate` methods in the controller:
 func webView(_ webView: SEWebView, didReceiveCallbackWithResponse response: SEConnectResponse) {
     switch response.stage {
     case .success:
-	    // Login successfully connected
+	    // Connection successfully connected
     case .fetching:
-	    // Login is fetching. You can safe login secret if it is present.
+	    // Connection is fetching. You can safe connection secret if it is present.
     case .error:
 	    // Handle error
     }
@@ -77,7 +77,7 @@ func webView(_ webView: SEWebView, didReceiveCallbackWithError error: Error) {
 Load the Salt Edge Connect URL into the web view and you're good to go:
 
 ```swift
-SERequestManager.shared.createToken(params: tokenParams) { response in
+SERequestManager.shared.createConnectSession(params: connectSessionParams) { response in
 	switch response {
 	case .success(let value):
 		if let url = URL(string: value.data.connectUrl) {
@@ -92,7 +92,7 @@ SERequestManager.shared.createToken(params: tokenParams) { response in
 
 ## SEAPIRequestManager
 
-A class designed with convenience methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (logins, transactions, accounts, et al.), for requesting login tokens for connecting, reconnecting and refreshing logins via a `SEWebView`, and also for connecting logins via the REST API.
+A class designed with convenience methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (Connections, Transactions, Accounts, et al.), for requesting connect url for connecting, reconnecting and refreshing Connections via a `SEWebView`, and also for connecting Connections via the REST API.
 
 Each successful request via `SEAPIRequestManager` returns `SEResponse` containing `data` and `meta`.
 
@@ -124,14 +124,14 @@ SERequestManager.shared.createCustomer(with: params) { response in
 Use the manager to interact with the provided API:
 
 ```swift
-let loginParams = SELoginParams(countryCode: "XF",
-                                providerCode: "fakebank_simple_xf",
-                                credentials: ["login": "username", "password": "secret"],
-                                fetchType: "recent")
-SERequestManager.shared.createLogin(with: loginParams) { response in
+let connectionParams = SEConnectionParams(countryCode: "XF",
+                                          providerCode: "fakebank_simple_xf",
+                                          credentials: ["login": "username", "password": "secret"],
+                                          fetchScopes: ["accounts", "transactions"])
+SERequestManager.shared.createConnection(with: connectionParams) { response in
     switch response {
     case .success(let value):
-	    // value.data is a valid SELogin
+	    // value.data is a valid SEConnection
     case .failure(let error):
     	// Handle error
     }
@@ -140,16 +140,17 @@ SERequestManager.shared.createLogin(with: loginParams) { response in
 
 ## Models
 
-There are some provided models for serializing the objects received in the API responses. These represent the providers, logins, accounts, transactions, provider fields and their options. Whenever you request a resource that returns one of these types, they will always get serialized into Swift structs. For instance, the `getAllTransactions(for loginSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>)` method has a `SEResponse` containing `data` and `meta` where `data` is `[SETransaction]` in it's success callback.
+There are some provided models for serializing the objects received in the API responses. These represent the Providers, Connections, Accounts, Transactions, provider fields and their options. Whenever you request a resource that returns one of these types, they will always get serialized into Swift structs. For instance, the `getAllTransactions(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>)` method has a `SEResponse` containing `data` and `meta` where `data` is `[SETransaction]` in it's success callback.
 
 Models contained within the components:
 
 * `SEProvider`
-* `SELogin`
+* `SEConnection`
 * `SEAccount`
 * `SETransaction`
-* `SETokenResponse`
+* `SEConnectSessionResponse`
 * `SEAttempt`
+* `SEConsent`
 * `SECountry`
 * `SECustomer`
 * `SEStage`
@@ -179,6 +180,8 @@ The SDK has SSL pinning enabled. That means that every API request that originat
 #### Since version 1.1.0
 
 The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/guides/security/#http_public_key_pinning_(hpkp))
+
+## [Changelog](CHANGELOG.md)
 
 ## License
 

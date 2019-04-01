@@ -1,7 +1,7 @@
 //
 //  SEWebView.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ let seCallbackHost: String = "connect"
  */
 public class SEWebView: WKWebView {
     /**
-     The state delegate of the login that is currently processed. This object will be notified about events such as the state of the login **(fetching, success, error)** and about any errors that will occur in the processing.
+     The state delegate of the connection that is currently processed. This object will be notified about events such as the state of the connection **(fetching, success, error)** and about any errors that will occur in the processing.
      
      - warning: must not be nil in order to receive Salt Edge Connect callbacks.
      */

@@ -1,7 +1,7 @@
 //
-//  Attempt.swift
+//  SEAttempt.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,35 +23,96 @@
 
 import Foundation
 
-public struct SEAttempt: Decodable {
-    public let id: String
-    public let apiMode: String
-    public let apiVersion: String
-    public let automaticFetch: Bool
-    public let dailyRefresh: Bool
-    public let categorize: Bool
-    public let createdAt: Date
+public struct SEAttempt: Codable {
+    public let id: String?
+    public let fetchScopes: [String]?
+    public let apiMode: String?
+    public let apiVersion: String?
+    public let automaticFetch: Bool?
+    public let dailyRefresh: Bool?
+    public let categorize: Bool?
+    public let createdAt: Date?
     public let customFields: [String: String]?
-    public let deviceType: String
-    public let remoteIp: String
-    public let excludeAccounts: [Int]
+    public let deviceType: String?
+    public let remoteIp: String?
+    public let excludeAccounts: [Int]?
     public let failAt: Date?
     public let failErrorClass: String?
     public let failMessage: String?
-    public let fetchScopes: [String]
-    public let finished: Bool
-    public let finishedRecent: Bool
-    public let interactive: Bool
-    public let locale: String
-    public let partial: Bool
-    public let storeCredentials: Bool
+    public let finished: Bool?
+    public let finishedRecent: Bool?
+    public let interactive: Bool?
+    public let locale: String?
+    public let partial: Bool?
+    public let storeCredentials: Bool?
     public let successAt: Date?
-    public let updatedAt: Date
+    public let updatedAt: Date?
     public let showConsentConfirmation: Bool?
     public let consentTypes: [String]?
     public let consentGivenAt: Date?
     public let lastStage: SEStage?
     public let stages: [SEStage]?
+    public let returnTo: String?
+
+    public init(id: String? = nil,
+                fetchScopes: [String]? = nil,
+                apiMode: String? = nil,
+                apiVersion: String? = nil,
+                automaticFetch: Bool? = nil,
+                dailyRefresh: Bool? = nil,
+                categorize: Bool? = nil,
+                createdAt: Date? = nil,
+                customFields: [String: String]? = nil,
+                deviceType: String? = nil,
+                remoteIp: String? = nil,
+                excludeAccounts: [Int]? = nil,
+                failAt: Date? = nil,
+                failErrorClass: String? = nil,
+                failMessage: String? = nil,
+                finished: Bool? = nil,
+                finishedRecent: Bool? = nil,
+                interactive: Bool? = nil,
+                locale: String? = nil,
+                partial: Bool? = nil,
+                storeCredentials: Bool? = nil,
+                successAt: Date? = nil,
+                updatedAt: Date? = nil,
+                showConsentConfirmation: Bool? = nil,
+                consentTypes: [String]? = nil,
+                consentGivenAt: Date? = nil,
+                lastStage: SEStage? = nil,
+                stages: [SEStage]? = nil,
+                returnTo: String? = nil) {
+        self.id = id
+        self.fetchScopes = fetchScopes
+        self.apiMode = apiMode
+        self.apiVersion = apiVersion
+        self.automaticFetch = automaticFetch
+        self.dailyRefresh = dailyRefresh
+        self.categorize = categorize
+        self.createdAt = createdAt
+        self.customFields = customFields
+        self.deviceType = deviceType
+        self.remoteIp = remoteIp
+        self.excludeAccounts = excludeAccounts
+        self.failAt = failAt
+        self.failErrorClass = failErrorClass
+        self.failMessage = failMessage
+        self.finished = finished
+        self.finishedRecent = finishedRecent
+        self.interactive = interactive
+        self.locale = locale
+        self.partial = partial
+        self.storeCredentials = storeCredentials
+        self.successAt = successAt
+        self.updatedAt = updatedAt
+        self.showConsentConfirmation = showConsentConfirmation
+        self.consentTypes = consentTypes
+        self.consentGivenAt = consentGivenAt
+        self.lastStage = lastStage
+        self.stages = stages
+        self.returnTo = returnTo
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -81,7 +142,7 @@ public struct SEAttempt: Decodable {
         case consentTypes = "consent_types"
         case consentGivenAt = "consent_given_at"
         case lastStage = "last_stage"
-        case stages
+        case stages = "stages"
+        case returnTo = "return_to"
     }
 }
-

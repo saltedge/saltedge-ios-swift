@@ -1,7 +1,7 @@
 //
-//  SELogin.swift
+//  SEConnection.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 
 import Foundation
 
-public struct SELogin: Decodable {
+public struct SEConnection: Decodable {
     public let id: String
     public let countryCode: String
     public let createdAt: Date
@@ -32,7 +32,7 @@ public struct SELogin: Decodable {
     public let consentTypes: [String]?
     public let consentGivenAt: Date?
     public let lastAttempt: SEAttempt
-    public let holderInfo: SEHolderInfo
+    public let holderInfo: SEHolderInfo?
     public let lastSuccessAt: Date?
     public let nextRefreshPossibleAt: Date?
     public let providerId: String
@@ -42,6 +42,7 @@ public struct SELogin: Decodable {
     public let status: String
     public let storeCredentials: Bool
     public let updatedAt: Date
+    public let customerId: String
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -62,6 +63,7 @@ public struct SELogin: Decodable {
         case status = "status"
         case storeCredentials = "store_credentials"
         case updatedAt = "updated_at"
+        case customerId = "customer_id"
     }
     
     var stage: String {

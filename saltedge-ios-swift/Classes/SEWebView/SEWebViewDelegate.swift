@@ -1,7 +1,7 @@
 //
 //  SEWebViewDelegate.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,21 +30,21 @@ public protocol SEWebViewDelegate: NSObjectProtocol {
      
      - parameters:
          - webView: The web view which displays the Salt Edge Connect page from which the callback is triggered.
-         - response: The payload within the callback. It contains three keys: **login_id**, **secret** and **state**. Note that if the login is duplicated, you will receive a payload with the key **duplicated_login_id** and the **state** being **error**. See an example response above.
+         - response: The payload within the callback. It contains three keys: **connection_id**, **secret** and **state**. Note that if the connection is duplicated, you will receive a payload with the key **duplicated_connection_id** and the **state** being **error**. See an example response above.
      
      ```
      // usual response
      {
          "data": {
-             "login_id": 997671551,
+             "connection_id": 997671551,
              "secret": "Dk4WGvf71TMMp4ZQSodLa-n5Ay8WStFG0-gd-k2jPUM",
              "state": "success"
          }
      }
-     // if the login is duplicated
+     // if the connection is duplicated
      {
          "data": {
-             "duplicated_login_id": 997674446,
+             "duplicated_connection_id": 997674446,
              "state": "error"
          }
      }

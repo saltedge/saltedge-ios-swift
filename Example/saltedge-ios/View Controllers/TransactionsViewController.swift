@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ final class TransactionsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var transactions: [SETransaction] = []
-    private var loginSecret: String!
+    private var connectionSecret: String!
     private var account: SEAccount!
     
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ final class TransactionsViewController: UIViewController {
     func requestTransactions() {
         HUD.show(.labeledProgress(title: "Fetching Transactions", subtitle: nil))
         let params = SETransactionParams(accountId: account.id)
-        SERequestManager.shared.getAllTransactions(for: loginSecret, params: params) { [weak self] response in
+        SERequestManager.shared.getAllTransactions(for: connectionSecret, params: params) { [weak self] response in
             switch response {
             case .success(let value):
                 self?.transactions = value.data
@@ -74,12 +74,12 @@ extension TransactionsViewController: UITableViewDelegate {
 }
 
 extension TransactionsViewController {
-    static func create(with loginSecret: String, account: SEAccount) -> TransactionsViewController? {
+    static func create(with connectionSecret: String, account: SEAccount) -> TransactionsViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "TransactionsViewController") as? TransactionsViewController else { return nil }
         
-        vc.loginSecret = loginSecret
+        vc.connectionSecret = connectionSecret
         vc.account = account
         
         return vc

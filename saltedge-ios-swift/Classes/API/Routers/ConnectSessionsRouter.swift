@@ -1,5 +1,5 @@
 //
-//  ParametersEncodable.swift
+//  ConnectSessionsRouter.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,28 +23,35 @@
 
 import Foundation
 
-enum Encoding {
-    case url
-    case json
-}
-
-protocol ParametersEncodable {
-    func encode() throws -> Any
-}
-
-extension ParametersEncodable where Self: URLEncodable {
-    func encode(with encoding: Encoding) throws -> Any {
-        return self.encode()
+enum ConnectSessionsRouter: Routable {
+    case create(SECreateSessionsParams)
+    case reconnect(ConnectionSecret, SEReconnectSessionsParams)
+    case refresh(ConnectionSecret, SERefreshSessionsParams)
+    
+    var method: HTTPMethod {
+        return .post
+    }
+    
+    var url: URL {
+        switch self {
+        case .create: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/create")
+        case .reconnect: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/reconnect")
+        case .refresh: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/refresh")
+        }
+    }
+    
+    var headers: Headers {
+        switch self {
+        case .create: return SEHeaders.cached.sessionHeaders
+        case .reconnect(let secret, _), .refresh(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
+        }
+    }
+    
+    var parameters: ParametersEncodable? {
+        switch self {
+        case .create(let params): return params
+        case .reconnect(_, let params): return params
+        case .refresh(_, let params): return params
+        }
     }
 }
-
-extension ParametersEncodable where Self: Encodable {
-    func encode() throws -> Any {
-        let params = SERequestParams(data: self)
-        
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        return try encoder.encode(params)
-    }
-}
-

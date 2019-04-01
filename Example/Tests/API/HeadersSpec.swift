@@ -3,7 +3,7 @@
 //  saltedge-ios_Tests
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import Quick
@@ -58,19 +58,19 @@ class HeadersSpec: QuickSpec {
             }
         }
 
-        describe("set(loginSecret:)") {
-            context("when loginSecret is set") {
-                it("should return headers with provided login secret") {
-                    let loginSecret = "login secret"
+        describe("set(connectionSecret:)") {
+            context("when connectionSecret is set") {
+                it("should return headers with provided connection secret") {
+                    let connectionSecret = "connection secret"
                     
                     let expectedHeaders = [ "Accept": "application/json",
                                             "Content-Type": "application/json",
                                             "App-id": appId,
                                             "Secret": secret,
                                             "Customer-secret": customerSecret,
-                                            "Login-secret": loginSecret ]
+                                            "Connection-secret": connectionSecret ]
                     
-                    expect(SEHeaders.cached.with(loginSecret: loginSecret)).to(equal(expectedHeaders))
+                    expect(SEHeaders.cached.with(connectionSecret: connectionSecret)).to(equal(expectedHeaders))
                 }
             }
         }
