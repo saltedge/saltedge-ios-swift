@@ -394,9 +394,9 @@ public struct SERequestManager {
      Fetches all transactions for a connection.
      
      - parameters:
-     - connectionSecret: The connection secret of the accounts' connection.
-     - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching all transactions from particular **transaction_id**
-     - completion: The code to be executed once the request has finished.
+         - connectionSecret: The connection secret of the accounts' connection.
+         - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching all transactions from particular **transaction_id**
+         - completion: The code to be executed once the request has finished.
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-list)
      */
@@ -408,9 +408,9 @@ public struct SERequestManager {
      Fetches page of pendding transactions for a connection.
 
      - parameters:
-     - connectionSecret: The connection secret of the accounts' connection.
-     - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
-     - completion: The code to be executed once the request has finished.
+         - connectionSecret: The connection secret of the accounts' connection.
+         - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
+         - completion: The code to be executed once the request has finished.
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-pending)
      */
@@ -422,13 +422,13 @@ public struct SERequestManager {
      Fetches page of duplicated transactions for a connection.
 
      - parameters:
-     - connectionSecret: The connection secret of the accounts' connection.
-     - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
-     - completion: The code to be executed once the request has finished.
+         - connectionSecret: The connection secret of the accounts' connection.
+         - params: Optional constraints set to the fetch query. Set **account_id** if you want to fetch transcation only for particular account. Set **from_id** to start fetching transaction from particular **transaction_id**. *next_id* could be obtained from response meta.
+         - completion: The code to be executed once the request has finished.
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-duplicates)
      */
-    public func getduplicatedTransations(params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
+    public func getDuplicatedTransations(params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
         HTTPService<[SETransaction]>.makeRequest(TransactionRouter.duplicates(params), completion: completion)
     }
 

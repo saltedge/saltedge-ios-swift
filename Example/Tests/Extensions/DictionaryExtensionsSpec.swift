@@ -14,7 +14,7 @@ class DictionaryExtensionsSpec: QuickSpec {
     override func spec() {
         describe("mergeWith(_:)") {
             it("should return merged dictionary") {
-                var firstDictionary = ["key": "value", "secondKey": "other value"]
+                let firstDictionary = ["key": "value", "secondKey": "other value"]
                 let secondDictionary = ["key": "newValue", "newKey": "value"]
                 
                 let expectedDictionary = ["key": "newValue", "secondKey": "other value", "newKey": "value"]

@@ -39,7 +39,7 @@ final class AccountsViewController: UIViewController {
     @IBAction func actionsPressed(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let remove = UIAlertAction(title: "Remove", style: .destructive) { [weak self] action in
-            self?.removeconnection()
+            self?.removeConnection()
         }
         let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
             self?.chooseMethodFotAction(for: .reconnect)
@@ -60,7 +60,7 @@ final class AccountsViewController: UIViewController {
         present(actionSheet, animated: true)
     }
     
-    private func removeconnection() {
+    private func removeConnection() {
         HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
         
         SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
@@ -69,7 +69,7 @@ final class AccountsViewController: UIViewController {
                 guard let weakSelf = self else { return }
                 if value.data.removed {
                     var connections = UserDefaultsHelper.connections
-                    if let index = connections?.index(of: weakSelf.connection.secret) {
+                    if let index = connections?.firstIndex(of: weakSelf.connection.secret) {
                         connections?.remove(at: index)
                         UserDefaultsHelper.connections = connections
                     }
@@ -97,7 +97,7 @@ final class AccountsViewController: UIViewController {
                 createVC.connection = self?.connection
                 self?.tabBarController?.selectedIndex = 1
             } else {
-               self?.refreshconnectionUsingAPI()
+               self?.refreshConnectionUsingAPI()
             }
         }
         
@@ -135,23 +135,23 @@ final class AccountsViewController: UIViewController {
         }
     }
     
-    private func refreshconnectionUsingAPI() {
+    private func refreshConnectionUsingAPI() {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
-        if connectionProvider.isOAuth {
-            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
 
-            SERequestManager.shared.refreshConnection(
-                with: connection.secret,
-                params: connectionProvider.isOAuth ? params :nil,
-                fetchingDelegate: self
-            ) { response in
-                switch response {
-                case .success(let value):
-                    // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks
-                    print(value.data)
-                case .failure(let error):
-                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
-                }
+        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+
+        SERequestManager.shared.refreshConnection(
+            with: connection.secret,
+            params: connectionProvider.isOAuth ? params :nil,
+            fetchingDelegate: self
+        ) { response in
+            switch response {
+            case .success(let value):
+                // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks
+                print(value.data)
+            case .failure(let error):
+                HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+                print(response)
             }
         }
     }

@@ -24,8 +24,8 @@
 import Foundation
 
 public struct SEAttempt: Codable {
-    public let fetchScopes: [String]?
     public let id: String?
+    public let fetchScopes: [String]?
     public let apiMode: String?
     public let apiVersion: String?
     public let automaticFetch: Bool?
@@ -54,8 +54,8 @@ public struct SEAttempt: Codable {
     public let stages: [SEStage]?
     public let returnTo: String?
 
-    public init(fetchScopes: [String]? = nil,
-                id: String? = nil,
+    public init(id: String? = nil,
+                fetchScopes: [String]? = nil,
                 apiMode: String? = nil,
                 apiVersion: String? = nil,
                 automaticFetch: Bool? = nil,
@@ -83,8 +83,8 @@ public struct SEAttempt: Codable {
                 lastStage: SEStage? = nil,
                 stages: [SEStage]? = nil,
                 returnTo: String? = nil) {
-        self.fetchScopes = fetchScopes
         self.id = id
+        self.fetchScopes = fetchScopes
         self.apiMode = apiMode
         self.apiVersion = apiVersion
         self.automaticFetch = automaticFetch
@@ -146,4 +146,3 @@ public struct SEAttempt: Codable {
         case returnTo = "return_to"
     }
 }
-

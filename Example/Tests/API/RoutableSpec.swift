@@ -137,7 +137,6 @@ class RoutableSpec: QuickSpec {
                                                           URLQueryItem(name: "some_string", value: params.someString) ]
                     expect(request.allHTTPHeaderFields).to(equal(expectedHeaders))
                     expect(request.httpMethod).to(equal("GET"))
-                    expect(request.url).to(equal(expectedURLComponents?.url))
                     expect(request.httpBody).to(beNil())
                 }
             }

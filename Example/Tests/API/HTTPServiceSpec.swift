@@ -40,8 +40,9 @@ class HTTPServiceSpec: QuickSpec {
                 it("should return SEError as data and nil error") {
                     let errorJson = """
                                         {
-                                          "error_class": "ConnectionNotFound",
-                                          "error_message": "Connection with id: '987' was not found."
+                                          "class": "ConnectionNotFound",
+                                          "message": "Connection with id: '987' was not found.",
+                                          "documentation_url": "https://test.com"
                                         }
                                     """
                     let (data, error) = handleResponse(from: errorJson.data(using: .utf8) , error: nil, decoder: JSONDecoder())
