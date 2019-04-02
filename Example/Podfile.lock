@@ -2,7 +2,7 @@ PODS:
   - Nimble (7.3.4)
   - PKHUD (5.2.1)
   - Quick (1.3.4)
-  - SaltEdge-iOS-Swift (1.1.2):
+  - SaltEdge-iOS-Swift (2.0):
     - TrustKit
   - TrustKit (1.6.1)
 
@@ -27,9 +27,9 @@ SPEC CHECKSUMS:
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
-  SaltEdge-iOS-Swift: cbf1042bb81e0e9b3f1541532b8ced40e2c64d3b
+  SaltEdge-iOS-Swift: dea5a83d8d5141cdc3e8ffa710be5d3cb99092d0
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
 PODFILE CHECKSUM: af65592a936e9f7032081206063d1bcd8cde6143
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.0
