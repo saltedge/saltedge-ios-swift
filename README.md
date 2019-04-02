@@ -1,4 +1,4 @@
-# Salt Edge iOS Swift SDK and Eaxample application
+# Salt Edge iOS Swift SDK and Example application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS app.
 Last SDK version (2.0+) supports Salt Edge API v5.
