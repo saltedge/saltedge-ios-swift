@@ -1,39 +1,43 @@
-# Salt Edge iOS Swift
+# Salt Edge iOS Swift SDK and Eaxample application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS app.
+Last SDK version (2.0+) supports Salt Edge API v5.
 
 ## Requirements
 
 iOS 10.0+, Swift 4+
 
-## Installation
-### CocoaPods
+## Installation with CocoaPods
 
-Add the pod to your `Podfile`
+#### Add the pod to your `Podfile`  
 
+for Salt Edge API v5 use  
+```ruby
+pod 'SaltEdge-iOS-Swift', '~> 2.0'
+```
+
+for Salt Edge API v4 use  
 ```ruby
 pod 'SaltEdge-iOS-Swift', '~> 1.1.2'
 ```
 
-Install the pod
+#### Install the pod
 
 `$ pod install`
 
-Import SDK into your app
+#### Import SDK into your app
 
 `import SaltEdge`
 
-## Connecting Connections using the sample app
+## Init SDK
 
-1. Install dependencies by running `$ pod install`
-2. Replace the `clientId`, `secret` and `customerIdentifier` constants in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51) with your Client ID and corresponding App secret
-3. Run the app
+Replace the `appId`, `appSecret` and `customerId` constants in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51)
 
-*Note*: You can find your Client ID and App secret at your [secrets](https://www.saltedge.com/clients/profile/secrets) page.
+*Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page.  `customerId` - it is the unique identifier of the new customer.
 
 ## SEWebView
 
-A small `WKWebView` subclass for using [Salt Edge Connect](https://docs.saltedge.com/guides/connect/) within your iOS app.
+A small `WKWebView` subclass for using [Salt Edge Connect](https://docs.saltedge.com/account_information/v5/#salt_edge_connect) within your iOS app.
 
 ### Example
 
@@ -100,7 +104,7 @@ Each failed request returns standard Swift's `Error` .
 
 ### Usage
 
-Link your Client ID and App secret in the first place before using it.
+Link your App ID and App Secret in the first place before using it.
 
 ``` swift
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
@@ -158,7 +162,7 @@ Models contained within the components:
 * `SEProviderField`
 * `SEProviderFieldOption`
 
-For a supplementary description of the models listed above that is not included in the sources' docs, feel free to visit the [API Reference](https://docs.saltedge.com/reference/).
+For a supplementary description of the models listed above that is not included in the sources' docs, feel free to visit the [API Reference](https://docs.saltedge.com/account_information/v5/).
 
 ## Documentation
 
@@ -166,12 +170,12 @@ Documentation is available for all of the components. Use quick documentation (A
 
 ## Running the demo
 
-To run the demo app contained in here, you have to provide the demo with your client ID, app secret, and a customer identifier.
-Set up the `clientId`, `appSecret` and `customerIdentifier` constants to your Client ID and corresponding App secret in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51).
+To run the demo app contained in here, you have to provide the demo with your App ID, App Secret, and a customer identifier.
+Set up the `appId`, `appSecret` and `customerId` constants to your App ID and corresponding App Secret in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51).
 
 ## Versioning
 
-The current version of the SDK is [1.1.2](https://github.com/saltedge/saltedge-ios-swift/releases/tag/v1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [2.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/2.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
@@ -179,15 +183,18 @@ The SDK has SSL pinning enabled. That means that every API request that originat
 
 #### Since version 1.1.0
 
-The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/guides/security/#http_public_key_pinning_(hpkp))
+The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/general/#security)
 
-## [Changelog](CHANGELOG.md)
+## Changelog
+
+See the [Changelog](CHANGELOG.md) file.
 
 ## License
 
-See the LICENSE file.
+See the [LICENSE](LICENSE) file.
 
 ## References
 
-1. [Salt Edge Connect Guide](https://docs.saltedge.com/guides/connect/)
-2. [Salt Edge API Reference](https://docs.saltedge.com/reference/)
+1. [Salt Edge API General](https://docs.saltedge.com/general/)
+2. [Salt Edge Client Dashboard](https://www.saltedge.com/clients/dashboard)
+3. [Salt Edge API v5 Reference](https://docs.saltedge.com/account_information/v5/)
