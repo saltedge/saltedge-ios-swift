@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -24,33 +24,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var createViewController: CreateViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let createVC = tabBarVCs[1].childViewControllers[0] as? CreateViewController {
+        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let createVC = tabBarVCs[1].children[0] as? CreateViewController {
             return createVC
         }
         return nil
     }
     
     var connectViewController: ConnectViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let connectVC = tabBarVCs[0].childViewControllers[0] as? ConnectViewController {
+        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let connectVC = tabBarVCs[0].children[0] as? ConnectViewController {
             return connectVC
         }
         return nil
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if let createVC = createViewController {
-            HUD.show(.labeledProgress(title: "Fetching OAuth Login", subtitle: nil))
-            SERequestManager.shared.handleOpen(url: url, loginFetchingDelegate: createVC)
+            HUD.show(.labeledProgress(title: "Fetching OAuth Connection", subtitle: nil))
+            SERequestManager.shared.handleOpen(url: url, connectionFetchingDelegate: createVC)
         }
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let appId: String = "your-app-id"
         let appSecret: String = "your-app-secret"
         let customerId: String = "customer-secret"
-        
-        // By default SSL Pinning is enabled to disabled it use:
+
+        // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
@@ -72,4 +72,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-

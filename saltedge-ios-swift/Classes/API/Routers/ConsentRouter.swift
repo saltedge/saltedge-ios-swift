@@ -1,5 +1,5 @@
 //
-//  ParametersEncodable.swift
+//  ConsentRouter.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,28 +23,36 @@
 
 import Foundation
 
-enum Encoding {
-    case url
-    case json
-}
+typealias ConsentId = String
 
-protocol ParametersEncodable {
-    func encode() throws -> Any
-}
+enum ConsentRouter: Routable {
+    case list(SEConsentsListParams)
+    case show(ConsentId, SEBaseConsentsParams)
+    case revoke(ConsentId, SEBaseConsentsParams)
 
-extension ParametersEncodable where Self: URLEncodable {
-    func encode(with encoding: Encoding) throws -> Any {
-        return self.encode()
+    var method: HTTPMethod {
+        switch self {
+        case .list, .show: return .get
+        case .revoke: return .put
+        }
+    }
+
+    var url: URL {
+        switch self {
+        case .list: return APIEndpoints.baseURL.appendingPathComponent("consents")
+        case .show(let id, _): return APIEndpoints.baseURL.appendingPathComponent("consents/\(id)")
+        case .revoke(let id, _): return APIEndpoints.baseURL.appendingPathComponent("consents/\(id)/revoke")
+        }
+    }
+
+    var headers: Headers {
+        return SEHeaders.cached.sessionHeaders
+    }
+
+    var parameters: ParametersEncodable? {
+        switch self {
+        case .list(let params): return params
+        case .show(_, let params), .revoke(_, let params): return params
+        }
     }
 }
-
-extension ParametersEncodable where Self: Encodable {
-    func encode() throws -> Any {
-        let params = SERequestParams(data: self)
-        
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        return try encoder.encode(params)
-    }
-}
-

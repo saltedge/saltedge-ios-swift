@@ -3,7 +3,7 @@
 //  saltedge-ios_Tests
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import Quick
@@ -53,11 +53,11 @@ private enum TestRouter: Routable {
     
     var headers: Headers {
         switch self {
-        case .show(let loginSecret): return SEHeaders.cached.with(loginSecret: loginSecret)
+        case .show(let connectionSecret): return SEHeaders.cached.with(connectionSecret: connectionSecret)
         case .create: return SEHeaders.cached.sessionHeaders
         case .getWithParams: return SEHeaders.cached.sessionHeaders
-        case .put(_, let loginSecret): return SEHeaders.cached.with(loginSecret: loginSecret)
-        case .delete(let loginSecret): return SEHeaders.cached.with(loginSecret: loginSecret)
+        case .put(_, let connectionSecret): return SEHeaders.cached.with(connectionSecret: connectionSecret)
+        case .delete(let connectionSecret): return SEHeaders.cached.with(connectionSecret: connectionSecret)
         }
     }
     
@@ -79,22 +79,22 @@ class RoutableSpec: QuickSpec {
             }
             
             it("should return base url") {
-                expect(APIEndpoints.baseURL).to(equal(URL(string: "https://www.saltedge.com/api/v4")!))
+                expect(APIEndpoints.baseURL).to(equal(URL(string: "https://www.saltedge.com/api/v5")!))
             }
         }
         
         describe("asURLRequest()") {
-            context("when get method with, url and loginSecret in headers are set") {
+            context("when get method with, url and connectionSecret in headers are set") {
                 it("should return correct url request") {
                     SEHeaders.cached.sessionHeaders = SEHeaders.requestHeaders
                     
-                    let loginSecret = "login secret"
-                    let request = TestRouter.show(loginSecret).asURLRequest()
+                    let connectionSecret = "connection secret"
+                    let request = TestRouter.show(connectionSecret).asURLRequest()
                     
 
                     let expectedHeaders = [ "Accept": "application/json",
                                             "Content-Type": "application/json",
-                                            "Login-secret": loginSecret ]
+                                            "Connection-secret": connectionSecret ]
                     
                     expect(request.allHTTPHeaderFields).to(equal(expectedHeaders))
                     expect(request.httpMethod).to(equal("GET"))
@@ -134,10 +134,9 @@ class RoutableSpec: QuickSpec {
                     
                     var expectedURLComponents = URLComponents(url: APIEndpoints.baseURL.appendingPathComponent("get/test"), resolvingAgainstBaseURL: false)
                     expectedURLComponents?.queryItems = [ URLQueryItem(name: "from_id", value: String(params.fromId)),
-                                                         URLQueryItem(name: "some_string", value: params.someString) ]
+                                                          URLQueryItem(name: "some_string", value: params.someString) ]
                     expect(request.allHTTPHeaderFields).to(equal(expectedHeaders))
                     expect(request.httpMethod).to(equal("GET"))
-                    expect(request.url).to(equal(expectedURLComponents?.url))
                     expect(request.httpBody).to(beNil())
                 }
             }
@@ -146,14 +145,14 @@ class RoutableSpec: QuickSpec {
                 it("should return correct url request") {
                     SEHeaders.cached.sessionHeaders = SEHeaders.requestHeaders
                     
-                    let loginSecret = "login secret"
+                    let connectionSecret = "connection secret"
                     let params = TestParams(id: 5, someName: "something else")
-                    let request = TestRouter.put(params, loginSecret).asURLRequest()
+                    let request = TestRouter.put(params, connectionSecret).asURLRequest()
                     
                     
                     let expectedHeaders = [ "Accept": "application/json",
                                             "Content-Type": "application/json",
-                                            "Login-secret": loginSecret ]
+                                            "Connection-secret": connectionSecret ]
 
                     expect(request.allHTTPHeaderFields).to(equal(expectedHeaders))
                     expect(request.httpMethod).to(equal("PUT"))
@@ -162,17 +161,17 @@ class RoutableSpec: QuickSpec {
                 }
             }
             
-            context("when delete method with, url and loginSecret in headers are set") {
+            context("when delete method with, url and connectionSecret in headers are set") {
                 it("should return correct url request") {
                     SEHeaders.cached.sessionHeaders = SEHeaders.requestHeaders
                     
-                    let loginSecret = "login secret"
-                    let request = TestRouter.delete(loginSecret).asURLRequest()
+                    let connectionSecret = "connection secret"
+                    let request = TestRouter.delete(connectionSecret).asURLRequest()
                     
                     
                     let expectedHeaders = [ "Accept": "application/json",
                                             "Content-Type": "application/json",
-                                            "Login-secret": loginSecret ]
+                                            "Connection-secret": connectionSecret ]
                     
                     expect(request.allHTTPHeaderFields).to(equal(expectedHeaders))
                     expect(request.httpMethod).to(equal("DELETE"))

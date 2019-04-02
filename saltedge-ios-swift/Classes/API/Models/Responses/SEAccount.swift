@@ -1,7 +1,7 @@
 //
 //  Account.swift
 //
-//  Copyright (c) 2018 Salt Edge. https://saltedge.com
+//  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ public struct SEAccount: Decodable {
     public let balance: Double
     public let currencyCode: String
     public let extra: SEExtra?
-    public let loginId: String
+    public let connectionId: String
     public let createdAt: String
     public let updatedAt: String
     
@@ -41,7 +41,7 @@ public struct SEAccount: Decodable {
         case balance = "balance"
         case currencyCode = "currency_code"
         case extra = "extra"
-        case loginId = "login_id"
+        case connectionId = "connection_id"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

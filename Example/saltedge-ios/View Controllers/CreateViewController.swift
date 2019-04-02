@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -13,19 +13,19 @@ import PKHUD
 class CreateViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var createLoginButton: UIButton!
+    @IBOutlet weak var createConnectionButton: UIButton!
     
     private let fieldsStackView: UIStackView = UIStackView()
     
     private var provider: SEProvider?
-    var login: SELogin? {
+    var connection: SEConnection? {
         didSet {
-            if let login = login {
+            if let connection = connection {
                 self.stackView.isHidden = true
-                self.requestProvider(with: login.providerCode)
-                createLoginButton.setTitle("Reconnect Login", for: .normal)
+                self.requestProvider(with: connection.providerCode)
+                createConnectionButton.setTitle("Reconnect Connection", for: .normal)
             } else {
-                createLoginButton.setTitle("Connect Login", for: .normal)
+                createConnectionButton.setTitle("Connect Connection", for: .normal)
             }
         }
     }
@@ -38,10 +38,10 @@ class CreateViewController: UIViewController {
     
     @IBAction func createPressed(_ sender: Any) {
         view.endEditing(true)
-        if let login = login {
-            reconnectLogin(login)
+        if let connection = connection {
+            reconnect(connection)
         } else {
-            createLogin()
+            createConnection()
         }
     }
     
@@ -49,7 +49,7 @@ class CreateViewController: UIViewController {
         guard let providersVC = ProvidersViewController.create(onPick: { [weak self] provider in
             guard let weakSelf = self else { return }
             
-            weakSelf.login = nil
+            weakSelf.connection = nil
             weakSelf.requestProvider(with: provider.code)
         }) else { return }
         
@@ -58,42 +58,60 @@ class CreateViewController: UIViewController {
         present(navVC, animated: true)
     }
     
-    private func createLogin() {
+    private func createConnection() {
         guard let provider = provider else { return }
         
-        HUD.show(.labeledProgress(title: "Creating Login", subtitle: nil))
+        HUD.show(.labeledProgress(title: "Creating Connection", subtitle: nil))
         if provider.isOAuth {
-            let params = SECreateOAuthParams(countryCode: provider.countryCode, providerCode: provider.code, returnTo: AppDelegate.applicationURLString, fetchScopes: ["accounts", "transactions"])
-            SERequestManager.shared.createOAuthLogin(params: params) { response in
+            let params = SECreateOAuthParams(
+                countryCode: provider.countryCode,
+                providerCode: provider.code,
+                returnTo: AppDelegate.applicationURLString,
+                fetchScopes: ["accounts", "transactions"]
+            )
+            SERequestManager.shared.createOAuthConnection(params: params) { response in
                 self.handleOAuthResponse(response)
             }
         } else {
-            let params = SELoginParams(countryCode: provider.countryCode, providerCode: provider.code, credentials: gatherCredentials(), fetchScopes: ["accounts", "transactions"])
-            SERequestManager.shared.createLogin(with: params, fetchingDelegate: self) { response in
-                self.handleLoginResponse(response)
+            let params = SEConnectionParams(
+                countryCode: provider.countryCode,
+                providerCode: provider.code,
+                credentials: gatherCredentials(),
+                fetchScopes: ["accounts", "transactions"]
+            )
+            SERequestManager.shared.createConnection(with: params, fetchingDelegate: self) { response in
+                self.handleConnectionResponse(response)
             }
         }
     }
     
-    private func reconnectLogin(_ login: SELogin) {
+    private func reconnect(_ connection: SEConnection) {
         guard let provider = provider else { return }
         
-        HUD.show(.labeledProgress(title: "Reconnecting Login", subtitle: nil))
+        HUD.show(.labeledProgress(title: "Reconnecting Connection", subtitle: nil))
 
         if provider.isOAuth {
-            let params = SEUpdateOAuthParams(returnTo: AppDelegate.applicationURLString)
-            SERequestManager.shared.refreshOAuthLogin(with: login.secret, params: params) { response in
-                self.handleOAuthResponse(response)
+            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+
+            SERequestManager.shared.refreshConnection(with: connection.secret, params: params, fetchingDelegate: self) { response in
+                switch response {
+                case .success(let value):
+                    // Nothing here. Need to wait for SEconnectionFetchingDelegate callbacks
+                    print(value.data)
+                case .failure(let error):
+                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+                }
             }
         } else {
-            let params = SELoginReconnectParams(credentials: gatherCredentials())
-            SERequestManager.shared.reconnectLogin(with: login.secret, with: params, fetchingDelegate: self) { response in
-                self.handleLoginResponse(response)
+            let params = SEConnectionReconnectParams(credentials: gatherCredentials())
+
+            SERequestManager.shared.reconnectConnection(with: connection.secret, with: params, fetchingDelegate: self) { response in
+                self.handleConnectionResponse(response)
             }
         }
     }
     
-    private func handleLoginResponse(_ response: SEResult<SEResponse<SELogin>>) {
+    private func handleConnectionResponse(_ response: SEResult<SEResponse<SEConnection>>) {
         switch response {
         case .success(let value):
             print(value.data)
@@ -214,24 +232,24 @@ class CreateViewController: UIViewController {
         present(alertController, animated:  true)
     }
 
-    private func switchToLoginsController() {
+    private func switchToConnectionsController() {
         tabBarController?.selectedIndex = 2
     }
 }
 
-extension CreateViewController: SELoginFetchingDelegate {
-    func failedToFetch(login: SELogin?, message: String) {
+extension CreateViewController: SEConnectionFetchingDelegate {
+    func failedToFetch(connection: SEConnection?, message: String) {
         HUD.flash(.labeledError(title: "Error", subtitle: message), delay: 3.0)
     }
     
-    func interactiveInputRequested(for login: SELogin) {
+    func interactiveInputRequested(for connection: SEConnection) {
         HUD.hide(animated: true)
-        showInteractiveAlertView(title: login.providerName,
-                                 message: login.lastAttempt.lastStage?.interactiveHtml?.htmlToString,
-                                 fields: login.lastAttempt.lastStage?.interactiveFieldsNames) { credentials in
-            let params = SELoginInteractiveParams(credentials: credentials)
+        showInteractiveAlertView(title: connection.providerName,
+                                 message: connection.lastAttempt.lastStage?.interactiveHtml?.htmlToString,
+                                 fields: connection.lastAttempt.lastStage?.interactiveFieldsNames) { credentials in
+            let params = SEConnectionInteractiveParams(credentials: credentials)
             HUD.show(.labeledProgress(title: "Checking Credentials", subtitle: nil))
-            SERequestManager.shared.confirmLogin(with: login.secret, params: params, fetchingDelegate: self) { response in
+            SERequestManager.shared.confirmConnection(with: connection.secret, params: params, fetchingDelegate: self) { response in
                 switch response {
                 case .success(let value):
                     print(value.data)
@@ -242,17 +260,16 @@ extension CreateViewController: SELoginFetchingDelegate {
         }
     }
     
-    func successfullyFinishedFetching(login: SELogin) {
+    func successfullyFinishedFetching(connection: SEConnection) {
         HUD.hide(animated: true)
-        if var logins = UserDefaultsHelper.logins {
-            if !logins.contains(login.secret) {
-                logins.append(login.secret)
-                UserDefaultsHelper.logins = logins
+        if var connections = UserDefaultsHelper.connections {
+            if !connections.contains(connection.secret) {
+                connections.append(connection.secret)
+                UserDefaultsHelper.connections = connections
             }
         } else {
-            UserDefaultsHelper.logins = [login.secret]
+            UserDefaultsHelper.connections = [connection.secret]
         }
-        switchToLoginsController()
+        switchToConnectionsController()
     }
 }
-

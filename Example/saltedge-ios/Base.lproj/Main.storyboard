@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qSF-oa-G5S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qSF-oa-G5S">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -74,9 +74,9 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igy-z7-MAB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igy-z7-MAB" userLabel="Create Connection Button">
                                         <rect key="frame" x="0.0" y="60.5" width="303" height="30"/>
-                                        <state key="normal" title="Create Login"/>
+                                        <state key="normal" title="Create Connection"/>
                                         <connections>
                                             <action selector="createPressed:" destination="0np-N8-vkI" eventType="touchUpInside" id="krN-Qt-NLL"/>
                                         </connections>
@@ -99,7 +99,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="createLoginButton" destination="igy-z7-MAB" id="FKr-N9-YCq"/>
+                        <outlet property="createConnectionButton" destination="igy-z7-MAB" id="jEy-WQ-5yo"/>
                         <outlet property="descriptionLabel" destination="TIN-fz-bWb" id="ZaJ-bl-YcW"/>
                         <outlet property="stackView" destination="NsW-dT-jzd" id="dXt-pj-1eO"/>
                     </connections>
@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="841" y="995"/>
         </scene>
-        <!--Logins-->
+        <!--Connections-->
         <scene sceneID="2q0-lM-8uu">
             <objects>
-                <viewController storyboardIdentifier="LoginsViewController" title="Logins" id="Vmq-fV-iQU" customClass="LoginsViewController" customModule="saltedge_ios_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectionsViewController" title="Connections" id="Vmq-fV-iQU" customClass="ConnectionsViewController" customModule="saltedge_ios_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kbb-hf-lhl"/>
                         <viewControllerLayoutGuide type="bottom" id="LHy-mt-YXD"/>
@@ -133,7 +133,7 @@
                             <constraint firstAttribute="trailing" secondItem="AP9-5H-jsa" secondAttribute="trailing" id="xqE-qy-Wos"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Logins" id="B0J-xt-Huq">
+                    <navigationItem key="navigationItem" title="Connections" id="B0J-xt-Huq">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="ahB-wf-dKn">
                             <connections>
                                 <action selector="refreshPressed:" destination="Vmq-fV-iQU" id="5fk-4I-lEk"/>
@@ -151,7 +151,7 @@
         <!--Accounts View Controller-->
         <scene sceneID="KYF-0F-ohU">
             <objects>
-                <viewController storyboardIdentifier="AccountsViewController" id="vpH-ys-cqN" customClass="AccountsViewController" customModule="saltedge_ios_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountsViewController" hidesBottomBarWhenPushed="YES" id="vpH-ys-cqN" customClass="AccountsViewController" customModule="saltedge_ios_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8cV-La-ulw"/>
                         <viewControllerLayoutGuide type="bottom" id="Lnn-e9-dm3"/>
@@ -445,11 +445,11 @@
             </objects>
             <point key="canvasLocation" x="163.19999999999999" y="1001.1994002998501"/>
         </scene>
-        <!--Logins-->
+        <!--Connections-->
         <scene sceneID="Q9I-Vo-AQQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HaZ-0J-ywY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Logins" id="vb1-c2-oW4"/>
+                    <tabBarItem key="tabBarItem" title="Connections" id="vb1-c2-oW4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uOH-1k-LfW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

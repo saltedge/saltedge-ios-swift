@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Vlad Somov.
-//  Copyright (c) 2018 Salt Edge. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ final class AttemptsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var attempts: [SEAttempt] = []
-    private var loginSecret: String!
+    private var connectionSecret: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ final class AttemptsViewController: UIViewController {
     
     func requestAttempts() {
         HUD.show(.labeledProgress(title: "Fething Attempts", subtitle: nil))
-        SERequestManager.shared.getAttempts(for: loginSecret) { [weak self] response in
+        SERequestManager.shared.getAttempts(for: connectionSecret) { [weak self] response in
             switch response {
             case .success(let value):
                 self?.attempts = value.data
@@ -71,18 +71,21 @@ extension AttemptsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let attempt = attempts[indexPath.row]
         
-        guard let attemptVC = AttemptViewController.create(attemptId: attempt.id, loginSecret: loginSecret) else { return }
+        guard let id = attempt.id, let attemptVC = AttemptViewController.create(
+            attemptId: id,
+            connectionSecret: connectionSecret
+            ) else { return }
         
         navigationController?.pushViewController(attemptVC, animated: true)
     }
 }
 
 extension AttemptsViewController {
-    static func create(loginSecret: String) -> AttemptsViewController? {
+    static func create(connectionSecret: String) -> AttemptsViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "AttemptsViewController") as? AttemptsViewController else { return nil }
-        vc.loginSecret = loginSecret
+        vc.connectionSecret = connectionSecret
 
         return vc
     }
