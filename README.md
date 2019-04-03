@@ -13,7 +13,7 @@ iOS 10.0+, Swift 4+
 
 for Salt Edge API v5 use  
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 2.0'
+pod 'SaltEdge-iOS-Swift', '~> 2.0.1'
 ```
 
 for Salt Edge API v4 use  
