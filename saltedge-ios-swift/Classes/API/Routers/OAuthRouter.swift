@@ -25,8 +25,8 @@ import Foundation
 
 enum OAuthRouter: Routable {
     case create(SECreateOAuthParams)
-    case reconnect(ConnectionSecret, SEUpdateOAuthParams)
-    case refresh(ConnectionSecret, SEUpdateOAuthParams)
+    case reconnect(ConnectionSecret, SEReconnectOAuthParams)
+    case refresh(ConnectionSecret, SEReconnectOAuthParams)
     
     var method: HTTPMethod {
         return .post

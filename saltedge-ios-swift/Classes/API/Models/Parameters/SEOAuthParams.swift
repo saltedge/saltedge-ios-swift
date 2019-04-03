@@ -24,20 +24,18 @@
 import Foundation
 
 public class SEBasicOAuthParams: Encodable, ParametersEncodable {
-    let returnTo: String
-    let dailyRefresh: Bool?
-    let fetchScopes: [String]?
-    let customFields: String?
-    let fromDate: Date?
-    let toDate: Date?
-    let locale: String?
-    let returnConnectionId: Bool?
-    let categorize: Bool?
-    let includeFakeProvider: Bool?
+    public let returnTo: String
+    public let dailyRefresh: Bool?
+    public let customFields: String?
+    public let fromDate: Date?
+    public let toDate: Date?
+    public let locale: String?
+    public let returnConnectionId: Bool?
+    public let categorize: Bool?
+    public let includeFakeProvider: Bool?
     
     public init(returnTo: String,
                 dailyRefresh: Bool? = nil,
-                fetchScopes: [String]? = nil,
                 customFields: String? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
@@ -47,7 +45,6 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
                 includeFakeProvider: Bool? = nil) {
         self.returnTo = returnTo
         self.dailyRefresh = dailyRefresh
-        self.fetchScopes = fetchScopes
         self.customFields = customFields
         self.fromDate = fromDate
         self.toDate = toDate
@@ -60,7 +57,6 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
     private enum CodingKeys: String, CodingKey {
         case returnTo = "return_to"
         case dailyRefresh = "daily_refresh"
-        case fetchScopes = "fetch_scopes"
         case customFields = "custom_fields"
         case fromDate = "from_date"
         case toDate = "to_date"
@@ -72,13 +68,16 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
 }
 
 public class SECreateOAuthParams: SEBasicOAuthParams {
+    let consent: SEConsent
     public let countryCode: String
     public let providerCode: String
+    public let attempt: SEAttempt?
     
-    public init(countryCode: String,
+    public init(consent: SEConsent,
+                countryCode: String,
                 providerCode: String,
+                attempt: SEAttempt? = nil,
                 returnTo: String,
-                fetchScopes: [String],
                 dailyRefresh: Bool? = nil,
                 customFields: String? = nil,
                 fromDate: Date? = nil,
@@ -87,12 +86,13 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
                 returnConnectionId: Bool? = nil,
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil) {
+        self.consent = consent
         self.providerCode = providerCode
         self.countryCode = countryCode
+        self.attempt = attempt
         
         super.init(returnTo: returnTo,
                    dailyRefresh: dailyRefresh,
-                   fetchScopes: fetchScopes,
                    customFields: customFields,
                    fromDate: fromDate,
                    toDate: toDate,
@@ -103,12 +103,16 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
     }
     
     private enum CodingKeys: String, CodingKey {
+        case consent
+        case attempt
         case countryCode = "country_code"
         case providerCode = "provider_code"
     }
     
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(consent, forKey: .consent)
+        try container.encodeIfPresent(attempt, forKey: .attempt)
         try container.encodeIfPresent(countryCode, forKey: .countryCode)
         try container.encodeIfPresent(providerCode, forKey: .providerCode)
 
@@ -116,12 +120,15 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
     }
 }
 
-public class SEUpdateOAuthParams: SEBasicOAuthParams {
-    let excludeAccounts: [Int]?
+public class SEReconnectOAuthParams: SEBasicOAuthParams {
+    public let consent: SEConsent
+    public let attempt: SEAttempt?
+    public let excludeAccounts: [Int]?
     
-    public init(returnTo: String,
+    public init(consent: SEConsent,
+                returnTo: String,
+                attempt: SEAttempt? = nil,
                 dailyRefresh: Bool? = nil,
-                fetchScopes: [String]? = nil,
                 customFields: String? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
@@ -130,11 +137,12 @@ public class SEUpdateOAuthParams: SEBasicOAuthParams {
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil,
                 excludeAccounts: [Int]? = nil) {
+        self.consent = consent
+        self.attempt = attempt
         self.excludeAccounts = excludeAccounts
         
         super.init(returnTo: returnTo,
                    dailyRefresh: dailyRefresh,
-                   fetchScopes: fetchScopes,
                    customFields: customFields,
                    fromDate: fromDate,
                    toDate: toDate,
@@ -145,11 +153,15 @@ public class SEUpdateOAuthParams: SEBasicOAuthParams {
     }
     
     private enum CodingKeys: String, CodingKey {
+        case consent
+        case attempt
         case excludeAccounts = "exclude_accounts"
     }
     
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(consent, forKey: .consent)
+        try container.encodeIfPresent(attempt, forKey: .attempt)
         try container.encodeIfPresent(excludeAccounts, forKey: .excludeAccounts)
 
         try super.encode(to: encoder)

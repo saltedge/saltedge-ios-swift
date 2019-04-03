@@ -25,9 +25,9 @@
 import Foundation
 
 public class SEBaseConsentsParams: Encodable, ParametersEncodable {
-    let id: String?
-    let connectionId: String?
-    let customerId: String?
+    public let id: String?
+    public let connectionId: String?
+    public let customerId: String?
 
     public init(id: String? = nil,
                 connectionId: String? = nil,
@@ -44,7 +44,7 @@ public class SEBaseConsentsParams: Encodable, ParametersEncodable {
 }
 
 public class SEConsentsListParams: SEBaseConsentsParams {
-    let fromId: String?
+    public let fromId: String?
 
     public init(fromId: String? = nil,
                 id: String? = nil,

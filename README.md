@@ -128,10 +128,12 @@ SERequestManager.shared.createCustomer(with: params) { response in
 Use the manager to interact with the provided API:
 
 ```swift
-let connectionParams = SEConnectionParams(countryCode: "XF",
-                                          providerCode: "fakebank_simple_xf",
-                                          credentials: ["login": "username", "password": "secret"],
-                                          fetchScopes: ["accounts", "transactions"])
+let connectionParams = SEConnectionParams(
+    consent: SEConsent(scopes: ["account_details", "transactions_details"]),
+    countryCode: "XF",
+    providerCode: "fakebank_simple_xf",
+    credentials: ["login": "username", "password": "secret"]
+)
 SERequestManager.shared.createConnection(with: connectionParams) { response in
     switch response {
     case .success(let value):
