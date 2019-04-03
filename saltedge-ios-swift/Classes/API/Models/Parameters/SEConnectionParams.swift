@@ -24,34 +24,29 @@
 import Foundation
 
 public class SEBaseConnectionParams: Encodable, ParametersEncodable {
-    let fetchScopes: [String]?
-    let fromDate: Date?
-    let toDate: Date?
+    public let fromDate: Date?
+    public let toDate: Date?
     
-    public init(fetchScopes: [String]? = nil,
-                fromDate: Date? = nil,
+    public init(fromDate: Date? = nil,
                 toDate: Date? = nil) {
-        self.fetchScopes = fetchScopes
         self.fromDate  = fromDate
         self.toDate    = toDate
     }
 
     private enum CodingKeys: String, CodingKey {
-        case fetchScopes = "fetch_scopes"
-        case fromDate  = "from_date"
-        case toDate    = "to_date"
+        case fromDate = "from_date"
+        case toDate   = "to_date"
     }
 }
 
 public class SEExtendedConnectionParams: SEBaseConnectionParams {
-    let dailyRefresh: Bool?
-    let locale: String?
-    let includeFakeProviders: Bool?
-    let categorize: Bool?
-    let storeCredentials: Bool?
+    public let dailyRefresh: Bool?
+    public let locale: String?
+    public let includeFakeProviders: Bool?
+    public let categorize: Bool?
+    public let storeCredentials: Bool?
     
-    public init(fetchScopes: [String]? = nil,
-                fromDate: Date? = nil,
+    public init(fromDate: Date? = nil,
                 toDate: Date? = nil,
                 dailyRefresh: Bool? = nil,
                 locale: String? = nil,
@@ -64,7 +59,7 @@ public class SEExtendedConnectionParams: SEBaseConnectionParams {
         self.categorize           = categorize
         self.storeCredentials     = storeCredentials
         
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate)
+        super.init(fromDate: fromDate, toDate: toDate)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -88,12 +83,11 @@ public class SEExtendedConnectionParams: SEBaseConnectionParams {
 }
 
 public class SEConnectionRefreshParams: SEExtendedConnectionParams {
-    let attempt: SEAttempt?
-    let categorization: String?
+    public let attempt: SEAttempt?
+    public let categorization: String?
 
     public init(attempt: SEAttempt? = nil,
                 categorization: String? = nil,
-                fetchScopes: [String]? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 dailyRefresh: Bool? = nil,
@@ -104,8 +98,8 @@ public class SEConnectionRefreshParams: SEExtendedConnectionParams {
         self.attempt = attempt
         self.categorization = categorization
 
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
-                   dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
+        super.init(fromDate: fromDate, toDate: toDate, dailyRefresh: dailyRefresh,
+                   locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
 
@@ -125,10 +119,9 @@ public class SEConnectionRefreshParams: SEExtendedConnectionParams {
 }
 
 public class SEConnectionUpdateStatusParams: SEExtendedConnectionParams {
-    let status: String?
+    public let status: String?
 
-    public init(fetchScopes: [String]? = nil,
-                fromDate: Date? = nil,
+    public init(fromDate: Date? = nil,
                 toDate: Date? = nil,
                 dailyRefresh: Bool? = nil,
                 locale: String? = nil,
@@ -138,8 +131,8 @@ public class SEConnectionUpdateStatusParams: SEExtendedConnectionParams {
                 status: String? = nil) {
         self.status = status
 
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
-                   dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
+        super.init(fromDate: fromDate, toDate: toDate, dailyRefresh: dailyRefresh,
+                   locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
 
@@ -156,10 +149,11 @@ public class SEConnectionUpdateStatusParams: SEExtendedConnectionParams {
 }
 
 public class SEConnectionReconnectParams: SEExtendedConnectionParams {
-    let credentials: [String: String]
+    public let consent: SEConsent
+    public let credentials: [String: String]
     
-    public init(credentials: [String: String],
-                fetchScopes: [String]? = nil,
+    public init(consent: SEConsent,
+                credentials: [String: String],
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 dailyRefresh: Bool? = nil,
@@ -167,19 +161,22 @@ public class SEConnectionReconnectParams: SEExtendedConnectionParams {
                 includeFakeProviders: Bool? = nil,
                 categorize: Bool? = nil,
                 storeCredentials: Bool? = nil) {
+        self.consent = consent
         self.credentials = credentials
         
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
-                   dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
+        super.init(fromDate: fromDate, toDate: toDate, dailyRefresh: dailyRefresh,
+                   locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
     
     private enum CodingKeys: String, CodingKey {
         case credentials
+        case consent
     }
     
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(consent, forKey: .consent)
         try container.encodeIfPresent(credentials, forKey: .credentials)
         
         try super.encode(to: encoder)
@@ -187,15 +184,14 @@ public class SEConnectionReconnectParams: SEExtendedConnectionParams {
 }
 
 public class SEConnectionInteractiveParams: SEBaseConnectionParams {
-    let credentials: [String:  String]
+    public let credentials: [String:  String]
     
     public init(credentials: [String: String],
-                fetchScopes: [String]? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil) {
         self.credentials = credentials
         
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate)
+        super.init(fromDate: fromDate, toDate: toDate)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -211,15 +207,16 @@ public class SEConnectionInteractiveParams: SEBaseConnectionParams {
 }
 
 public class SEConnectionParams: SEExtendedConnectionParams {
-    let countryCode: String
-    let providerCode: String
-    let credentials: [String: String]
-    let fileUrl: String?
+    public let consent: SEConsent
+    public let countryCode: String
+    public let providerCode: String
+    public let credentials: [String: String]
+    public let fileUrl: String?
     
-    public init(countryCode: String,
+    public init(consent: SEConsent,
+                countryCode: String,
                 providerCode: String,
                 credentials: [String: String],
-                fetchScopes: [String],
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
@@ -228,21 +225,23 @@ public class SEConnectionParams: SEExtendedConnectionParams {
                 categorize: Bool? = nil,
                 storeCredentials: Bool? = nil,
                 fileUrl: String? = nil) {
+        self.consent      = consent
         self.countryCode  = countryCode
         self.providerCode = providerCode
         self.credentials  = credentials
         self.fileUrl      = fileUrl
         
-        super.init(fetchScopes: fetchScopes, fromDate: fromDate, toDate: toDate,
-                   dailyRefresh: dailyRefresh, locale: locale, includeFakeProviders: includeFakeProviders,
+        super.init(fromDate: fromDate, toDate: toDate, dailyRefresh: dailyRefresh,
+                   locale: locale, includeFakeProviders: includeFakeProviders,
                    categorize: categorize, storeCredentials: storeCredentials)
     }
     
     private enum CodingKeys: String, CodingKey {
-        case countryCode          = "country_code"
-        case providerCode         = "provider_code"
-        case credentials          = "credentials"
-        case fileUrl              = "file_url"
+        case consent      = "consent"
+        case countryCode  = "country_code"
+        case providerCode = "provider_code"
+        case credentials  = "credentials"
+        case fileUrl      = "file_url"
     }
     
     public override func encode(to encoder: Encoder) throws {
@@ -250,6 +249,7 @@ public class SEConnectionParams: SEExtendedConnectionParams {
         try container.encode(countryCode, forKey: .countryCode)
         try container.encode(providerCode, forKey: .providerCode)
         try container.encode(credentials, forKey: .credentials)
+        try container.encode(consent, forKey: .consent)
         try container.encodeIfPresent(fileUrl, forKey: .fileUrl)
 
         try super.encode(to: encoder)

@@ -270,7 +270,7 @@ public struct SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#oauth_providers-reconnect)
      */
-    public func reconnectOAuthConnection(with secret: String, params: SEUpdateOAuthParams, completion: SEHTTPResponse<SEOAuthResponse>) {
+    public func reconnectOAuthConnection(with secret: String, params: SEReconnectOAuthParams, completion: SEHTTPResponse<SEOAuthResponse>) {
         HTTPService<SEOAuthResponse>.makeRequest(OAuthRouter.reconnect(secret, params), completion: completion)
     }
 

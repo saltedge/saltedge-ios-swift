@@ -64,20 +64,20 @@ class CreateViewController: UIViewController {
         HUD.show(.labeledProgress(title: "Creating Connection", subtitle: nil))
         if provider.isOAuth {
             let params = SECreateOAuthParams(
+                consent: SEConsent(scopes: ["account_details", "transactions_details"]),
                 countryCode: provider.countryCode,
                 providerCode: provider.code,
-                returnTo: AppDelegate.applicationURLString,
-                fetchScopes: ["accounts", "transactions"]
+                returnTo: AppDelegate.applicationURLString
             )
             SERequestManager.shared.createOAuthConnection(params: params) { response in
                 self.handleOAuthResponse(response)
             }
         } else {
             let params = SEConnectionParams(
+                consent: SEConsent(scopes: ["account_details", "transactions_details"]),
                 countryCode: provider.countryCode,
                 providerCode: provider.code,
-                credentials: gatherCredentials(),
-                fetchScopes: ["accounts", "transactions"]
+                credentials: gatherCredentials()
             )
             SERequestManager.shared.createConnection(with: params, fetchingDelegate: self) { response in
                 self.handleConnectionResponse(response)
@@ -103,7 +103,10 @@ class CreateViewController: UIViewController {
                 }
             }
         } else {
-            let params = SEConnectionReconnectParams(credentials: gatherCredentials())
+            let params = SEConnectionReconnectParams(
+                consent: SEConsent(scopes: ["account_details", "transactions_details"]),
+                credentials: gatherCredentials()
+            )
 
             SERequestManager.shared.reconnectConnection(with: connection.secret, with: params, fetchingDelegate: self) { response in
                 self.handleConnectionResponse(response)

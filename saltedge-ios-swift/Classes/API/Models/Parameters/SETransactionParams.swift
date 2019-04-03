@@ -24,8 +24,8 @@
 import Foundation
 
 public struct SETransactionParams: URLEncodable, ParametersEncodable {
-    let accountId: String?
-    let fromId: String?
+    public let accountId: String?
+    public let fromId: String?
     
     public init(accountId: String? = nil, fromId: String? = nil) {
         self.accountId = accountId
@@ -39,7 +39,7 @@ public struct SETransactionParams: URLEncodable, ParametersEncodable {
 }
 
 public struct SEDuplicateTransactionsParams: Encodable, ParametersEncodable {
-    let transactionIds: [SEDuplicateTransactionParams]
+    public let transactionIds: [SEDuplicateTransactionParams]
     
     public init(ids: [Int]) {
         self.transactionIds = ids.map { SEDuplicateTransactionParams(id: $0) }
@@ -56,7 +56,7 @@ public struct SEDuplicateTransactionsParams: Encodable, ParametersEncodable {
 }
 
 public struct SEDuplicateTransactionParams: Encodable, ParametersEncodable {
-    let transactionId: Int
+    public let transactionId: Int
     
     public init(id: Int) {
         self.transactionId = id

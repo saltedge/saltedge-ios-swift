@@ -25,7 +25,7 @@ import Foundation
 
 public struct SERatesParameters: URLEncodable, ParametersEncodable {
     //set date format as 2014-03-21
-    let date: String?
+    public let date: String?
     
     public init(dateString: String? = nil) {
         self.date = dateString

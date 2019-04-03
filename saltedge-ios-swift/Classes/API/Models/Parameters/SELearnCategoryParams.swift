@@ -24,7 +24,7 @@
 import Foundation
 
 public struct SELearnCategories: Encodable, ParametersEncodable {
-    let data: [SELearnCategoryParams]
+    public let data: [SELearnCategoryParams]
     
     public init(data: [SELearnCategoryParams]) {
         self.data = data
@@ -41,8 +41,8 @@ public struct SELearnCategories: Encodable, ParametersEncodable {
 }
 
 public struct SELearnCategoryParams: Encodable, ParametersEncodable {
-    let transactionId: Int
-    let categoryCode: String
+    public let transactionId: Int
+    public let categoryCode: String
     
     public init(transactionId: Int, categoryCode: String) {
         self.transactionId = transactionId

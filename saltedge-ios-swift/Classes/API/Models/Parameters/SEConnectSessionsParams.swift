@@ -24,19 +24,19 @@
 import Foundation
 
 public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
-    let customFields: String?
-    let dailyRefresh: Bool?
-    let fromDate: Date?
-    let toDate: Date?
-    let locale: String?
-    let returnConnectionId: Bool?
-    let providerModes: [String]?
-    let categorize: Bool?
-    let javascriptCallbackType: String?
-    let includeFakeProviders: Bool?
-    let lostConnectionNotify: Bool?
-    let showConsentConfirmation: Bool?
-    let attempt: SEAttempt?
+    public let customFields: String?
+    public let dailyRefresh: Bool?
+    public let fromDate: Date?
+    public let toDate: Date?
+    public let locale: String?
+    public let returnConnectionId: Bool?
+    public let providerModes: [String]?
+    public let categorize: Bool?
+    public let javascriptCallbackType: String?
+    public let includeFakeProviders: Bool?
+    public let lostConnectionNotify: Bool?
+    public let showConsentConfirmation: Bool?
+    public let attempt: SEAttempt?
 
     init(attempt: SEAttempt? = nil,
          customFields: String? = nil,
@@ -84,10 +84,10 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
 }
 
 public class SECreateSessionsParams: SEBaseConnectSessionsParams {
-    let allowedCountries: [String]?
-    let consent: SEConsent
-    let credentialsStrategy: String?
-    let providerCode: String?
+    public let allowedCountries: [String]?
+    public let consent: SEConsent
+    public let credentialsStrategy: String?
+    public let providerCode: String?
 
     public init(allowedCountries: [String]? = nil,
                 attempt: SEAttempt? = nil,
@@ -145,7 +145,7 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
 }
 
 public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
-    let excludeAccounts: [Int]?
+    public let excludeAccounts: [Int]?
     
     public init(excludeAccounts: [Int]? = nil,
                 attempt: SEAttempt? = nil,
@@ -192,9 +192,9 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
 }
 
 public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
-    let excludeAccounts: [Int]?
-    let credentialsStrategy: String?
-    let consent: SEConsent
+    public let excludeAccounts: [Int]?
+    public let credentialsStrategy: String?
+    public let consent: SEConsent
     
     public init(excludeAccounts: [Int]? = nil,
                 attempt: SEAttempt? = nil,
