@@ -1,11 +1,12 @@
-# Salt Edge iOS Swift SDK and Example application
+# Salt Edge iOS / macOS Swift SDK and Example application
 
-A handful of classes to help you interact with the Salt Edge API from your iOS app.
+A handful of classes to help you interact with the Salt Edge API from your iOS/macOS app.
 Last SDK version (2.0+) supports Salt Edge API v5.
 
 ## Requirements
 
-iOS 10.0+, Swift 4+
+- iOS 10.0+ / macOS 10.12+
+- Swift 4+
 
 ## Installation with CocoaPods
 
@@ -13,7 +14,7 @@ iOS 10.0+, Swift 4+
 
 for Salt Edge API v5 use  
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 2.0.1'
+pod 'SaltEdge-iOS-Swift', '~> 2.1.0'
 ```
 
 for Salt Edge API v4 use  
@@ -177,7 +178,7 @@ Set up the `appId`, `appSecret` and `customerId` constants to your App ID and co
 
 ## Versioning
 
-The current version of the SDK is [2.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/2.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [2.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/2.1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
