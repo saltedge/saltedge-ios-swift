@@ -28,7 +28,6 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
     public let dailyRefresh: Bool?
     public let fromDate: Date?
     public let toDate: Date?
-    public let locale: String?
     public let returnConnectionId: Bool?
     public let providerModes: [String]?
     public let categorize: Bool?
@@ -43,7 +42,6 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
          dailyRefresh: Bool? = nil,
          fromDate: Date? = nil,
          toDate: Date? = nil,
-         locale: String? = nil,
          returnConnectionId: Bool? = nil,
          providerModes: [String]? = nil,
          categorize: Bool? = nil,
@@ -56,7 +54,6 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
         self.dailyRefresh = dailyRefresh
         self.fromDate = fromDate
         self.toDate = toDate
-        self.locale = locale
         self.returnConnectionId = returnConnectionId
         self.providerModes = providerModes
         self.categorize = categorize
@@ -72,7 +69,6 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
         case dailyRefresh = "daily_refresh"
         case fromDate = "from_date"
         case toDate = "to_date"
-        case locale = "locale"
         case returnConnectionId = "return_connection_id"
         case providerModes = "provider_modes"
         case categorize = "categorize"
@@ -96,7 +92,6 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -116,7 +111,6 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
@@ -153,7 +147,6 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -168,7 +161,6 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
@@ -202,7 +194,6 @@ public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
-                locale: String? = nil,
                 returnConnectionId: Bool? = nil,
                 providerModes: [String]? = nil,
                 categorize: Bool? = nil,
@@ -221,7 +212,6 @@ public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
                    dailyRefresh: dailyRefresh,
                    fromDate: fromDate,
                    toDate: toDate,
-                   locale: locale,
                    returnConnectionId: returnConnectionId,
                    providerModes: providerModes,
                    categorize: categorize,
