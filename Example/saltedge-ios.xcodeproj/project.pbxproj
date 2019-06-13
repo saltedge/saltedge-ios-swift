@@ -37,6 +37,8 @@
 		AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */; };
 		AEFBA5A02086172700CD09BF /* SEUserDefaultHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */; };
 		D33E24B0AA9D041B85E197C7 /* Pods_saltedge_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012D5301580879C53F777FDF /* Pods_saltedge_ios_Tests.framework */; };
+		FAC9BA6C22B23E9A00310F6B /* ProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC9BA6B22B23E9A00310F6B /* ProviderCell.swift */; };
+		FAC9BA6E22B2402200310F6B /* LocaleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC9BA6D22B2402200310F6B /* LocaleExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AEFBA59F2086172700CD09BF /* SEUserDefaultHelperSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEUserDefaultHelperSpec.swift; sourceTree = "<group>"; };
 		E2A5E9B41CDB74D9850DC586 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		FAC9BA6B22B23E9A00310F6B /* ProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderCell.swift; sourceTree = "<group>"; };
+		FAC9BA6D22B2402200310F6B /* LocaleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +264,7 @@
 			children = (
 				AE299B4220178F440033FCFB /* UserDefaultsHelper.swift */,
 				AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */,
+				FAC9BA6D22B2402200310F6B /* LocaleExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				AE299B4D2017AD4E0033FCFB /* TransactionTableViewCell.swift */,
+				FAC9BA6B22B23E9A00310F6B /* ProviderCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -404,13 +410,21 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImageSVGCoder/SDWebImageSVGCoder.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SaltEdge-iOS-Swift/SaltEdge.framework",
 				"${BUILT_PRODUCTS_DIR}/TrustKit/TrustKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImageSVGCoder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SaltEdge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKit.framework",
 			);
@@ -483,11 +497,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB851422018E65700127D70 /* AttemptsViewController.swift in Sources */,
+				FAC9BA6E22B2402200310F6B /* LocaleExtensions.swift in Sources */,
 				AE299B4320178F440033FCFB /* UserDefaultsHelper.swift in Sources */,
 				AE9F52CC20164A870057FE09 /* ConnectionsViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ConnectViewController.swift in Sources */,
 				AE31B4BC201B5EC700D00382 /* CredentialTextField.swift in Sources */,
 				AEB851442018E9B200127D70 /* AttemptViewController.swift in Sources */,
+				FAC9BA6C22B23E9A00310F6B /* ProviderCell.swift in Sources */,
 				AE05129D201F3EE1000E5F64 /* OptionsButton.swift in Sources */,
 				AE9F52CF20164E0C0057FE09 /* ProvidersViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

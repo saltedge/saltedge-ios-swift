@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appId: String = "your-app-id"
         let appSecret: String = "your-app-secret"
         let customerId: String = "customer-secret"
-
+        
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 

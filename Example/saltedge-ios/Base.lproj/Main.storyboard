@@ -353,6 +353,44 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kLM-pM-iaC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProviderCell" id="ICU-85-Kag" customClass="ProviderCell" customModule="saltedge_ios_Example" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ICU-85-Kag" id="457-WE-J6i">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqy-4k-iQd">
+                                                    <rect key="frame" x="51.5" y="0.0" width="307.5" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vr-oW-ISN" customClass="SVGKFastImageView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="43.5" height="43.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8Vr-oW-ISN" secondAttribute="height" multiplier="1:1" id="iVV-C2-I50"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8Vr-oW-ISN" firstAttribute="top" secondItem="457-WE-J6i" secondAttribute="top" id="8Ju-HN-Z6M"/>
+                                                <constraint firstAttribute="trailing" secondItem="bqy-4k-iQd" secondAttribute="trailing" constant="16" id="P5H-3V-weQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Vr-oW-ISN" secondAttribute="bottom" id="SJp-vi-KNM"/>
+                                                <constraint firstItem="bqy-4k-iQd" firstAttribute="top" secondItem="457-WE-J6i" secondAttribute="top" id="ald-1c-FBI"/>
+                                                <constraint firstItem="bqy-4k-iQd" firstAttribute="leading" secondItem="8Vr-oW-ISN" secondAttribute="trailing" constant="8" id="gLS-Hu-yTQ"/>
+                                                <constraint firstItem="8Vr-oW-ISN" firstAttribute="leading" secondItem="457-WE-J6i" secondAttribute="leading" id="gVR-l9-kp6"/>
+                                                <constraint firstAttribute="bottom" secondItem="bqy-4k-iQd" secondAttribute="bottom" id="gwt-5I-gvt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="logoImageView" destination="8Vr-oW-ISN" id="ASl-Gu-Ygg"/>
+                                            <outlet property="titleLabel" destination="bqy-4k-iQd" id="8Ce-5W-M90"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

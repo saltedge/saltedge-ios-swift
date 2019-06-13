@@ -1,9 +1,18 @@
 PODS:
+  - CocoaLumberjack (3.5.3):
+    - CocoaLumberjack/Core (= 3.5.3)
+  - CocoaLumberjack/Core (3.5.3)
   - Nimble (7.3.4)
   - PKHUD (5.2.1)
   - Quick (1.3.4)
   - SaltEdge-iOS-Swift (2.1.0):
     - TrustKit
+  - SDWebImage/Core (5.0.3)
+  - SDWebImageSVGCoder (0.3.0):
+    - SDWebImage/Core (~> 5.0)
+    - SVGKit (>= 2.1)
+  - SVGKit (2.1.1):
+    - CocoaLumberjack (~> 3.0)
   - TrustKit (1.6.1)
 
 DEPENDENCIES:
@@ -11,12 +20,18 @@ DEPENDENCIES:
   - PKHUD (~> 5.0)
   - Quick (~> 1.3.2)
   - SaltEdge-iOS-Swift (from `../`)
+  - SDWebImageSVGCoder (~> 0.3)
+  - SVGKit (~> 2.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CocoaLumberjack
     - Nimble
     - PKHUD
     - Quick
+    - SDWebImage
+    - SDWebImageSVGCoder
+    - SVGKit
     - TrustKit
 
 EXTERNAL SOURCES:
@@ -24,12 +39,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
   SaltEdge-iOS-Swift: cdd2402129a7353f10cd82b615a90e8a18f58f80
+  SDWebImage: d4f87d7d36c8a4d9f9459dc282e0caa057fdf935
+  SDWebImageSVGCoder: 4b354bcdc7d74ce14d9fdb3c9ed9ab2c667f3b57
+  SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
-PODFILE CHECKSUM: af65592a936e9f7032081206063d1bcd8cde6143
+PODFILE CHECKSUM: 081bd14fb90d2c968a466a27e9a3bc047f9fe132
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.2

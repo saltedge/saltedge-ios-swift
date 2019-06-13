@@ -27,25 +27,55 @@ class ProvidersViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProviderCell")
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
         
+        fetchProviders()
+    }
+    
+    
+    
+    private func fetchProviders() {
         HUD.show(.labeledProgress(title: "Fetching Providers", subtitle: nil))
         SERequestManager.shared.getProviders { [weak self] response in
             switch response {
             case .success(let value):
                 HUD.hide(animated: true)
-                self?.providers = value.data
-                self?.filteredProviders = value.data
-                self?.tableView.reloadData()
+                guard let self = self else { return }
+                
+                let providers = self.sortProvidersByCountry(value.data,
+                                                            startingWith: Locale.preferredLanguageCode.uppercased())
+                
+                self.providers = providers
+                self.filteredProviders = providers
+                self.tableView.reloadData()
             case .failure(let error):
                 HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
             }
         }
     }
+    
+    private func sortProvidersByCountry(_ providers: [SEProvider], startingWith topCountry: String? = nil) -> [SEProvider] {
+        return providers.sorted(by: {
+            if $0.countryCode != $1.countryCode {
+                if let topCountry = topCountry {
+                    if $1.countryCode == topCountry {
+                        return false
+                    }
+                    if $0.countryCode == topCountry {
+                        return true
+                    }
+                }                
+                return $0.countryCode < $1.countryCode
+            } else {
+                return $0.name < $1.name
+            }
+        })
+    }
+    
+    
 }
 
 extension ProvidersViewController: UITableViewDataSource {
@@ -59,9 +89,17 @@ extension ProvidersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProviderCell", for: indexPath)
-        cell.textLabel?.text = filteredProviders[indexPath.row].name
+        
+        if let providerCell = cell as? ProviderCell {
+            providerCell.provider = filteredProviders[indexPath.row]
+            return providerCell
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
     }
 }
 

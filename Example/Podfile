@@ -4,6 +4,8 @@ use_frameworks!
 target 'saltedge-ios_Example' do
   pod 'SaltEdge-iOS-Swift', :path => '../'
   pod 'PKHUD', '~> 5.0'
+  pod 'SVGKit', '~> 2.1'
+  pod 'SDWebImageSVGCoder', '~> 0.3'
 
   target 'saltedge-ios_Tests' do
     inherit! :search_paths

@@ -41,6 +41,7 @@ public struct SEProvider: Decodable {
     public let createdAt: String
     public let updatedAt: String
     public let requiredFields: [SEProviderField]?
+    public let logoURL: URL
     
     public var isOAuth: Bool {
         return mode == "oauth"
@@ -64,6 +65,7 @@ public struct SEProvider: Decodable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case requiredFields = "required_fields"
+        case logoURL = "logo_url"
     }
 }
 

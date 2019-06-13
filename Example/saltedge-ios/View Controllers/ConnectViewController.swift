@@ -66,8 +66,9 @@ final class ConnectViewController: UIViewController {
             
             // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
             // see https://docs.saltedge.com/guides/connect
+            let languageCode = Locale.preferredLanguageCode.lowercased()
             let connectSessionsParams = SECreateSessionsParams(
-                attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                attempt: SEAttempt(locale: languageCode, returnTo: "http://httpbin.org"),
                 providerCode: provider.code,
                 javascriptCallbackType: "iframe",
                 consent: SEConsent(scopes: ["account_details", "transactions_details"])
