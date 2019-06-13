@@ -23,7 +23,6 @@ class ProviderCell : UITableViewCell {
     
     private func updateUI() {
         titleLabel.text = provider?.name
-//        logoImageView.sd_adjustContentMode = true // make `contentMode` works
         logoImageView.sd_setImage(with: provider?.logoURL, completed: nil)
     }
 }
