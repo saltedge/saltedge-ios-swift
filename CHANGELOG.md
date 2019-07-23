@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.1] - 2019-07-24
+
+### Changed.
+
+- Modified date parser.
+
+### Removed.
+
+- Removed redundant `locale` field.
+
+
 ## [2.0.0] - 2019-04-01
 
 ### Added.
@@ -52,4 +63,6 @@
 - Removed `oauth/refresh`.
 
 - Removed `fetchScopes` from `SECreateTokenParams`. Should use `SEConsent(scopes: ..)` instead.
+
+
 
