@@ -10,7 +10,6 @@
 
 - Removed redundant `locale` field.
 
-
 ## [2.0.0] - 2019-04-01
 
 ### Added.
@@ -63,6 +62,3 @@
 - Removed `oauth/refresh`.
 
 - Removed `fetchScopes` from `SECreateTokenParams`. Should use `SEConsent(scopes: ..)` instead.
-
-
-

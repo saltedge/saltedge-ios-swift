@@ -99,36 +99,36 @@ public struct SEExtra: Decodable {
         case transactionsCount = "transactions_count"
     }
 
-        public init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            accountName = try container.decodeIfPresent(String.self, forKey: .accountName)
-            status = try container.decodeIfPresent(String.self, forKey: .status)
-            clientName = try container.decodeIfPresent(String.self, forKey: .clientName)
-            iban = try container.decodeIfPresent(String.self, forKey: .iban)
-            swift = try container.decodeIfPresent(String.self, forKey: .swift)
-            cardType = try container.decodeIfPresent(String.self, forKey: .cardType)
-            accountNumber = try container.decodeIfPresent(String.self, forKey: .accountName)
-            blockedAmount = try container.decodeIfPresent(Double.self, forKey: .blockedAmount)
-            availableAmount = try container.decodeIfPresent(Double.self, forKey: .availableAmount)
-            creditLimit = try container.decodeIfPresent(Double.self, forKey: .creditLimit)
-            interestRate = try container.decodeIfPresent(Double.self, forKey: .interestRate)
-            cards = try container.decodeIfPresent([String].self, forKey: .cards)
-            units = try container.decodeIfPresent(Double.self, forKey: .units)
-            unitPrice = try container.decodeIfPresent(Double.self, forKey: .unitPrice)
-            transactionsCount = try container.decodeIfPresent(TransactionsCount.self, forKey: .transactionsCount)
-            if let expiryDateString = try container.decodeIfPresent(String.self, forKey: .expiryDate),
-                let expiryDate = DateFormatter.yyyyMMdd.date(from: expiryDateString) {
-                self.expiryDate = expiryDate
-            } else {
-                self.expiryDate = nil
-            }
-            if let openDateString = try container.decodeIfPresent(String.self, forKey: .openDate),
-                let openDate = DateFormatter.yyyyMMdd.date(from: openDateString) {
-                self.openDate = openDate
-            } else {
-                self.openDate = nil
-            }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        accountName = try container.decodeIfPresent(String.self, forKey: .accountName)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        clientName = try container.decodeIfPresent(String.self, forKey: .clientName)
+        iban = try container.decodeIfPresent(String.self, forKey: .iban)
+        swift = try container.decodeIfPresent(String.self, forKey: .swift)
+        cardType = try container.decodeIfPresent(String.self, forKey: .cardType)
+        accountNumber = try container.decodeIfPresent(String.self, forKey: .accountName)
+        blockedAmount = try container.decodeIfPresent(Double.self, forKey: .blockedAmount)
+        availableAmount = try container.decodeIfPresent(Double.self, forKey: .availableAmount)
+        creditLimit = try container.decodeIfPresent(Double.self, forKey: .creditLimit)
+        interestRate = try container.decodeIfPresent(Double.self, forKey: .interestRate)
+        cards = try container.decodeIfPresent([String].self, forKey: .cards)
+        units = try container.decodeIfPresent(Double.self, forKey: .units)
+        unitPrice = try container.decodeIfPresent(Double.self, forKey: .unitPrice)
+        transactionsCount = try container.decodeIfPresent(TransactionsCount.self, forKey: .transactionsCount)
+        if let expiryDateString = try container.decodeIfPresent(String.self, forKey: .expiryDate),
+            let expiryDate = DateFormatter.yyyyMMdd.date(from: expiryDateString) {
+            self.expiryDate = expiryDate
+        } else {
+            self.expiryDate = nil
         }
+        if let openDateString = try container.decodeIfPresent(String.self, forKey: .openDate),
+            let openDate = DateFormatter.yyyyMMdd.date(from: openDateString) {
+            self.openDate = openDate
+        } else {
+            self.openDate = nil
+        }
+    }
 }
 
 public struct TransactionsCount: Decodable {
