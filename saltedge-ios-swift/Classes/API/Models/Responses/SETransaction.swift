@@ -35,7 +35,7 @@ public struct SETransaction: Decodable {
     public let category: String
     public let accountId: String
     public let createdAt: Date
-    public let updatedAt:Date
+    public let updatedAt: Date
     public let extra: SETransactionExtra
     
     enum CodingKeys: String, CodingKey {

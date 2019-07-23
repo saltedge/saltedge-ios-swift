@@ -27,18 +27,3 @@ final class TransactionTableViewCell: UITableViewCell {
         amountLabel.text = amountFormatter.string(from: NSNumber(value: transaction.amount))
     }
 }
-
-//static NSNumberFormatter* amountFormatter;
-//static dispatch_once_t onceToken;
-//dispatch_once(&onceToken, ^{
-//amountFormatter = [[NSNumberFormatter alloc] init];
-//amountFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-//amountFormatter.currencyCode = transaction.currencyCode;
-//});
-//
-//self.descriptionLabel.text = transaction.description;
-//self.madeOnDateLabel.text  = [NSDateFormatter localizedStringFromDate:transaction.madeOn
-//dateStyle:NSDateFormatterMediumStyle
-//timeStyle:NSDateFormatterNoStyle];
-//self.amountLabel.text      = [amountFormatter stringFromNumber:transaction.amount];
-
