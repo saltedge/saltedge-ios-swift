@@ -46,15 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let appId: String = "your-app-id"
-        let appSecret: String = "your-app-secret"
-        let customerId: String = "customer-secret"
+        let appId: String = "KyVEYIqAmnUVnTbsP0GZ3G54EdAdInEvIYKZleHWYJc"
+        let appSecret: String = "qRypClMa1CHCUN19gH1O6NmvrWHROtW6voC0rBv5LXY"
+        let customerId: String = "customer-secret-\(UUID().uuidString)"
 
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
+//        SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
         
+//        guard SERequestManager.shared.isPartner else { return true }
+
         if let secret = UserDefaultsHelper.customerSecret {
             SERequestManager.shared.set(customerSecret: secret)
         } else {

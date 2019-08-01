@@ -41,13 +41,13 @@ private enum TestRouter: Routable {
         }
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .show: return APIEndpoints.baseURL.appendingPathComponent("get/route")
-        case .getWithParams: return APIEndpoints.baseURL.appendingPathComponent("get/test")
-        case .create: return APIEndpoints.baseURL.appendingPathComponent("create/route")
-        case .put: return APIEndpoints.baseURL.appendingPathComponent("put/route")
-        case .delete: return APIEndpoints.baseURL.appendingPathComponent("delete/route")
+        case .show: return "get/route"
+        case .getWithParams: return "get/test"
+        case .create: return "create/route"
+        case .put: return "put/route"
+        case .delete: return "delete/route"
         }
     }
     
