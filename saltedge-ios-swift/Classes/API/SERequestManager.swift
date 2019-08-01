@@ -23,11 +23,13 @@
 
 import Foundation
 
-public struct SERequestManager {
+public class SERequestManager {
     // MARK: Setup
     private init() {}
 
     public static let shared = SERequestManager()
+
+    public var isPartner: Bool = false
     
     public func set(sslPinningEnabled: Bool) {
         SessionManager.initializeManager(isSSLPinningEnabled: sslPinningEnabled)
@@ -41,6 +43,11 @@ public struct SERequestManager {
          - clientId: The ID of the client.
      */
     public func set(appId: String, appSecret: String) {
+        SEHeaders.cached.set(appId: appId, appSecret: appSecret)
+    }
+
+    public func setPartner(appId: String, appSecret: String) {
+        isPartner = true
         SEHeaders.cached.set(appId: appId, appSecret: appSecret)
     }
     

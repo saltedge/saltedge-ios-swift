@@ -25,6 +25,8 @@ import Foundation
 
 public struct SEConsent: Codable {
     public let scopes: [String]
+    public let status: String?
+    public let revokedBy: String?
     public let fromDate: Date?
     public let toDate: Date?
     public let periodDays: Int?
@@ -36,6 +38,8 @@ public struct SEConsent: Codable {
     public let updatedAt: Date?
 
     public init(scopes: [String],
+                status: String? = nil,
+                revokedBy: String? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
                 periodDays: Int? = nil,
@@ -46,6 +50,8 @@ public struct SEConsent: Codable {
                 createdAt: Date? = nil,
                 updatedAt: Date? = nil) {
         self.scopes = scopes
+        self.status = status
+        self.revokedBy = revokedBy
         self.fromDate = fromDate
         self.toDate = toDate
         self.periodDays = periodDays
@@ -59,6 +65,8 @@ public struct SEConsent: Codable {
 
     enum CodingKeys: String, CodingKey {
         case scopes = "scopes"
+        case status = "status"
+        case revokedBy = "revoked_by"
         case fromDate = "from_date"
         case toDate = "to_date"
         case periodDays = "period_days"

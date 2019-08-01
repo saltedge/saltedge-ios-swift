@@ -33,10 +33,10 @@ enum ProviderRouter: Routable {
         return .get
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("providers")
-        case .show(let providerCode): return APIEndpoints.baseURL.appendingPathComponent("providers/\(providerCode)")
+        case .list: return "providers"
+        case .show(let providerCode): return "providers/\(providerCode)"
         }
     }
     

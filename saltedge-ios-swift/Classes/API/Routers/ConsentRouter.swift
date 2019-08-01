@@ -37,11 +37,11 @@ enum ConsentRouter: Routable {
         }
     }
 
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("consents")
-        case .show(let id, _): return APIEndpoints.baseURL.appendingPathComponent("consents/\(id)")
-        case .revoke(let id, _): return APIEndpoints.baseURL.appendingPathComponent("consents/\(id)/revoke")
+        case .list: return "consents"
+        case .show(let id, _): return "consents/\(id)"
+        case .revoke(let id, _): return "consents/\(id)/revoke"
         }
     }
 

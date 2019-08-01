@@ -30,8 +30,8 @@ enum AccountRouter: Routable {
         return .get
     }
     
-    var url: URL {
-        return APIEndpoints.baseURL.appendingPathComponent("accounts")
+    var query: String {
+        return "accounts"
     }
     
     var headers: Headers {

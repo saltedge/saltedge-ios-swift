@@ -34,10 +34,10 @@ enum CategoryRouter: Routable {
         }
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("categories")
-        case .learn: return APIEndpoints.baseURL.appendingPathComponent("categories/learn")
+        case .list: return "categories"
+        case .learn: return "categories/learn"
         }
     }
     

@@ -30,8 +30,8 @@ enum CountryRouter: Routable {
         return .get
     }
     
-    var url: URL {
-        return APIEndpoints.baseURL.appendingPathComponent("countries")
+    var query: String {
+        return "countries"
     }
     
     var headers: Headers {
