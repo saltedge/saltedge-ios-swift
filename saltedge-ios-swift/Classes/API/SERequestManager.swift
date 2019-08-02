@@ -322,7 +322,7 @@ public class SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connect_sessions-create)
      */
-    public func createConnectSession(params: SECreateSessionsParams, completion: SEHTTPResponse<SEConnectSessionResponse>) {
+    public func createConnectSession(params: SEConnectSessionsParams, completion: SEHTTPResponse<SEConnectSessionResponse>) {
         HTTPService<SEConnectSessionResponse>.makeRequest(ConnectSessionsRouter.create(params), completion: completion)
     }
     

@@ -118,7 +118,7 @@ final class ConnectViewController: UIViewController {
                 self?.handleLeadSessionResponse(response)
             }
         } else {
-            let connectSessionsParams = SECreateSessionsParams(
+            let connectSessionsParams = SEConnectSessionsParams(
                 attempt: attempt,
                 providerCode: provider.code,
                 javascriptCallbackType: "iframe",

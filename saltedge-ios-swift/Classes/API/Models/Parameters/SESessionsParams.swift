@@ -1,5 +1,5 @@
 //
-//  SEConnectSessionsParams.swift
+//  SESessionsParams.swift.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -79,9 +79,9 @@ public class SEBaseSessionsParams: Encodable, ParametersEncodable {
     }
 }
 
-public class SECreateSessionsParams: SEBaseSessionsParams {
-    public let allowedCountries: [String]?
+public class SEConnectSessionsParams: SEBaseSessionsParams {
     public let consent: SEConsent
+    public let allowedCountries: [String]?
     public let credentialsStrategy: String?
     public let providerCode: String?
 

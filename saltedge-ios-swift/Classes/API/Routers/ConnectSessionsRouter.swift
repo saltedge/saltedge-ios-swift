@@ -24,7 +24,7 @@
 import Foundation
 
 enum ConnectSessionsRouter: Routable {
-    case create(SECreateSessionsParams)
+    case create(SEConnectSessionsParams)
     case reconnect(ConnectionSecret, SEReconnectSessionsParams)
     case refresh(ConnectionSecret, SERefreshSessionsParams)
     

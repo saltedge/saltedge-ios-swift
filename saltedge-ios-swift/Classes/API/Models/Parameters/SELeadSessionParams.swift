@@ -23,12 +23,7 @@
 
 import Foundation
 
-public class SELeadSessionParams: SEBaseSessionsParams {
-    public let consent: SEConsent
-    public let allowedCountries: [String]?
-    public let credentialsStrategy: String?
-    public let providerCode: String?
-    public let customerId: String?
+public class SELeadSessionParams: SEConnectSessionsParams {
     public let categorization: String?
     public let returnConnectionSearch: Bool?
     public let disableProvidersSearch: Bool?
@@ -38,7 +33,6 @@ public class SELeadSessionParams: SEBaseSessionsParams {
                 allowedCountries: [String]? = nil,
                 credentialsStrategy: String? = nil,
                 providerCode: String? = nil,
-                customerId: String? = nil,
                 categorization: String? = nil,
                 returnConnectionSearch: Bool? = nil,
                 disableProvidersSearch: Bool? = nil,
@@ -55,11 +49,6 @@ public class SELeadSessionParams: SEBaseSessionsParams {
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil) {
-        self.consent = consent
-        self.allowedCountries = allowedCountries
-        self.credentialsStrategy = credentialsStrategy
-        self.providerCode = providerCode
-        self.customerId = customerId
         self.categorization = categorization
         self.returnConnectionSearch = returnConnectionSearch
         self.disableProvidersSearch = disableProvidersSearch
@@ -76,15 +65,11 @@ public class SELeadSessionParams: SEBaseSessionsParams {
                    javascriptCallbackType: javascriptCallbackType,
                    includeFakeProviders: includeFakeProviders,
                    lostConnectionNotify: lostConnectionNotify,
-                   showConsentConfirmation: showConsentConfirmation)
+                   showConsentConfirmation: showConsentConfirmation,
+                   consent: consent)
     }
 
     private enum CodingKeys: String, CodingKey {
-        case consent = "consent"
-        case allowedCountries = "allowed_countries"
-        case credentialsStrategy = "credentials_strategy"
-        case providerCode = "provider_code"
-        case customerId = "customer_id"
         case categorization = "categorization"
         case returnConnectionSearch = "return_connection_search"
         case disableProvidersSearch = "disable_providers_search"
@@ -93,11 +78,6 @@ public class SELeadSessionParams: SEBaseSessionsParams {
 
     public override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(consent, forKey: .consent)
-        try container.encodeIfPresent(credentialsStrategy, forKey: .credentialsStrategy)
-        try container.encodeIfPresent(allowedCountries, forKey: .allowedCountries)
-        try container.encodeIfPresent(providerCode, forKey: .providerCode)
-        try container.encodeIfPresent(customerId, forKey: .customerId)
         try container.encodeIfPresent(categorization, forKey: .categorization)
         try container.encodeIfPresent(returnConnectionSearch, forKey: .returnConnectionSearch)
         try container.encodeIfPresent(disableProvidersSearch, forKey: .disableProvidersSearch)
