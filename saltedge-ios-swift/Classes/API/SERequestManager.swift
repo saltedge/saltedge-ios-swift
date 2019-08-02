@@ -358,8 +358,8 @@ public class SERequestManager {
      Requests a Lead Session for connecting a Connection via a web view.
      
      - parameters:
-     - params: The parameters that will go in the request payload.
-     - completion: The code to be executed once the request has finished.
+         - params: The parameters that will go in the request payload.
+         - completion: The code to be executed once the request has finished.
      
      [Salt Edge API Reference](https://docs.saltedge.com/partners/v1/#lead_sessions)
      */
@@ -548,6 +548,52 @@ public class SERequestManager {
      */
     public func revokeConsent(with id: String, params: SEBaseConsentsParams, completion: SEHTTPResponse<SEConsent>) {
         HTTPService<SEConsent>.makeRequest(ConsentRouter.revoke(id, params), completion: completion)
+    }
+
+    // MARK: Partner Consent. ONLY FOR PARTNERS API.
+    /**
+     Returns list of partner consents of a connection.
+
+     - parameters:
+        - connection_id: Optional. The id of the connection containing the partner consents
+        - customer_id: Optional. The id of the customer containing the partner consents. Note: Will be ignored if connection_id is present.
+        - from_id: Optional. The id from which the next page of partner consents starts.
+        - completion: The code to be executed once the request has finished.
+
+     [Salt Edge API Reference](https://docs.saltedge.com/partners/v1/#partner_consents-list)
+     */
+    public func getPartnerConsents(params: SEConsentsListParams, completion: SEHTTPResponse<[SEPartnerConsent]>) {
+        HTTPService<[SEPartnerConsent]>.makeRequest(ConsentRouter.listPartner(params), completion: completion)
+    }
+
+    /**
+     Returns the partner consent object.
+
+     - parameters:
+        - id: The id of the partner partner consent.
+        - connection_id: Optional. The id of the connection containing the partner consents
+        - customer_id: Optional. The id of the customer containing the partner consents. Note: Will be ignored if connection_id is present.
+        - completion: The code to be executed once the request has finished.
+
+     [Salt Edge API Reference](https://docs.saltedge.com/partners/v1/#partner_consents-show)
+     */
+    public func getPartnerConsent(by id: String, params: SEBaseConsentsParams, completion: SEHTTPResponse<SEPartnerConsent>) {
+        HTTPService<SEPartnerConsent>.makeRequest(ConsentRouter.showPartner(id, params), completion: completion)
+    }
+
+    /**
+     Revokes the partner consent object.
+
+     - parameters:
+        - id: The id of the partner consent.
+        - connection_id: Optional. The id of the connection containing the partner consents
+        - customer_id: Optional. The id of the customer containing the partner consents. Note: Will be ignored if connection_id is present.
+        - completion: The code to be executed once the request has finished.
+q
+     [Salt Edge API Reference](https://docs.saltedge.com/partners/v1/#partner_consents-revoke)
+     */
+    public func revokePartnerConsent(with id: String, params: SEBaseConsentsParams, completion: SEHTTPResponse<SEPartnerConsent>) {
+        HTTPService<SEPartnerConsent>.makeRequest(ConsentRouter.revokePartner(id, params), completion: completion)
     }
 
     // MARK: Attempt

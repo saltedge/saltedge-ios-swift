@@ -30,10 +30,15 @@ enum ConsentRouter: Routable {
     case show(ConsentId, SEBaseConsentsParams)
     case revoke(ConsentId, SEBaseConsentsParams)
 
+    // MARK: ONLY FOR PARTNERS API.
+    case listPartner(SEConsentsListParams)
+    case showPartner(ConsentId, SEBaseConsentsParams)
+    case revokePartner(ConsentId, SEBaseConsentsParams)
+
     var method: HTTPMethod {
         switch self {
-        case .list, .show: return .get
-        case .revoke: return .put
+        case .list, .listPartner, .show, .showPartner: return .get
+        case .revoke, .revokePartner: return .put
         }
     }
 
@@ -42,6 +47,10 @@ enum ConsentRouter: Routable {
         case .list: return "consents"
         case .show(let id, _): return "consents/\(id)"
         case .revoke(let id, _): return "consents/\(id)/revoke"
+
+        case .listPartner(let params): return "partner_consents?connection_id=\(params.connectionId ?? "")"
+        case .showPartner(let id, let params): return "partner_consents/\(id)?connection_id=\(params.connectionId ?? "")"
+        case .revokePartner(let id, let params): return "partner_consents/\(id)/revoke?connection_id=\(params.connectionId ?? "")"
         }
     }
 
@@ -51,8 +60,9 @@ enum ConsentRouter: Routable {
 
     var parameters: ParametersEncodable? {
         switch self {
-        case .list(let params): return params
-        case .show(_, let params), .revoke(_, let params): return params
+        case .list(let params), .listPartner(let params): return params
+        case .show(_, let params), .showPartner(_, let params),
+             .revoke(_, let params), .revokePartner(_, let params): return params
         }
     }
 }
