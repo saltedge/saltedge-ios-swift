@@ -43,6 +43,7 @@ public class SERequestManager {
          - clientId: The ID of the client.
      */
     public func set(appId: String, appSecret: String) {
+        isPartner = false
         SEHeaders.cached.set(appId: appId, appSecret: appSecret)
     }
 

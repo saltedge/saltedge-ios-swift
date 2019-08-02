@@ -96,7 +96,7 @@ final class ConnectViewController: UIViewController {
 
 
     private func switchToConnectionsController() {
-        tabBarController?.selectedIndex = 2
+        tabBarController?.selectedIndex = SERequestManager.shared.isPartner ? 1 : 2
     }
 
     private func createSession() {
@@ -108,8 +108,8 @@ final class ConnectViewController: UIViewController {
         if SERequestManager.shared.isPartner {
             let leadSessionParams = SELeadSessionParams(
                 consent: consent,
-                attempt: attempt,
                 providerCode: provider.code,
+                attempt: attempt,
                 javascriptCallbackType: "iframe"
             )
 

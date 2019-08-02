@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
+public class SEBaseSessionsParams: Encodable, ParametersEncodable {
     public let customFields: String?
     public let dailyRefresh: Bool?
     public let fromDate: Date?
@@ -79,7 +79,7 @@ public class SEBaseConnectSessionsParams: Encodable, ParametersEncodable {
     }
 }
 
-public class SECreateSessionsParams: SEBaseConnectSessionsParams {
+public class SECreateSessionsParams: SEBaseSessionsParams {
     public let allowedCountries: [String]?
     public let consent: SEConsent
     public let credentialsStrategy: String?
@@ -138,7 +138,7 @@ public class SECreateSessionsParams: SEBaseConnectSessionsParams {
     }
 }
 
-public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
+public class SERefreshSessionsParams: SEBaseSessionsParams {
     public let excludeAccounts: [Int]?
     
     public init(excludeAccounts: [Int]? = nil,
@@ -183,7 +183,7 @@ public class SERefreshSessionsParams: SEBaseConnectSessionsParams {
 
 }
 
-public class SEReconnectSessionsParams: SEBaseConnectSessionsParams {
+public class SEReconnectSessionsParams: SEBaseSessionsParams {
     public let excludeAccounts: [Int]?
     public let credentialsStrategy: String?
     public let consent: SEConsent

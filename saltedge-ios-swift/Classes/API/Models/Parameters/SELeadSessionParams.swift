@@ -23,74 +23,86 @@
 
 import Foundation
 
-public struct SELeadSessionParams: Encodable, ParametersEncodable {
+public class SELeadSessionParams: SEBaseSessionsParams {
     public let consent: SEConsent
-    public let attempt: SEAttempt
-    public let customerId: String?
     public let allowedCountries: [String]?
-    public let providerCode: String?
-    public let skipProviderSelect: Bool?
-    public let dailyRefresh: Bool?
-    public let disableProvidersSearch: Bool?
-    public let returnConnectionSearch: Bool?
-    public let providerModes: [String]?
-    public let categorization: String?
-    public let javascriptCallbackType: String?
-    public let includeFakeProviders: Bool?
-    public let lostConnectionNotify: Bool?
-    public let showConsentConfirmation: Bool?
     public let credentialsStrategy: String?
+    public let providerCode: String?
+    public let customerId: String?
+    public let categorization: String?
+    public let returnConnectionSearch: Bool?
+    public let disableProvidersSearch: Bool?
+    public let skipProviderSelect: Bool?
 
     public init(consent: SEConsent,
-         attempt: SEAttempt,
-         customerId: String? = nil,
-         allowedCountries: [String]? = nil,
-         providerCode: String? = nil,
-         skipProviderSelect: Bool? = nil,
-         dailyRefresh: Bool? = nil,
-         disableProvidersSearch: Bool? = nil,
-         returnConnectionSearch: Bool? = nil,
-         providerModes: [String]? = nil,
-         categorization: String? = nil,
-         javascriptCallbackType: String? = nil,
-         includeFakeProviders: Bool? = nil,
-         lostConnectionNotify: Bool? = nil,
-         showConsentConfirmation: Bool? = nil,
-         credentialsStrategy: String? = nil) {
+                allowedCountries: [String]? = nil,
+                credentialsStrategy: String? = nil,
+                providerCode: String? = nil,
+                customerId: String? = nil,
+                categorization: String? = nil,
+                returnConnectionSearch: Bool? = nil,
+                disableProvidersSearch: Bool? = nil,
+                skipProviderSelect: Bool? = nil,
+                attempt: SEAttempt? = nil,
+                customFields: String? = nil,
+                dailyRefresh: Bool? = nil,
+                fromDate: Date? = nil,
+                toDate: Date? = nil,
+                returnConnectionId: Bool? = nil,
+                providerModes: [String]? = nil,
+                categorize: Bool? = nil,
+                javascriptCallbackType: String? = nil,
+                includeFakeProviders: Bool? = nil,
+                lostConnectionNotify: Bool? = nil,
+                showConsentConfirmation: Bool? = nil) {
         self.consent = consent
-        self.attempt = attempt
-        self.customerId = customerId
         self.allowedCountries = allowedCountries
-        self.providerCode = providerCode
-        self.skipProviderSelect = skipProviderSelect
-        self.dailyRefresh = dailyRefresh
-        self.disableProvidersSearch = disableProvidersSearch
-        self.returnConnectionSearch = returnConnectionSearch
-        self.providerModes = providerModes
-        self.categorization = categorization
-        self.javascriptCallbackType = javascriptCallbackType
-        self.includeFakeProviders = includeFakeProviders
-        self.lostConnectionNotify = lostConnectionNotify
-        self.showConsentConfirmation = showConsentConfirmation
         self.credentialsStrategy = credentialsStrategy
+        self.providerCode = providerCode
+        self.customerId = customerId
+        self.categorization = categorization
+        self.returnConnectionSearch = returnConnectionSearch
+        self.disableProvidersSearch = disableProvidersSearch
+        self.skipProviderSelect = skipProviderSelect
+
+        super.init(attempt: attempt,
+                   customFields: customFields,
+                   dailyRefresh: dailyRefresh,
+                   fromDate: fromDate,
+                   toDate: toDate,
+                   returnConnectionId: returnConnectionId,
+                   providerModes: providerModes,
+                   categorize: categorize,
+                   javascriptCallbackType: javascriptCallbackType,
+                   includeFakeProviders: includeFakeProviders,
+                   lostConnectionNotify: lostConnectionNotify,
+                   showConsentConfirmation: showConsentConfirmation)
     }
 
     private enum CodingKeys: String, CodingKey {
         case consent = "consent"
-        case attempt = "attempt"
-        case customerId = "customer_id"
         case allowedCountries = "allowed_countries"
-        case providerCode = "provider_code"
-        case skipProviderSelect = "skip_provider_select"
-        case dailyRefresh = "daily_refresh"
-        case disableProvidersSearch = "disable_providers_search"
-        case returnConnectionSearch = "return_connection_search"
-        case providerModes = "provider_modes"
-        case categorization = "categorization"
-        case javascriptCallbackType = "javascript_callback_type"
-        case includeFakeProviders = "include_fake_providers"
-        case lostConnectionNotify = "lost_connection_notify"
-        case showConsentConfirmation = "show_consent_confirmation"
         case credentialsStrategy = "credentials_strategy"
+        case providerCode = "provider_code"
+        case customerId = "customer_id"
+        case categorization = "categorization"
+        case returnConnectionSearch = "return_connection_search"
+        case disableProvidersSearch = "disable_providers_search"
+        case skipProviderSelect = "skip_provider_select"
+    }
+
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(consent, forKey: .consent)
+        try container.encodeIfPresent(credentialsStrategy, forKey: .credentialsStrategy)
+        try container.encodeIfPresent(allowedCountries, forKey: .allowedCountries)
+        try container.encodeIfPresent(providerCode, forKey: .providerCode)
+        try container.encodeIfPresent(customerId, forKey: .customerId)
+        try container.encodeIfPresent(categorization, forKey: .categorization)
+        try container.encodeIfPresent(returnConnectionSearch, forKey: .returnConnectionSearch)
+        try container.encodeIfPresent(disableProvidersSearch, forKey: .disableProvidersSearch)
+        try container.encodeIfPresent(skipProviderSelect, forKey: .skipProviderSelect)
+
+        try super.encode(to: encoder)
     }
 }

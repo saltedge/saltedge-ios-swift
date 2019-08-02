@@ -58,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
-//        SERequestManager.shared.set(appId: appId, appSecret: appSecret)
-        SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
+        SERequestManager.shared.set(appId: appId, appSecret: appSecret)
+//         SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
