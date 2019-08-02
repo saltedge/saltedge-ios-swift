@@ -62,20 +62,7 @@ final class ConnectViewController: UIViewController {
                 }
             }
         } else {
-            guard let provider = provider else { return }
-            
-            // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
-            // see https://docs.saltedge.com/guides/connect
-            let connectSessionsParams = SECreateSessionsParams(
-                attempt: SEAttempt(returnTo: "http://httpbin.org"),
-                providerCode: provider.code,
-                javascriptCallbackType: "iframe",
-                consent: SEConsent(scopes: ["account_details", "transactions_details"])
-            )
-            // Check if SERequestManager will call handleConnectSessionResponse
-            SERequestManager.shared.createConnectSession(params: connectSessionsParams) { [weak self] response in
-                self?.handleConnectSessionResponse(response)
-            }
+            createSession()
         }
     }
     
@@ -93,8 +80,56 @@ final class ConnectViewController: UIViewController {
         }
     }
 
+    private func handleLeadSessionResponse(_ response: SEResult<SEResponse<SELeadSessionResponse>>) {
+        switch response {
+        case .success(let value):
+            HUD.hide(animated: true)
+            if let url = URL(string: value.data.redirectUrl) {
+                let request = URLRequest(url: url)
+                webView.load(request)
+                webView.isHidden = false
+            }
+        case .failure(let error):
+            HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+        }
+    }
+
+
     private func switchToConnectionsController() {
         tabBarController?.selectedIndex = 2
+    }
+
+    private func createSession() {
+        guard let provider = provider else { return }
+
+        let consent = SEConsent(scopes: ["account_details", "transactions_details"])
+        let attempt = SEAttempt(returnTo: "http://httpbin.org")
+
+        if SERequestManager.shared.isPartner {
+            let leadSessionParams = SELeadSessionParams(
+                consent: consent,
+                attempt: attempt,
+                providerCode: provider.code,
+                javascriptCallbackType: "iframe"
+            )
+
+            // Check if SERequestManager will call handleConnectSessionResponse
+            SERequestManager.shared.createLeadSession(params: leadSessionParams) { [weak self] response in
+                self?.handleLeadSessionResponse(response)
+            }
+        } else {
+            let connectSessionsParams = SECreateSessionsParams(
+                attempt: attempt,
+                providerCode: provider.code,
+                javascriptCallbackType: "iframe",
+                consent: consent
+            )
+
+            // Check if SERequestManager will call handleConnectSessionResponse
+            SERequestManager.shared.createConnectSession(params: connectSessionsParams) { [weak self] response in
+                self?.handleConnectSessionResponse(response)
+            }
+        }
     }
 }
 

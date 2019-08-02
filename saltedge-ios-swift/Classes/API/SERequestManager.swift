@@ -353,6 +353,20 @@ public class SERequestManager {
         HTTPService<SEConnectSessionResponse>.makeRequest(ConnectSessionsRouter.refresh(secret, params), completion: completion)
     }
 
+    // MARK: Lead Session (ONLY FOR PARTNERS API)
+    /**
+     Requests a Lead Session for connecting a Connection via a web view.
+     
+     - parameters:
+     - params: The parameters that will go in the request payload.
+     - completion: The code to be executed once the request has finished.
+     
+     [Salt Edge API Reference](https://docs.saltedge.com/partners/v1/#lead_sessions)
+     */
+    public func createLeadSession(params: SELeadSessionParams, completion: SEHTTPResponse<SELeadSessionResponse>) {
+        HTTPService<SELeadSessionResponse>.makeRequest(LeadSessionRouter.create(params), completion: completion)
+    }
+
     // MARK: Account
     /**
      Fetches page of accounts tied to a connection.
