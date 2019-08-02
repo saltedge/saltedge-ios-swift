@@ -69,13 +69,8 @@ final class AccountsViewController: UIViewController {
     
     private func removeConnection() {
         HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
-        var connections = UserDefaultsHelper.connections
-
         if SERequestManager.shared.isPartner {
-            if let index = connections?.firstIndex(of: connection.secret) {
-                connections?.remove(at: index)
-                UserDefaultsHelper.connections = connections
-            }
+            removeConnection()
             navigationController?.popViewController(animated: true)
         } else {
             SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
@@ -83,10 +78,7 @@ final class AccountsViewController: UIViewController {
                 case .success(let value):
                     guard let weakSelf = self else { return }
                     if value.data.removed {
-                        if let index = connections?.firstIndex(of: weakSelf.connection.secret) {
-                            connections?.remove(at: index)
-                            UserDefaultsHelper.connections = connections
-                        }
+                        weakSelf.removeConnection()
                         weakSelf.navigationController?.popViewController(animated: true)
                     }
                     HUD.hide(animated: true)
@@ -94,6 +86,15 @@ final class AccountsViewController: UIViewController {
                     HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
                 }
             }
+        }
+    }
+
+    private func removeConnections() {
+        var connections = UserDefaultsHelper.connections
+
+        if let index = connections?.firstIndex(of: connection.secret) {
+            connections?.remove(at: index)
+            UserDefaultsHelper.connections = connections
         }
     }
 
