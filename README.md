@@ -32,9 +32,21 @@ pod 'SaltEdge-iOS-Swift', '~> 1.1.2'
 
 ## Init SDK
 
-Replace the `appId`, `appSecret` and `customerId` constants in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51)
+Replace the `appId`, `appSecret`.
 
-*Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page.  `customerId` - it is the unique identifier of the new customer (Not needed for Partners API).
+To setup Salt Edge API v5, call in `AppDelegate.swift`:
+```swift
+SERequestManager.shared.set(appId: appId, appSecret: appSecret)
+```
+
+To setup Salt Edge Partners API v5, call in `AppDelegate.swift`:
+```swift
+SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
+```
+
+*Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page (Eligable only for Salt Edge API).
+If you want to use Salt Edge Partners API, you should ask `appId` and `appSecret` from [Salt Edge](https://www.saltedge.com/pages/contact).
+`customerId` - it is the unique identifier of the new customer (Not needed for Partners API).
 
 ## SEWebView
 
@@ -101,15 +113,7 @@ A class designed with convenience methods for interacting with and querying the 
 
 Each successful request via `SEAPIRequestManager` returns `SEResponse` containing `data` and `meta`.
 
-Each failed request returns standard Swift's `Error` .
-
-### Usage
-
-Link your App ID and App Secret in the first place before using it.
-
-``` swift
-SERequestManager.shared.set(appId: appId, appSecret: appSecret)
-```
+Each failed request returns standard Swift `Error` .
 
 ### Example
 
@@ -164,12 +168,10 @@ Models contained within the components:
 * `SEError`
 * `SEProviderField`
 * `SEProviderFieldOption`
-
-Partners API:
-
 * `SEPartnerConsent`
 
-For a supplementary description of the models listed above that is not included in the sources docs, feel free to visit the [API Reference](https://docs.saltedge.com/account_information/v5/).
+For a supplementary description of the models listed above that is not included in the sources docs, feel free to visit the [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/) or
+[Salt Edge Partners API Reference](https://docs.saltedge.com/partners/v1/)
 
 ## Documentation
 
@@ -184,7 +186,7 @@ To setup Salt Edge API v5, use:
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-To setup Salt Edge Partnerts API v5, use:
+To setup Salt Edge Partners API v5, use:
 ```swift
 SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
 ```
@@ -217,3 +219,7 @@ See the [LICENSE](LICENSE) file.
 2. [Salt Edge Client Dashboard](https://www.saltedge.com/clients/dashboard)
 3. [Salt Edge API v5 Reference](https://docs.saltedge.com/account_information/v5/)
 4. [Salt Edge Partners API v1 Reference](https://docs.saltedge.com/partners/v1/)
+
+For more information, feel free to [contact us](https://www.saltedge.com/pages/contact)
+---
+Copyright © 2014 - 2019 Salt Edge Inc. https://www.saltedge.com
