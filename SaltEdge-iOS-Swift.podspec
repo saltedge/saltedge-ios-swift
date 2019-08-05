@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '10.0'
   s.osx.deployment_target = '10.12'
+  s.swift_version = '5'
   s.module_name = 'SaltEdge'
   s.dependency 'TrustKit'
 
