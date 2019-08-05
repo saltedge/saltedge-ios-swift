@@ -1,5 +1,5 @@
 //
-//  AccountRouter.swift
+//  SEPartnerConsent.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,26 +23,30 @@
 
 import Foundation
 
-enum AccountRouter: Routable {
-    case list(ConnectionSecret, SEAccountParams?)
-    
-    var method: HTTPMethod {
-        return .get
+public struct SEPartnerConsent: Codable {
+    public let status: String?
+    public let revokedBy: String?
+    public let revokedAt: Date?
+    public let createdAt: Date?
+    public let updatedAt: Date?
+
+    public init(status: String? = nil,
+                revokedBy: String? = nil,
+                revokedAt: Date? = nil,
+                createdAt: Date? = nil,
+                updatedAt: Date? = nil) {
+        self.status = status
+        self.revokedBy = revokedBy
+        self.revokedAt = revokedAt
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
-    
-    var query: String {
-        return "accounts"
-    }
-    
-    var headers: Headers {
-        switch self {
-        case .list(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
-        }
-    }
-    
-    var parameters: ParametersEncodable? {
-        switch self {
-        case .list(_, let params): return params
-        }
+
+    enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case revokedBy = "revoked_by"
+        case revokedAt = "revoked_at"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }

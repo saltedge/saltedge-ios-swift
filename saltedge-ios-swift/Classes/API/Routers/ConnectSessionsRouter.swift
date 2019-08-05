@@ -24,7 +24,7 @@
 import Foundation
 
 enum ConnectSessionsRouter: Routable {
-    case create(SECreateSessionsParams)
+    case create(SEConnectSessionsParams)
     case reconnect(ConnectionSecret, SEReconnectSessionsParams)
     case refresh(ConnectionSecret, SERefreshSessionsParams)
     
@@ -32,11 +32,11 @@ enum ConnectSessionsRouter: Routable {
         return .post
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .create: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/create")
-        case .reconnect: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/reconnect")
-        case .refresh: return APIEndpoints.baseURL.appendingPathComponent("connect_sessions/refresh")
+        case .create: return "connect_sessions/create"
+        case .reconnect: return "connect_sessions/reconnect"
+        case .refresh: return "connect_sessions/refresh"
         }
     }
     

@@ -31,10 +31,10 @@ enum AttemptRouter: Routable {
         return .get
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("attempts")
-        case .show(_, let id): return APIEndpoints.baseURL.appendingPathComponent("attempts/\(id)")
+        case .list: return "attempts"
+        case .show(_, let id): return "attempts/\(id)"
         }
     }
     

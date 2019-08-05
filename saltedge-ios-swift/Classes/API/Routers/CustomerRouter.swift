@@ -34,8 +34,8 @@ enum CustomerRouter: Routable {
         return .post
     }
     
-    var url: URL {
-        return APIEndpoints.baseURL.appendingPathComponent("customers")
+    var query: String {
+        return "customers"
     }
     
     var headers: Headers {

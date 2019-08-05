@@ -32,11 +32,11 @@ enum OAuthRouter: Routable {
         return .post
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .create: return APIEndpoints.baseURL.appendingPathComponent("oauth_providers/create")
-        case .reconnect: return APIEndpoints.baseURL.appendingPathComponent("oauth_providers/reconnect")
-        case .refresh: return APIEndpoints.baseURL.appendingPathComponent("connections/refresh")
+        case .create: return "oauth_providers/create"
+        case .reconnect: return "oauth_providers/reconnect"
+        case .refresh: return "connections/refresh"
         }
     }
     

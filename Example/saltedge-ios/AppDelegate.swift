@@ -24,14 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var createViewController: CreateViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let createVC = tabBarVCs[1].children[0] as? CreateViewController {
+        if let tabBar = tabBar,
+            let tabBarVCs = tabBar.viewControllers,
+            let createVC = tabBarVCs[1].children[0] as? CreateViewController {
             return createVC
         }
         return nil
     }
     
     var connectViewController: ConnectViewController? {
-        if let tabBar = tabBar, let tabBarVCs = tabBar.viewControllers, let connectVC = tabBarVCs[0].children[0] as? ConnectViewController {
+        if let tabBar = tabBar,
+            let tabBarVCs = tabBar.viewControllers,
+            let connectVC = tabBarVCs[0].children[0] as? ConnectViewController {
             return connectVC
         }
         return nil
@@ -45,7 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let appId: String = "your-app-id"
         let appSecret: String = "your-app-secret"
         let customerId: String = "customer-secret"
@@ -53,8 +58,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
+        // NOTE: Use this method for setting Salt Edge API v5.
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
+
+        // NOTE: Use this method for setting Salt Edge Partners API v1.
+        // SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = MainTabBarViewController()
         
+        guard !SERequestManager.shared.isPartner else { return true }
+
         if let secret = UserDefaultsHelper.customerSecret {
             SERequestManager.shared.set(customerSecret: secret)
         } else {

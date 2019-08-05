@@ -38,51 +38,67 @@ final class AccountsViewController: UIViewController {
     
     @IBAction func actionsPressed(_ sender: Any) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         let remove = UIAlertAction(title: "Remove", style: .destructive) { [weak self] action in
             self?.removeConnection()
         }
-        let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
-            self?.chooseMethodFotAction(for: .reconnect)
+        actionSheet.addAction(cancel)
+        actionSheet.addAction(remove)
+
+        if !SERequestManager.shared.isPartner {
+            let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
+                self?.chooseMethodForAction(for: .reconnect)
+            }
+            let refresh = UIAlertAction(title: "Refresh", style: .default) { [weak self] action in
+                self?.chooseMethodForAction(for: .refresh)
+            }
+            let viewAttempts = UIAlertAction(title: "View Attempts", style: .default) { [weak self] action in
+                guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(connectionSecret: weakSelf.connection.secret) else { return }
+                
+                weakSelf.navigationController?.pushViewController(attemtsVC, animated: true)
+            }
+
+            for action in [reconnect, refresh, viewAttempts] {
+                actionSheet.addAction(action)
+            }
         }
-        let refresh = UIAlertAction(title: "Refresh", style: .default) { [weak self] action in
-            self?.chooseMethodFotAction(for: .refresh)
-        }
-        let viewAttempts = UIAlertAction(title: "View Attempts", style: .default) { [weak self] action in
-            guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(connectionSecret: weakSelf.connection.secret) else { return }
-            
-            weakSelf.navigationController?.pushViewController(attemtsVC, animated: true)
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        for action in [remove, reconnect, refresh, viewAttempts, cancel] {
-            actionSheet.addAction(action)
-        }
-        
+
         present(actionSheet, animated: true)
     }
     
     private func removeConnection() {
         HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
-        
-        SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
-            switch response {
-            case .success(let value):
-                guard let weakSelf = self else { return }
-                if value.data.removed {
-                    var connections = UserDefaultsHelper.connections
-                    if let index = connections?.firstIndex(of: weakSelf.connection.secret) {
-                        connections?.remove(at: index)
-                        UserDefaultsHelper.connections = connections
+        if SERequestManager.shared.isPartner {
+            removeConnection()
+            navigationController?.popViewController(animated: true)
+        } else {
+            SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
+                switch response {
+                case .success(let value):
+                    guard let weakSelf = self else { return }
+                    if value.data.removed {
+                        weakSelf.removeConnection()
+                        weakSelf.navigationController?.popViewController(animated: true)
                     }
-                    weakSelf.navigationController?.popViewController(animated: true)
+                    HUD.hide(animated: true)
+                case .failure(let error):
+                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
                 }
-                HUD.hide(animated: true)
-            case .failure(let error):
-                HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
             }
         }
     }
 
-    private func chooseMethodFotAction(for connectAction: ConnectAction) {
+    private func removeConnections() {
+        var connections = UserDefaultsHelper.connections
+
+        if let index = connections?.firstIndex(of: connection.secret) {
+            connections?.remove(at: index)
+            UserDefaultsHelper.connections = connections
+        }
+    }
+
+    private func chooseMethodForAction(for connectAction: ConnectAction) {
         let actionSheet = UIAlertController(title: "Choose a method for action", message: nil, preferredStyle: .alert)
         let webViewActions = UIAlertAction(title: "Web View", style: .default) { [weak self] action in
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let connectVC = appDelegate.connectViewController else { return }

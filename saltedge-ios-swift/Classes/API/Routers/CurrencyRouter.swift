@@ -31,10 +31,10 @@ enum CurrencyRouter: Routable {
         return .get
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("currencies")
-        case .rates: return APIEndpoints.baseURL.appendingPathComponent("rates")
+        case .list: return "currencies"
+        case .rates: return "rates"
         }
     }
     

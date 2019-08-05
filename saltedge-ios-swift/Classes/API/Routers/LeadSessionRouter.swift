@@ -1,5 +1,5 @@
 //
-//  AccountRouter.swift
+//  LeadSessionRouter.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,26 +23,26 @@
 
 import Foundation
 
-enum AccountRouter: Routable {
-    case list(ConnectionSecret, SEAccountParams?)
-    
+enum LeadSessionRouter: Routable {
+    case create(SELeadSessionParams)
+
     var method: HTTPMethod {
-        return .get
+        return .post
     }
     
     var query: String {
-        return "accounts"
+        return "lead_sessions/create"
     }
     
     var headers: Headers {
         switch self {
-        case .list(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
+        case .create: return SEHeaders.cached.sessionHeaders
         }
     }
     
     var parameters: ParametersEncodable? {
         switch self {
-        case .list(_, let params): return params
+        case .create(let params): return params
         }
     }
 }

@@ -44,18 +44,13 @@ enum ConnectionRouter: Routable {
         }
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .show, .create, .remove:
-            return APIEndpoints.baseURL.appendingPathComponent("connection")
-        case .reconnect:
-            return APIEndpoints.baseURL.appendingPathComponent("connection/reconnect")
-        case .interactive:
-            return APIEndpoints.baseURL.appendingPathComponent("connection/interactive")
-        case .refresh:
-            return APIEndpoints.baseURL.appendingPathComponent("connection/refresh")
-        case .update(_, let id, _):
-            return APIEndpoints.baseURL.appendingPathComponent("connection/update/\(id)")
+        case .show, .create, .remove: return "connection"
+        case .reconnect: return "connection/reconnect"
+        case .interactive: return "connection/interactive"
+        case .refresh: return "connection/refresh"
+        case .update(_, let id, _): return "connection/update/\(id)"
         }
     }
     

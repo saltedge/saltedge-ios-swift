@@ -37,13 +37,13 @@ enum TransactionRouter: Routable {
         }
     }
     
-    var url: URL {
+    var query: String {
         switch self {
-        case .list: return APIEndpoints.baseURL.appendingPathComponent("transactions")
-        case .pending: return APIEndpoints.baseURL.appendingPathComponent("transactions/pending")
-        case .duplicate: return APIEndpoints.baseURL.appendingPathComponent("transactions/duplicate")
-        case .duplicates: return APIEndpoints.baseURL.appendingPathComponent("transactions/duplicates")
-        case .unduplicate: return APIEndpoints.baseURL.appendingPathComponent("transactions/unduplicate")
+        case .list: return "transactions"
+        case .pending: return "transactions/pending"
+        case .duplicate: return "transactions/duplicate"
+        case .duplicates: return "transactions/duplicates"
+        case .unduplicate: return "transactions/unduplicate"
         }
     }
     
