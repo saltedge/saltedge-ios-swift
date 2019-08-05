@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.0]  - 2019-08-05
+
+### Added.
+
+- Added Partners API v1 support.
+
 ## [2.1.1] - 2019-07-24
 
 ### Changed.
