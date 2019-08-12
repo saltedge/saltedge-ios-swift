@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] - 2019-08-12
+
+### Added.
+
+- Added possibility to handle `SEWebView` request urls.
+
 ## [3.0.0] - 2019-08-05
 
 ### Added.

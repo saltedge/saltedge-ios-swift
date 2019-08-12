@@ -13,6 +13,8 @@ import PKHUD
 
 final class ConnectViewController: UIViewController {
     private var provider: SEProvider?
+    private lazy var attempt = SEAttempt(returnTo: "http://httpbin.org/")
+    private lazy var consent = SEConsent(scopes: ["account_details", "transactions_details"])
     
     @IBOutlet weak var webView: SEWebView!
     
@@ -38,12 +40,11 @@ final class ConnectViewController: UIViewController {
     func requestToken(connection: SEConnection? = nil, refresh: Bool = false) {
         HUD.show(.labeledProgress(title: "Requesting Token", subtitle: nil))
         if let connection = connection {
-            let consent = SEConsent(scopes: ["account_details", "transactions_details"])
             if refresh {
                 // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
                 // see https://docs.saltedge.com/guides/connect
                 let params = SERefreshSessionsParams(
-                    attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                    attempt: attempt,
                     javascriptCallbackType: "iframe"
                 )
                 SERequestManager.shared.refreshSession(with: connection.secret, params: params) { [weak self] response in
@@ -53,7 +54,7 @@ final class ConnectViewController: UIViewController {
                 // Set javascriptCallbackType to "iframe" to receive callback with connection_id and connection_secret
                 // see https://docs.saltedge.com/guides/connect
                 let params = SEReconnectSessionsParams(
-                    attempt: SEAttempt(returnTo: "http://httpbin.org"),
+                    attempt: attempt,
                     javascriptCallbackType: "iframe",
                     consent: consent
                 )
@@ -101,9 +102,6 @@ final class ConnectViewController: UIViewController {
 
     private func createSession() {
         guard let provider = provider else { return }
-
-        let consent = SEConsent(scopes: ["account_details", "transactions_details"])
-        let attempt = SEAttempt(returnTo: "http://httpbin.org")
 
         if SERequestManager.shared.isPartner {
             let leadSessionParams = SELeadSessionParams(
@@ -156,5 +154,11 @@ extension ConnectViewController: SEWebViewDelegate {
     
     func webView(_ webView: SEWebView, didReceiveCallbackWithError error: Error) {
         HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+    }
+
+    func webView(_ webView: SEWebView, didHandleRequestUrl url: URL) {
+        if url.absoluteString == attempt.returnTo {
+            webView.isHidden = true
+        }
     }
 }

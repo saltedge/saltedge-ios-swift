@@ -59,16 +59,19 @@ public class SEWebView: WKWebView {
 
 extension SEWebView: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.isCallback {
+        guard let url = navigationAction.request.url else { return }
+
+        if url.isCallback {
             let (response, error) = url.callbackParameters
             if let data = response, error == nil {
                 self.stateDelegate?.webView(self, didReceiveCallbackWithResponse: data)
             } else if let error = error {
                 self.stateDelegate?.webView(self, didReceiveCallbackWithError: error)
             }
-            
+
             decisionHandler(.cancel)
         } else {
+            self.stateDelegate?.webView(self, didHandleRequestUrl: url)
             decisionHandler(.allow)
         }
     }
