@@ -51,7 +51,16 @@ public protocol SEWebViewDelegate: NSObjectProtocol {
      ```
      */
     func webView(_ webView: SEWebView, didReceiveCallbackWithResponse response: SEConnectResponse)
-    
+
+    /**
+     Invoked when webView handle request urls from the Salt Edge Connect page.
+
+     - parameters:
+     - webView: The web view which displays the Salt Edge Connect page from which the callback is triggered.
+     - url: The request url.
+     */
+    func webView(_ webView: SEWebView, didHandleRequestUrl url: URL)
+
     /**
      Invoked when a error occurs within the callback from the Salt Edge Connect page.
      
