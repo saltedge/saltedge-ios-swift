@@ -29,7 +29,7 @@ public struct SEAccount: Decodable {
     public let nature: String
     public let balance: Double
     public let currencyCode: String
-    public let extra: SEExtra?
+    public let extra: SEAccountExtra?
     public let connectionId: String
     public let createdAt: Date
     public let updatedAt: Date
@@ -53,69 +53,72 @@ public struct SEAccount: Decodable {
         nature = try container.decode(String.self, forKey: .nature)
         balance = try container.decode(Double.self, forKey: .balance)
         currencyCode = try container.decode(String.self, forKey: .currencyCode)
-        extra = try container.decodeIfPresent(SEExtra.self, forKey: .extra)
+        extra = try container.decodeIfPresent(SEAccountExtra.self, forKey: .extra)
         connectionId = try container.decode(String.self, forKey: .connectionId)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try container.decode(Date.self, forKey: .updatedAt)
     }
 }
 
-public struct SEExtra: Decodable {
+public struct SEAccountExtra: Decodable {
     public let accountName: String?
-    public let status: String?
-    public let clientName: String?
-    public let iban: String?
-    public let swift: String?
-    public let cardType: String?
     public let accountNumber: String?
-    public let blockedAmount: Double?
+    public let assets: [String]?
     public let availableAmount: Double?
-    public let creditLimit: Double?
-    public let interestRate: Double?
-    public let expiryDate: Date?
-    public let openDate: Date?
+    public let blockedAmount: Double?
     public let cards: [String]?
-    public let units: Double?
-    public let unitPrice: Double?
+    public let cardType: String?
+    public let clientName: String?
+    public let creditLimit: Double?
+    public let expiryDate: Date?
+    public let iban: String?
+    public let interestRate: Double?
+    public let openDate: Date?
+    public let status: String?
+    public let swift: String?
     public let transactionsCount: TransactionsCount?
+    public let unitPrice: Double?
+    public let units: Double?
     
     enum CodingKeys: String, CodingKey {
         case accountName = "account_name"
-        case status
-        case clientName = "client_name"
-        case iban
-        case swift
-        case cardType = "card_type" 
         case accountNumber = "account_number"
-        case blockedAmount = "blocked_amount" 
-        case availableAmount = "available_amount" 
+        case assets = "assets"
+        case availableAmount = "available_amount"
+        case blockedAmount = "blocked_amount"
+        case cards = "cards"
+        case cardType = "card_type"
+        case clientName = "client_name"
         case creditLimit = "credit_limit"
-        case interestRate = "interest_rate" 
         case expiryDate = "expiry_date"
+        case iban = "iban"
+        case interestRate = "interest_rate"
         case openDate = "open_date"
-        case cards
-        case units
-        case unitPrice = "unit_price"
+        case status = "status"
+        case swift = "swift"
         case transactionsCount = "transactions_count"
+        case units = "units"
+        case unitPrice = "unit_price"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         accountName = try container.decodeIfPresent(String.self, forKey: .accountName)
-        status = try container.decodeIfPresent(String.self, forKey: .status)
-        clientName = try container.decodeIfPresent(String.self, forKey: .clientName)
-        iban = try container.decodeIfPresent(String.self, forKey: .iban)
-        swift = try container.decodeIfPresent(String.self, forKey: .swift)
-        cardType = try container.decodeIfPresent(String.self, forKey: .cardType)
         accountNumber = try container.decodeIfPresent(String.self, forKey: .accountName)
-        blockedAmount = try container.decodeIfPresent(Double.self, forKey: .blockedAmount)
+        assets = try container.decodeIfPresent([String].self, forKey: .assets)
         availableAmount = try container.decodeIfPresent(Double.self, forKey: .availableAmount)
-        creditLimit = try container.decodeIfPresent(Double.self, forKey: .creditLimit)
-        interestRate = try container.decodeIfPresent(Double.self, forKey: .interestRate)
+        blockedAmount = try container.decodeIfPresent(Double.self, forKey: .blockedAmount)
         cards = try container.decodeIfPresent([String].self, forKey: .cards)
+        cardType = try container.decodeIfPresent(String.self, forKey: .cardType)
+        clientName = try container.decodeIfPresent(String.self, forKey: .clientName)
+        creditLimit = try container.decodeIfPresent(Double.self, forKey: .creditLimit)
+        iban = try container.decodeIfPresent(String.self, forKey: .iban)
+        interestRate = try container.decodeIfPresent(Double.self, forKey: .interestRate)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        swift = try container.decodeIfPresent(String.self, forKey: .swift)
+        transactionsCount = try container.decodeIfPresent(TransactionsCount.self, forKey: .transactionsCount)
         units = try container.decodeIfPresent(Double.self, forKey: .units)
         unitPrice = try container.decodeIfPresent(Double.self, forKey: .unitPrice)
-        transactionsCount = try container.decodeIfPresent(TransactionsCount.self, forKey: .transactionsCount)
         if let expiryDateString = try container.decodeIfPresent(String.self, forKey: .expiryDate),
             let expiryDate = DateFormatter.yyyyMMdd.date(from: expiryDateString) {
             self.expiryDate = expiryDate

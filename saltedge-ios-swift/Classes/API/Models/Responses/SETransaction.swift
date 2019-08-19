@@ -78,20 +78,38 @@ public struct SETransaction: Decodable {
 }
 
 public struct SETransactionExtra: Decodable {
+    public let additional: String?
+    public let assetAmount: Double?
+    public let assetCode: String?
+    public let checkNumber: String?
+    public let categorizationConfidence: Double?
+    public let customerCategoryCode: String?
+    public let customerCategoryName: String?
+    public let information: String?
+    public let payee: String?
+    public let possibleDuplicate: Bool?
     public let postingDate: Date?
+    public let recordNumber: String?
     public let time: Date?
     public let originalAmount: Double?
-    public let categorizationConfidence: Double?
-    public let payee: String?
     public let originalCurrencyCode: String?
 
     enum CodingKeys: String, CodingKey {
+        case additional = "additional"
+        case assetAmount = "asset_amount"
+        case assetCode = "asset_code"
+        case checkNumber = "check_number"
+        case categorizationConfidence = "categorization_confidence"
+        case customerCategoryCode = "customer_category_code"
+        case customerCategoryName = "customer_category_name"
+        case information = "information"
+        case payee = "payee"
+        case possibleDuplicate = "possible_duplicate"
         case postingDate = "posting_date"
-        case time
+        case recordNumber = "record_number"
+        case time = "time"
         case originalAmount = "original_amount"
         case originalCurrencyCode = "original_currency_code"
-        case payee
-        case categorizationConfidence = "categorization_confidence"
     }
     
     public init(from decoder: Decoder) throws {
@@ -108,6 +126,15 @@ public struct SETransactionExtra: Decodable {
         } else {
             time = nil
         }
+        assetCode = try container.decodeIfPresent(String.self, forKey: .assetCode)
+        assetAmount = try container.decodeIfPresent(Double.self, forKey: .assetAmount)
+        additional = try container.decodeIfPresent(String.self, forKey: .additional)
+        information = try container.decodeIfPresent(String.self, forKey: .information)
+        customerCategoryCode = try container.decodeIfPresent(String.self, forKey: .customerCategoryCode)
+        customerCategoryName = try container.decodeIfPresent(String.self, forKey: .customerCategoryName)
+        possibleDuplicate = try container.decodeIfPresent(Bool.self, forKey: .possibleDuplicate)
+        checkNumber = try container.decodeIfPresent(String.self, forKey: .checkNumber)
+        recordNumber = try container.decodeIfPresent(String.self, forKey: .recordNumber)
         originalAmount = try container.decodeIfPresent(Double.self, forKey: .originalAmount)
         originalCurrencyCode = try container.decodeIfPresent(String.self, forKey: .originalCurrencyCode)
         payee = try container.decodeIfPresent(String.self, forKey: .payee)
