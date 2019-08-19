@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.0] - 2019-08-20
+
+### Added.
+
+- Added missed fields for `SETransactionExtra` and `SEAccountExtra`. 
+
+### Changed.
+
+- Renamed `SEExtra` to `SEAccountExtra`.
+
 ## [3.0.1] - 2019-08-12
 
 ### Added.
