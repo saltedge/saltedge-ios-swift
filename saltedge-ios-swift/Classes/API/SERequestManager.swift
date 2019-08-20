@@ -492,7 +492,7 @@ public class SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-remove)
      */
-    public func removeTransactions(with connectionSecret: String, params: SERemoveTransactionParams, completion: SEHTTPResponse<SERemovedTransactionsResponse>) {
+    public func removeTransactions(for connectionSecret: String, params: SERemoveTransactionParams, completion: SEHTTPResponse<SERemovedTransactionsResponse>) {
         HTTPService<SERemovedTransactionsResponse>.makeRequest(TransactionRouter.remove(connectionSecret, params), completion: completion)
     }
 
