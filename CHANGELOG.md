@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0] - 2019-08-20
+
+### Added.
+
+- Added missed `Connection-secret` header for `TransactionRouter`.
+- Added route `remove` in `TransactionRouter` for removing transactions for specified account
+
 ## [3.0.1] - 2019-08-12
 
 ### Added.

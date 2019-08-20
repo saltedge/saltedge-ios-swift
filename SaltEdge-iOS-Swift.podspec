@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SaltEdge-iOS-Swift'
-  s.version          = '3.0.1'
+  s.version          = '3.1.0'
   s.summary          = "A handful of classes to help you interact with the Salt Edge API from your iOS or macOS app."
   s.description      = <<-DESC
                    SaltEdge-iOS is a library targeted at easing the interaction with the [Salt Edge API](https://docs.saltedge.com/).
