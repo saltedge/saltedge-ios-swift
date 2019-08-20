@@ -450,8 +450,8 @@ public class SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-duplicates)
      */
-    public func getDuplicatedTransations(params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
-        HTTPService<[SETransaction]>.makeRequest(TransactionRouter.duplicates(params), completion: completion)
+    public func getDuplicatedTransations(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>) {
+        HTTPService<[SETransaction]>.makeRequest(TransactionRouter.duplicates(connectionSecret, params), completion: completion)
     }
 
     /**
@@ -464,10 +464,10 @@ public class SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-duplicate)
      */
-    public func markAsDuplicated(params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEDuplicateTransactionResponse>) {
-        HTTPService<SEDuplicateTransactionResponse>.makeRequest(TransactionRouter.duplicate(params), completion: completion)
+    public func markAsDuplicated(for connectionSecret: String, params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEDuplicateTransactionResponse>) {
+        HTTPService<SEDuplicateTransactionResponse>.makeRequest(TransactionRouter.duplicate(connectionSecret, params), completion: completion)
     }
-    
+
     /**
      Remove duplicated flag from a list of transactions.
      
@@ -478,10 +478,24 @@ public class SERequestManager {
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-unduplicate)
      */
-    public func markAsUnduplicated(params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEUnduplicateTransactionResponse>) {
-        HTTPService<SEUnduplicateTransactionResponse>.makeRequest(TransactionRouter.unduplicate(params), completion: completion)
+    public func markAsUnduplicated(for connectionSecret: String, params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEUnduplicateTransactionResponse>) {
+        HTTPService<SEUnduplicateTransactionResponse>.makeRequest(TransactionRouter.unduplicate(connectionSecret, params), completion: completion)
     }
-    
+
+    /**
+     Remove transactions older than a specified period.
+     
+     - parameters:
+     - connectionSecret: The connection secret of the accounts' connection.
+     - params: Struct containing id of the account, which transactions should be removed and keep days - the amount of days for which the transactions will be kept.
+     - completion: The code to be executed once the request has finished.
+     
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#transactions-remove)
+     */
+    public func removeTransactions(with connectionSecret: String, params: SERemoveTransactionParams, completion: SEHTTPResponse<SERemovedTransactionsResponse>) {
+        HTTPService<SERemovedTransactionsResponse>.makeRequest(TransactionRouter.remove(connectionSecret, params), completion: completion)
+    }
+
     // MARK: Currency
     /**
      Fetch the list of all the currencies that we support.

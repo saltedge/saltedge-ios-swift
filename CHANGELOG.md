@@ -4,7 +4,9 @@
 
 ### Added.
 
-- Added missed fields for `SETransactionExtra` and `SEAccountExtra`. 
+- Added missed fields for `SETransactionExtra` and `SEAccountExtra`.
+- Added missed `Connection-secret` header for `TransactionRouter`.
+- Added route `remove` in `TransactionRouter` for removing transactions for specified account.
 
 ### Changed.
 
