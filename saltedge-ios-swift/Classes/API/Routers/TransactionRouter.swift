@@ -26,38 +26,41 @@ import Foundation
 enum TransactionRouter: Routable {
     case list(ConnectionSecret, SETransactionParams?)
     case pending(ConnectionSecret, SETransactionParams?)
-    case duplicate(SEDuplicateTransactionsParams)
-    case duplicates(SETransactionParams?)
-    case unduplicate(SEDuplicateTransactionsParams)
+    case duplicate(ConnectionSecret, SEDuplicateTransactionsParams)
+    case duplicates(ConnectionSecret, SETransactionParams?)
+    case unduplicate(ConnectionSecret, SEDuplicateTransactionsParams)
+    case remove(ConnectionSecret, SERemoveTransactionParams)
 
     var method: HTTPMethod {
         switch self {
         case .list, .pending, .duplicates: return .get
         case .duplicate, .unduplicate: return .put
+        case .remove: return .delete
         }
     }
     
     var query: String {
         switch self {
-        case .list: return "transactions"
+        case .list, .remove: return "transactions"
         case .pending: return "transactions/pending"
         case .duplicate: return "transactions/duplicate"
         case .duplicates: return "transactions/duplicates"
         case .unduplicate: return "transactions/unduplicate"
         }
     }
-    
+
     var headers: Headers {
         switch self {
-        case .list(let secret, _), .pending(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
-        case .duplicate, .duplicates, .unduplicate: return SEHeaders.cached.sessionHeaders
+        case .list(let secret, _), .pending(let secret, _), .duplicate(let secret, _),
+             .duplicates(let secret, _), .unduplicate(let secret, _), .remove(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
-    
+
     var parameters: ParametersEncodable? {
         switch self {
-        case .list(_, let params), .pending(_, let params), .duplicates(let params): return params
-        case .duplicate(let params), .unduplicate(let params): return params
+        case .list(_, let params), .pending(_, let params), .duplicates(_, let params): return params
+        case .duplicate(_, let params), .unduplicate(_, let params): return params
+        case .remove(_, let params): return params
         }
     }
 }

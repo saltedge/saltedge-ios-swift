@@ -38,6 +38,21 @@ public struct SETransactionParams: URLEncodable, ParametersEncodable {
     }
 }
 
+public struct SERemoveTransactionParams: URLEncodable, ParametersEncodable {
+    public let accountId: String
+    public let keepDays: Int
+
+    public init(accountId: String, keepDays: Int) {
+        self.accountId = accountId
+        self.keepDays = keepDays
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case accountId = "account_id"
+        case keepDays = "keep_days"
+    }
+}
+
 public struct SEDuplicateTransactionsParams: Encodable, ParametersEncodable {
     public let transactionIds: [SEDuplicateTransactionParams]
     
