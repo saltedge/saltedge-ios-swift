@@ -48,14 +48,14 @@ enum TransactionRouter: Routable {
         case .unduplicate: return "transactions/unduplicate"
         }
     }
-    
+
     var headers: Headers {
         switch self {
         case .list(let secret, _), .pending(let secret, _), .duplicate(let secret, _),
              .duplicates(let secret, _), .unduplicate(let secret, _), .remove(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
         }
     }
-    
+
     var parameters: ParametersEncodable? {
         switch self {
         case .list(_, let params), .pending(_, let params), .duplicates(_, let params): return params

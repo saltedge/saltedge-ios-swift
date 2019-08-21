@@ -27,12 +27,20 @@ extension DateFormatter {
     static let yyyyMMdd: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.utc
         return formatter
     }()
-    
+
     static let time: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss"
+        formatter.timeZone = TimeZone.utc
         return formatter
     }()
+}
+
+extension TimeZone {
+    static var utc: TimeZone {
+        return TimeZone(identifier: "UTC")!
+    }
 }

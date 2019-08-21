@@ -26,12 +26,12 @@ import Foundation
 public struct SETransactionParams: URLEncodable, ParametersEncodable {
     public let accountId: String?
     public let fromId: String?
-    
+
     public init(accountId: String? = nil, fromId: String? = nil) {
         self.accountId = accountId
         self.fromId = fromId
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case accountId = "account_id"
         case fromId = "from_id"
@@ -54,29 +54,24 @@ public struct SERemoveTransactionParams: URLEncodable, ParametersEncodable {
 }
 
 public struct SEDuplicateTransactionsParams: Encodable, ParametersEncodable {
-    public let transactionIds: [SEDuplicateTransactionParams]
-    
-    public init(ids: [Int]) {
-        self.transactionIds = ids.map { SEDuplicateTransactionParams(id: $0) }
+    public let transactionIds: [String]
+
+    public init(ids: [String]) {
+        self.transactionIds = ids
     }
-    
+
     enum CodingKeys: String, CodingKey {
-        case transactionIds = ""
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(contentsOf: transactionIds)
+        case transactionIds = "transaction_ids"
     }
 }
 
 public struct SEDuplicateTransactionParams: Encodable, ParametersEncodable {
-    public let transactionId: Int
-    
-    public init(id: Int) {
+    public let transactionId: String
+
+    public init(id: String) {
         self.transactionId = id
     }
-    
+
     private enum CodingKeys: String, CodingKey {
         case transactionId = "transaction_id"
     }

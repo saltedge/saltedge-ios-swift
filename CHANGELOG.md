@@ -1,16 +1,17 @@
 # Changelog
 
-## [3.1.0] - 2019-08-20
+## [3.1.1] - 2019-08-21
 
 ### Added.
 
 - Added missed fields for `SETransactionExtra` and `SEAccountExtra`.
+
+## [3.1.0] - 2019-08-20
+
+### Added.
+
 - Added missed `Connection-secret` header for `TransactionRouter`.
 - Added route `remove` in `TransactionRouter` for removing transactions for specified account.
-
-### Changed.
-
-- Renamed `SEExtra` to `SEAccountExtra`.
 
 ## [3.0.1] - 2019-08-12
 

@@ -34,12 +34,12 @@ pod 'SaltEdge-iOS-Swift', '~> 1.1.2'
 
 Replace the `appId`, `appSecret`.
 
-To setup Salt Edge API v5, call in `AppDelegate.swift`:
+To setup Salt Edge API, call in `AppDelegate.swift`:
 ```swift
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-To setup Salt Edge Partners API v5, call in `AppDelegate.swift`:
+To setup Salt Edge Partners API, call in `AppDelegate.swift`:
 ```swift
 SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
 ```
@@ -181,12 +181,12 @@ Documentation is available for all of the components. Use quick documentation (A
 
 To run the demo app contained in here, you have to set the demo with your App ID, App Secret and choose desired API.
 
-To setup Salt Edge API v5, use:
+To setup Salt Edge API, call:
 ```swift
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-To setup Salt Edge Partners API v5, use:
+To setup Salt Edge Partners API, call:
 ```swift
 SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
 ```

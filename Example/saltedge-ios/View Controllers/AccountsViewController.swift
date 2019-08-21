@@ -199,6 +199,7 @@ extension AccountsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let account = accounts[indexPath.row]
+
         guard let transactionsVC = TransactionsViewController.create(with: connection.secret, account: account) else { return }
         
         navigationController?.pushViewController(transactionsVC, animated: true)

@@ -36,7 +36,7 @@ public struct SETransaction: Decodable {
     public let accountId: String
     public let createdAt: Date
     public let updatedAt: Date
-    public let extra: SETransactionExtra
+    public let extra: [String: Any]
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -67,7 +67,7 @@ public struct SETransaction: Decodable {
         accountId = try container.decode(String.self, forKey: .accountId)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-        extra = try container.decode(SETransactionExtra.self, forKey: .extra)
+        extra = try container.decode([String: Any].self, forKey: .extra)
         let dateString = try container.decode(String.self, forKey: .madeOn)
         if let date = DateFormatter.yyyyMMdd.date(from: dateString) {
             madeOn = date
@@ -76,69 +76,3 @@ public struct SETransaction: Decodable {
         }
     }
 }
-
-public struct SETransactionExtra: Decodable {
-    public let additional: String?
-    public let assetAmount: Double?
-    public let assetCode: String?
-    public let checkNumber: String?
-    public let categorizationConfidence: Double?
-    public let customerCategoryCode: String?
-    public let customerCategoryName: String?
-    public let information: String?
-    public let payee: String?
-    public let possibleDuplicate: Bool?
-    public let postingDate: Date?
-    public let recordNumber: String?
-    public let time: Date?
-    public let originalAmount: Double?
-    public let originalCurrencyCode: String?
-
-    enum CodingKeys: String, CodingKey {
-        case additional = "additional"
-        case assetAmount = "asset_amount"
-        case assetCode = "asset_code"
-        case checkNumber = "check_number"
-        case categorizationConfidence = "categorization_confidence"
-        case customerCategoryCode = "customer_category_code"
-        case customerCategoryName = "customer_category_name"
-        case information = "information"
-        case payee = "payee"
-        case possibleDuplicate = "possible_duplicate"
-        case postingDate = "posting_date"
-        case recordNumber = "record_number"
-        case time = "time"
-        case originalAmount = "original_amount"
-        case originalCurrencyCode = "original_currency_code"
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let dateString = try container.decodeIfPresent(String.self, forKey: .postingDate),
-            let date = DateFormatter.yyyyMMdd.date(from: dateString) {
-            postingDate = date
-        } else {
-            postingDate = nil
-        }
-        if let timeString = try container.decodeIfPresent(String.self, forKey: .time),
-            let time = DateFormatter.time.date(from: timeString) {
-            self.time = time
-        } else {
-            time = nil
-        }
-        assetCode = try container.decodeIfPresent(String.self, forKey: .assetCode)
-        assetAmount = try container.decodeIfPresent(Double.self, forKey: .assetAmount)
-        additional = try container.decodeIfPresent(String.self, forKey: .additional)
-        information = try container.decodeIfPresent(String.self, forKey: .information)
-        customerCategoryCode = try container.decodeIfPresent(String.self, forKey: .customerCategoryCode)
-        customerCategoryName = try container.decodeIfPresent(String.self, forKey: .customerCategoryName)
-        possibleDuplicate = try container.decodeIfPresent(Bool.self, forKey: .possibleDuplicate)
-        checkNumber = try container.decodeIfPresent(String.self, forKey: .checkNumber)
-        recordNumber = try container.decodeIfPresent(String.self, forKey: .recordNumber)
-        originalAmount = try container.decodeIfPresent(Double.self, forKey: .originalAmount)
-        originalCurrencyCode = try container.decodeIfPresent(String.self, forKey: .originalCurrencyCode)
-        payee = try container.decodeIfPresent(String.self, forKey: .payee)
-        categorizationConfidence = try container.decodeIfPresent(Double.self, forKey: .categorizationConfidence)
-    }
-}
-
