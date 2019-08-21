@@ -49,17 +49,27 @@ public class SEWebView: WKWebView {
     public init(frame: CGRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
         self.navigationDelegate = self
+        self.uiDelegate = self
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.navigationDelegate = self
+        self.uiDelegate = self
+    }
+
+    private func handleBackForwardWebView(navigationAction: WKNavigationAction, urlRequest: URLRequest) {
+        if navigationAction.navigationType == .backForward {
+            load(urlRequest)
+        }
     }
 }
 
 extension SEWebView: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else { decisionHandler(.allow); return }
+
+        handleBackForwardWebView(navigationAction: navigationAction, urlRequest: navigationAction.request)
 
         if url.isCallback {
             let (response, error) = url.callbackParameters
@@ -74,5 +84,19 @@ extension SEWebView: WKNavigationDelegate {
             self.stateDelegate?.webView(self, didHandleRequestUrl: url)
             decisionHandler(.allow)
         }
+    }
+}
+
+extension SEWebView: WKUIDelegate {
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        guard let targetFrame = navigationAction.targetFrame else {
+            webView.load(navigationAction.request)
+            return nil
+        }
+
+        if !targetFrame.isMainFrame {
+            webView.load(navigationAction.request)
+        }
+        return self
     }
 }
