@@ -36,7 +36,7 @@ public struct SETransaction: Decodable {
     public let accountId: String
     public let createdAt: Date
     public let updatedAt: Date
-    public let extra: SETransactionExtra
+    public let extra: [String: Any]?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -67,7 +67,7 @@ public struct SETransaction: Decodable {
         accountId = try container.decode(String.self, forKey: .accountId)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-        extra = try container.decode(SETransactionExtra.self, forKey: .extra)
+        extra = try container.decodeIfPresent([String: Any].self, forKey: .extra)
         let dateString = try container.decode(String.self, forKey: .madeOn)
         if let date = DateFormatter.yyyyMMdd.date(from: dateString) {
             madeOn = date
@@ -76,42 +76,3 @@ public struct SETransaction: Decodable {
         }
     }
 }
-
-public struct SETransactionExtra: Decodable {
-    public let postingDate: Date?
-    public let time: Date?
-    public let originalAmount: Double?
-    public let categorizationConfidence: Double?
-    public let payee: String?
-    public let originalCurrencyCode: String?
-
-    enum CodingKeys: String, CodingKey {
-        case postingDate = "posting_date"
-        case time
-        case originalAmount = "original_amount"
-        case originalCurrencyCode = "original_currency_code"
-        case payee
-        case categorizationConfidence = "categorization_confidence"
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let dateString = try container.decodeIfPresent(String.self, forKey: .postingDate),
-            let date = DateFormatter.yyyyMMdd.date(from: dateString) {
-            postingDate = date
-        } else {
-            postingDate = nil
-        }
-        if let timeString = try container.decodeIfPresent(String.self, forKey: .time),
-            let time = DateFormatter.time.date(from: timeString) {
-            self.time = time
-        } else {
-            time = nil
-        }
-        originalAmount = try container.decodeIfPresent(Double.self, forKey: .originalAmount)
-        originalCurrencyCode = try container.decodeIfPresent(String.self, forKey: .originalCurrencyCode)
-        payee = try container.decodeIfPresent(String.self, forKey: .payee)
-        categorizationConfidence = try container.decodeIfPresent(Double.self, forKey: .categorizationConfidence)
-    }
-}
-

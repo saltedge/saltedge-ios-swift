@@ -95,7 +95,6 @@ final class ConnectViewController: UIViewController {
         }
     }
 
-
     private func switchToConnectionsController() {
         tabBarController?.selectedIndex = SERequestManager.shared.isPartner ? 1 : 2
     }

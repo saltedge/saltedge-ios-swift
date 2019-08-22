@@ -467,7 +467,7 @@ public class SERequestManager {
     public func markAsDuplicated(for connectionSecret: String, params: SEDuplicateTransactionsParams, completion: SEHTTPResponse<SEDuplicateTransactionResponse>) {
         HTTPService<SEDuplicateTransactionResponse>.makeRequest(TransactionRouter.duplicate(connectionSecret, params), completion: completion)
     }
-    
+
     /**
      Remove duplicated flag from a list of transactions.
      
