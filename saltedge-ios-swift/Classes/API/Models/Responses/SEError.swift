@@ -27,10 +27,22 @@ public struct SEError: Decodable {
     public let errorClass: String
     public let errorMessage: String
     public let documentationUrl: String
-    
+
     private enum CodingKeys: String, CodingKey {
+        case error = "error"
+    }
+
+    private enum ErrorCodingKeys: String, CodingKey {
         case errorClass = "class"
         case errorMessage = "message"
         case documentationUrl = "documentation_url"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let error = try container.nestedContainer(keyedBy: ErrorCodingKeys.self, forKey: .error)
+        errorClass = try error.decode(String.self, forKey: .errorClass)
+        errorMessage = try error.decode(String.self, forKey: .errorMessage)
+        documentationUrl = try error.decode(String.self, forKey: .documentationUrl)
     }
 }
