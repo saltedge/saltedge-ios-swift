@@ -147,7 +147,7 @@ struct HTTPService<T: Decodable> {
                 DispatchQueue.main.async { completion?(.failure(error!)) }
                 return
             }
-            
+
             do {
                 let model = try decoder.decode(SEResponse<T>.self, from: jsonData)
                 DispatchQueue.main.async { completion?(.success(model)) }
