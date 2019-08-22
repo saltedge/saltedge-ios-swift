@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.2] - 2019-08-22
+
+### Fixed.
+
+- Fixed `SEError` decoding.
+
 ## [3.1.1] - 2019-08-22
 
 ### Changed.
