@@ -175,7 +175,7 @@ For a supplementary description of the models listed above that is not included 
 
 ### Models extra
 
-Some of models has `extra` field of type `[String: Any]`. In you case you need to get any field, you may do next:
+Some of models has `extra` field of type `[String: Any]`. In case you need to get any field, you may do next:
 
 ```swift
 let account = SEAccount()

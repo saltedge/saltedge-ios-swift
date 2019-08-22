@@ -22,7 +22,6 @@ final class ConnectViewController: UIViewController {
         super.viewDidLoad()
         webView.isHidden = true
         webView.stateDelegate = self
-        webView.allowsBackForwardNavigationGestures = true
     }
     
     @IBAction func providersPressed(_ sender: Any) {

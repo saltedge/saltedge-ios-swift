@@ -48,14 +48,16 @@ public class SEWebView: WKWebView {
     
     public init(frame: CGRect) {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
-        self.navigationDelegate = self
-        self.uiDelegate = self
+        navigationDelegate = self
+        uiDelegate = self
+        allowsBackForwardNavigationGestures = true
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.navigationDelegate = self
-        self.uiDelegate = self
+        navigationDelegate = self
+        uiDelegate = self
+        allowsBackForwardNavigationGestures = true
     }
 
     private func handleBackForwardWebView(navigationAction: WKNavigationAction, urlRequest: URLRequest) {

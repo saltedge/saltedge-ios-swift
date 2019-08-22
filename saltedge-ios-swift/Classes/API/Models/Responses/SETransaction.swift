@@ -67,7 +67,7 @@ public struct SETransaction: Decodable {
         accountId = try container.decode(String.self, forKey: .accountId)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-        extra = try container.decode([String: Any].self, forKey: .extra)
+        extra = try container.decodeIfPresent([String: Any].self, forKey: .extra)
         let dateString = try container.decode(String.self, forKey: .madeOn)
         if let date = DateFormatter.yyyyMMdd.date(from: dateString) {
             madeOn = date
