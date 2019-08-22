@@ -1,10 +1,15 @@
 # Changelog
 
-## [3.1.1] - 2019-08-21
+## [3.1.1] - 2019-08-22
 
-### Added.
+### Changed.
 
-- Added missed fields for `SETransactionExtra` and `SEAccountExtra`.
+- Modified `extra` field type.
+
+### Fixed.
+
+- Fixed `SEWebView` links loader bug.
+- Fixed `SEDuplicateTransactionsParams` request params.
 
 ## [3.1.0] - 2019-08-20
 

@@ -14,7 +14,7 @@ Last SDK version (3.0+) supports Salt Edge API v5 and Salt Edge Partners API v1.
 
 for Salt Edge API v5 or Salt Edge Partners API v1 use
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.1.0'
+pod 'SaltEdge-iOS-Swift', '~> 3.1.1'
 ```
 
 for Salt Edge API v4 use
@@ -173,6 +173,28 @@ Models contained within the components:
 For a supplementary description of the models listed above that is not included in the sources docs, feel free to visit the [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/) or
 [Salt Edge Partners API Reference](https://docs.saltedge.com/partners/v1/)
 
+### Models extra
+
+Some of models has `extra` field of type `[String: Any]`. In you case you need to get any field, you may do next:
+
+```swift
+let account = SEAccount()
+
+guard let accountExtra = account.extra else { return }
+
+let anyValue = accountExtra["string_key"]
+```
+
+Some of key-pairs has predifinied extensions:
+
+```swift
+let transaction = SETransaction()
+
+guard let transactionExtra = transaction.extra else { return }
+
+let possibleDuplicate: Bool = transactionExtra.possibleDuplicate
+```
+
 ## Documentation
 
 Documentation is available for all of the components. Use quick documentation (Alt+Click) to get a quick glance at the documentation for a method or a property.
@@ -195,7 +217,7 @@ Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and c
 
 ## Versioning
 
-The current version of the SDK is [3.1.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.1.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.1.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.1.1), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 

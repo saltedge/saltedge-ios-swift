@@ -25,7 +25,7 @@ import Foundation
 
 public struct SERemovedTransactionsResponse: Decodable {
     public let cleanupStarted: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case cleanupStarted = "cleanup_started"
     }
