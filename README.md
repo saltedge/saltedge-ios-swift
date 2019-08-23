@@ -13,6 +13,7 @@ Last SDK version (3.0+) supports Salt Edge API v5 and Salt Edge Partners API v1.
 #### Add the pod to your `Podfile`  
 
 for Salt Edge API v5 or Salt Edge Partners API v1 use
+
 ```ruby
 pod 'SaltEdge-iOS-Swift', '~> 3.1.2'
 ```

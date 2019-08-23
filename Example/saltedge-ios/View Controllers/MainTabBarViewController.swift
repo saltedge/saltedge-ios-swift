@@ -3,7 +3,7 @@
 //  saltedge-ios_Example
 //
 //  Created by Daniel Marcenco on 8/2/19.
-//  Copyright © 2019 CocoaPods. All rights reserved.
+//  Copyright (c) 2019 Salt Edge. All rights reserved.
 //
 
 import UIKit
