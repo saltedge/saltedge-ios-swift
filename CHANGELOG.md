@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.3] - 2019-08-23
+
+### Fixed.
+
+- Fixed `SEAccount` extra expected type for `assets` field in `ExtraExtensions.swift`.
+
 ## [3.1.2] - 2019-08-22
 
 ### Fixed.
