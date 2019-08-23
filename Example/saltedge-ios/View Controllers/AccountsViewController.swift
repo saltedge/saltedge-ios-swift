@@ -17,6 +17,7 @@ final class AccountsViewController: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
+    private var alertView: InteractiveAlertView!
     
     private var accounts: [SEAccount] = []
     private var connection: SEConnection!
@@ -65,6 +66,31 @@ final class AccountsViewController: UIViewController {
         }
 
         present(actionSheet, animated: true)
+    }
+
+    private func setupAlertView(with html: String) {
+        alertView = InteractiveAlertView(html: html)
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(alertView)
+    
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            alertView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20.0),
+            alertView.heightAnchor.constraint(equalToConstant: 180)
+        ])
+
+        tableView.isUserInteractionEnabled = false
+        HUD.hide { _ in
+            UIView.animate(
+                withDuration: 0.4,
+                animations: {
+                    self.alertView.alpha = 1.0
+                    self.tableView.alpha = 0.4
+                }
+            )
+        }
     }
     
     private func removeConnection() {
@@ -225,7 +251,45 @@ extension AccountsViewController: SEConnectionFetchingDelegate {
     }
     
     func interactiveInputRequested(for connection: SEConnection) {
-        // not possible, we only refresh connections here in this view controller
+        guard let lastStage = connection.lastAttempt.lastStage,
+            let html = lastStage.interactiveHtml,
+            let fieldName = lastStage.interactiveFieldsNames?.first else { return }
+
+        setupAlertView(with: html)
+
+        alertView.sendPressedClosure = { input in
+            self.tableView.isUserInteractionEnabled = true
+
+            UIView.animate(
+                withDuration: 0.4,
+                animations: {
+                    self.tableView.alpha = 1.0
+                    self.alertView.alpha = 0.0
+                }
+            )
+
+            HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
+
+            SERequestManager.shared.confirmConnection(
+                with: connection.secret,
+                params: SEConnectionInteractiveParams(credentials: [fieldName: input]),
+                fetchingDelegate: self,
+                completion: { response in
+                    print(response)
+                }
+            )
+        }
+
+        alertView.cancelPressedClosure = {
+            self.tableView.isUserInteractionEnabled = true
+            UIView.animate(
+                withDuration: 0.4,
+                animations: {
+                    self.tableView.alpha = 1.0
+                    self.alertView.alpha = 0.0
+                }
+            )
+        }
     }
     
     func successfullyFinishedFetching(connection: SEConnection) {
