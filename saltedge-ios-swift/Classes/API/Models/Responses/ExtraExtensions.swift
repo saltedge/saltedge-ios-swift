@@ -65,9 +65,9 @@ extension Dictionary where Key == String {
         }
     }
     
-    public var assets: [String]? {
+    public var assets: [[String: Any]]? {
         get {
-            return self["assets"] as? [String]
+            return self["assets"] as? [[String: Any]]
         }
     }
     
