@@ -38,7 +38,7 @@ let seCallbackHost: String = "connect"
  
  [See for more infromation](https://docs.saltedge.com/guides/connect/)
  */
-public class SEWebView: WKWebView {
+open class SEWebView: WKWebView {
     /**
      The state delegate of the connection that is currently processed. This object will be notified about events such as the state of the connection **(fetching, success, error)** and about any errors that will occur in the processing.
      

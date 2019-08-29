@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.4] - 2019-08-29
+
+### Modified.
+
+- Modified `SEWebView` access level.
+
 ## [3.1.3] - 2019-08-23
 
 ### Fixed.
