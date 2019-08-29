@@ -53,6 +53,7 @@ public struct SEAttempt: Codable {
     public let lastStage: SEStage?
     public let stages: [SEStage]?
     public let returnTo: String?
+    public let interactiveFieldNames: [String]?
 
     public init(id: String? = nil,
                 fetchScopes: [String]? = nil,
@@ -82,7 +83,8 @@ public struct SEAttempt: Codable {
                 consentGivenAt: Date? = nil,
                 lastStage: SEStage? = nil,
                 stages: [SEStage]? = nil,
-                returnTo: String? = nil) {
+                returnTo: String? = nil,
+                interactiveFieldNames: [String]? = nil) {
         self.id = id
         self.fetchScopes = fetchScopes
         self.apiMode = apiMode
@@ -112,6 +114,7 @@ public struct SEAttempt: Codable {
         self.lastStage = lastStage
         self.stages = stages
         self.returnTo = returnTo
+        self.interactiveFieldNames = interactiveFieldNames
     }
     
     enum CodingKeys: String, CodingKey {
@@ -144,5 +147,6 @@ public struct SEAttempt: Codable {
         case lastStage = "last_stage"
         case stages = "stages"
         case returnTo = "return_to"
+        case interactiveFieldNames = "interactive_fields_names"
     }
 }

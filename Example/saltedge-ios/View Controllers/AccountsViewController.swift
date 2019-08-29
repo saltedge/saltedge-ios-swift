@@ -68,8 +68,8 @@ final class AccountsViewController: UIViewController {
         present(actionSheet, animated: true)
     }
 
-    private func setupAlertView(with html: String) {
-        alertView = InteractiveAlertView(html: html)
+    private func setupAlertView(with html: String, fieldName: String?) {
+        alertView = InteractiveAlertView(html: html, fieldName: fieldName)
         alertView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(alertView)
@@ -92,7 +92,7 @@ final class AccountsViewController: UIViewController {
             )
         }
     }
-    
+
     private func removeConnection() {
         HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
         if SERequestManager.shared.isPartner {
@@ -197,6 +197,18 @@ final class AccountsViewController: UIViewController {
             }
         }
     }
+
+    private func confirmConnection(with credentials: [String: String], completion: (() -> ())? = nil) {
+        SERequestManager.shared.confirmConnection(
+            with: connection.secret,
+            params: SEConnectionInteractiveParams(credentials: credentials),
+            fetchingDelegate: self,
+            completion: { response in
+                completion?()
+                print(response)
+            }
+        )
+    }
 }
 
 extension AccountsViewController: UITableViewDataSource {
@@ -249,46 +261,84 @@ extension AccountsViewController: SEConnectionFetchingDelegate {
     func failedToFetch(connection: SEConnection?, message: String) {
         HUD.flash(.labeledError(title: "Error", subtitle: message), delay: 3.0)
     }
-    
+
     func interactiveInputRequested(for connection: SEConnection) {
-        guard let lastStage = connection.lastAttempt.lastStage,
-            let html = lastStage.interactiveHtml,
-            let fieldName = lastStage.interactiveFieldsNames?.first else { return }
+        guard let lastStage = connection.lastAttempt.lastStage else { return }
 
-        setupAlertView(with: html)
+        let fieldName = lastStage.interactiveFieldsNames?.first
 
-        alertView.sendPressedClosure = { input in
-            self.tableView.isUserInteractionEnabled = true
+        if let html = lastStage.interactiveHtml {
+            setupAlertView(with: html, fieldName: fieldName)
 
-            UIView.animate(
-                withDuration: 0.4,
-                animations: {
-                    self.tableView.alpha = 1.0
-                    self.alertView.alpha = 0.0
+            alertView.sendPressedClosure = { input in
+                self.tableView.isUserInteractionEnabled = true
+
+                UIView.animate(
+                    withDuration: 0.4,
+                    animations: {
+                        self.tableView.alpha = 1.0
+                        self.alertView.alpha = 0.0
+                    }
+                )
+
+                HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
+
+                var credentials: [String: String] = [:]
+
+                if let fieldName = fieldName {
+                    credentials = [fieldName: input]
+                }
+
+                self.confirmConnection(with: credentials)
+            }
+
+            alertView.cancelPressedClosure = {
+                self.tableView.isUserInteractionEnabled = true
+                UIView.animate(
+                    withDuration: 0.4,
+                    animations: {
+                        self.tableView.alpha = 1.0
+                        self.alertView.alpha = 0.0
+                    }
+                )
+            }
+        } else {
+            HUD.hide()
+
+            let alert = UIAlertController(title: fieldName, message: nil, preferredStyle: .alert)
+
+            alert.addTextField { (textField) in
+                textField.placeholder = "Text here"
+            }
+
+            let sendAction = UIAlertAction(
+                title: "Send",
+                style: .default,
+                handler: { [weak alert] _ in
+                    guard let textField = alert?.textFields?.first, let text = textField.text else { return }
+
+                    HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
+
+                    var credentials: [String: String] = [:]
+
+                    if let fieldName = fieldName {
+                        credentials = [fieldName: text]
+                    }
+
+                    self.confirmConnection(
+                        with: credentials,
+                        completion: {
+                            alert?.dismiss(animated: true)
+                        }
+                    )
                 }
             )
 
-            HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
 
-            SERequestManager.shared.confirmConnection(
-                with: connection.secret,
-                params: SEConnectionInteractiveParams(credentials: [fieldName: input]),
-                fetchingDelegate: self,
-                completion: { response in
-                    print(response)
-                }
-            )
-        }
+            [sendAction, cancelAction].forEach { alert.addAction($0) }
 
-        alertView.cancelPressedClosure = {
-            self.tableView.isUserInteractionEnabled = true
-            UIView.animate(
-                withDuration: 0.4,
-                animations: {
-                    self.tableView.alpha = 1.0
-                    self.alertView.alpha = 0.0
-                }
-            )
+            present(alert, animated: true)
         }
     }
     

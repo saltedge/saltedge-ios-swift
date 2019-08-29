@@ -148,6 +148,8 @@ struct HTTPService<T: Decodable> {
                 return
             }
 
+            print("REQUESTREQUESTREQUESTREQUEST:", String(data: jsonData, encoding: .utf8))
+
             do {
                 let model = try decoder.decode(SEResponse<T>.self, from: jsonData)
                 DispatchQueue.main.async { completion?(.success(model)) }
