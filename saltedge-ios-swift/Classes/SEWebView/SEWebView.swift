@@ -47,7 +47,7 @@ public class SEWebView: WKWebView {
     public weak var stateDelegate: SEWebViewDelegate?
     
     public init(frame: CGRect) {
-        super.init(fraqme: frame, configuration: WKWebViewConfiguration())
+        super.init(frame: frame, configuration: WKWebViewConfiguration())
         navigationDelegate = self
         uiDelegate = self
         allowsBackForwardNavigationGestures = true
