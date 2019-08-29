@@ -198,12 +198,12 @@ final class AccountsViewController: UIViewController {
         }
     }
 
-    private func confirmConnection(fieldName: String?, input: String?, completion: (() -> ())? = nil) {
+    private func confirmConnection(fieldName: String?, input: String, completion: (() -> ())? = nil) {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
         
         var credentials: [String: String] = [:]
         
-        if let fieldName = fieldName, let input = input {
+        if let fieldName = fieldName {
             credentials = [fieldName: input]
         }
 
@@ -315,11 +315,11 @@ extension AccountsViewController: SEConnectionFetchingDelegate {
                 title: "Send",
                 style: .default,
                 handler: { [weak alert] _ in
-                    guard let textField = alert?.textFields?.first, let text = textField.text else { return }
-                    
+                    guard let textField = alert?.textFields?.first else { return }
+
                     self.confirmConnection(
                         fieldName: fieldName,
-                        input: text,
+                        input: textField.text ?? "",
                         completion: {
                             alert?.dismiss(animated: true)
                         }
