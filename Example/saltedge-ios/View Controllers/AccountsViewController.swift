@@ -198,7 +198,15 @@ final class AccountsViewController: UIViewController {
         }
     }
 
-    private func confirmConnection(with credentials: [String: String], completion: (() -> ())? = nil) {
+    private func confirmConnection(fieldName: String?, input: String?, completion: (() -> ())? = nil) {
+        HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
+        
+        var credentials: [String: String] = [:]
+        
+        if let fieldName = fieldName, let input = input {
+            credentials = [fieldName: input]
+        }
+
         SERequestManager.shared.confirmConnection(
             with: connection.secret,
             params: SEConnectionInteractiveParams(credentials: credentials),
@@ -281,15 +289,7 @@ extension AccountsViewController: SEConnectionFetchingDelegate {
                     }
                 )
 
-                HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
-
-                var credentials: [String: String] = [:]
-
-                if let fieldName = fieldName {
-                    credentials = [fieldName: input]
-                }
-
-                self.confirmConnection(with: credentials)
+                self.confirmConnection(fieldName: fieldName, input: input)
             }
 
             alertView.cancelPressedClosure = {
@@ -316,17 +316,10 @@ extension AccountsViewController: SEConnectionFetchingDelegate {
                 style: .default,
                 handler: { [weak alert] _ in
                     guard let textField = alert?.textFields?.first, let text = textField.text else { return }
-
-                    HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
-
-                    var credentials: [String: String] = [:]
-
-                    if let fieldName = fieldName {
-                        credentials = [fieldName: text]
-                    }
-
+                    
                     self.confirmConnection(
-                        with: credentials,
+                        fieldName: fieldName,
+                        input: text,
                         completion: {
                             alert?.dismiss(animated: true)
                         }
