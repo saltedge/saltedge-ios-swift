@@ -184,7 +184,7 @@ public class SEConnectionReconnectParams: SEExtendedConnectionParams {
 }
 
 public class SEConnectionInteractiveParams: SEBaseConnectionParams {
-    public let credentials: [String:  String]
+    public let credentials: [String: String]
     
     public init(credentials: [String: String],
                 fromDate: Date? = nil,

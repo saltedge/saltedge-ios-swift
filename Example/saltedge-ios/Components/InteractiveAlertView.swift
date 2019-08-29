@@ -12,7 +12,6 @@ import WebKit
 final class InteractiveAlertView: UIView {
     private var textLabel: UILabel = {
         let label = UILabel()
-        label.text = "Enter text from the image:"
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
@@ -25,7 +24,6 @@ final class InteractiveAlertView: UIView {
     private var textField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.placeholder = "Captcha"
         textField.layer.cornerRadius = 4.0
         textField.autocapitalizationType = .none
         textField.layer.borderColor = UIColor.gray.cgColor
@@ -51,7 +49,6 @@ final class InteractiveAlertView: UIView {
 
     private var sendButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Send", for: .normal)
         button.setTitleColor(.buttonColor, for: .normal)
         button.addTarget(self, action: #selector(sendPressed), for: .touchUpInside)
         return button
@@ -60,15 +57,17 @@ final class InteractiveAlertView: UIView {
     var cancelPressedClosure: (() -> ())?
     var sendPressedClosure: ((String) -> ())?
 
-    convenience init(html: String) {
+    convenience init(html: String, fieldName: String? = nil) {
         self.init(frame: .zero)
         backgroundColor = .contentViewBackgroundColor
         layer.cornerRadius = 4.0
         clipsToBounds = true
         
+        sendButton.setTitle(fieldName != nil ? "Send" : "Confirm", for: .normal)
+        textLabel.text = fieldName ?? ""
         setupTextLabel()
         setupWebView(with: html)
-        setupTextField()
+        setupTextField(inputEnabled: fieldName != nil)
         setupButtonsStackView()
     }
 
@@ -81,9 +80,7 @@ final class InteractiveAlertView: UIView {
     }
     
     @objc private func sendPressed() {
-        guard let text = textField.text, !text.isEmpty else { return }
-
-        sendPressedClosure?(text)
+        sendPressedClosure?(textField.text ?? "")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -130,7 +127,9 @@ private extension InteractiveAlertView {
         ])
     }
 
-    func setupTextField() {
+    func setupTextField(inputEnabled: Bool) {
+        textField.isEnabled = inputEnabled
+
         addSubview(textField)
         
         textField.translatesAutoresizingMaskIntoConstraints = false
