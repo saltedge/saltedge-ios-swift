@@ -25,18 +25,25 @@ final class ConnectViewController: UIViewController {
     }
     
     @IBAction func providersPressed(_ sender: Any) {
-        guard let providersVC = ProvidersViewController.create(onPick: { [weak self] provider in
-            guard let weakSelf = self else { return }
-            
-            weakSelf.provider = provider
-            weakSelf.requestToken()
-        }) else { return }
-        
+        guard let providersVC = ProvidersViewController.create(
+            onPick: { [weak self] provider in
+                guard let weakSelf = self else { return }
+
+                weakSelf.provider = provider
+
+                if provider.isOAuth {
+                    weakSelf.requestOAuthToken()
+                } else {
+                    weakSelf.requestToken()
+                }
+            }
+        ) else { return }
+
         let navVC = UINavigationController(rootViewController: providersVC)
-        
+
         present(navVC, animated: true)
     }
-    
+
     func requestToken(connection: SEConnection? = nil, refresh: Bool = false) {
         HUD.show(.labeledProgress(title: "Requesting Token", subtitle: nil))
         if let connection = connection {
@@ -67,11 +74,33 @@ final class ConnectViewController: UIViewController {
         }
     }
     
+    private func requestOAuthToken() {
+        let params = SEConnectSessionsParams(
+            attempt: SEAttempt(returnTo: AppDelegate.applicationURLString),
+            providerCode: provider?.code,
+            disableProvidersSearch: true,
+            consent: consent
+        )
+
+        SERequestManager.shared.createConnectSession(
+            params: params,
+            completion: { [weak self] response in
+                self?.handleConnectSessionResponse(response)
+            }
+        )
+    }
+
     private func handleConnectSessionResponse(_ response: SEResult<SEResponse<SEConnectSessionResponse>>) {
         switch response {
         case .success(let value):
             HUD.hide(animated: true)
-            if let url = URL(string: value.data.connectUrl) {
+
+            guard let url = URL(string: value.data.connectUrl) else { return }
+
+            // Check if provider mode is "oauth". Then try to open it in external browser or app.
+            if let provider = self.provider, provider.isOAuth, UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
                 let request = URLRequest(url: url)
                 webView.load(request)
                 webView.isHidden = false
@@ -137,20 +166,13 @@ extension ConnectViewController: SEWebViewDelegate {
             switchToConnectionsController()
         case .fetching:
             guard let connectionSecret = response.secret else { return }
-            
-            if var connections = UserDefaultsHelper.connections {
-                if !connections.contains(connectionSecret) {
-                    connections.append(connectionSecret)
-                    UserDefaultsHelper.connections = connections
-                }
-            } else {
-                UserDefaultsHelper.connections = [connectionSecret]
-            }
+
+            UserDefaultsHelper.append(connectionSecret: connectionSecret)
         case .error:
             HUD.flash(.labeledError(title: "Cannot Fetch Connection", subtitle: nil), delay: 3.0)
         }
     }
-    
+
     func webView(_ webView: SEWebView, didReceiveCallbackWithError error: Error) {
         HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
     }

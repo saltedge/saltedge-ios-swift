@@ -34,7 +34,7 @@ class ProvidersViewController: UIViewController {
         tableView.tableHeaderView = searchController.searchBar
         
         HUD.show(.labeledProgress(title: "Fetching Providers", subtitle: nil))
-        SERequestManager.shared.getProviders { [weak self] response in
+        SERequestManager.shared.getAllProviders { [weak self] response in
             switch response {
             case .success(let value):
                 HUD.hide(animated: true)

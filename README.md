@@ -1,7 +1,7 @@
 # Salt Edge iOS / macOS Swift SDK and iOS Example application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS / macOS app.
-Last SDK version (3.0+) supports Salt Edge API v5 and Salt Edge Partners API v1.
+Last SDK version (3+) supports Salt Edge API v5 and Salt Edge Partners API v1.
 
 ## Requirements
 
@@ -15,10 +15,10 @@ Last SDK version (3.0+) supports Salt Edge API v5 and Salt Edge Partners API v1.
 for Salt Edge API v5 or Salt Edge Partners API v1 use
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.1.4'
+pod 'SaltEdge-iOS-Swift', '~> 3.2.0'
 ```
 
-for Salt Edge API v4 use
+for Salt Edge API v4 (***Deprecated***) use 
 ```ruby
 pod 'SaltEdge-iOS-Swift', '~> 1.1.2'
 ```
@@ -218,7 +218,7 @@ Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and c
 
 ## Versioning
 
-The current version of the SDK is [3.1.4](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.1.4), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.2.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.2.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
@@ -238,10 +238,11 @@ See the [LICENSE](LICENSE) file.
 
 ## References
 
+1. [How to... instructions](HOWTO.md)
 1. [Salt Edge API General](https://docs.saltedge.com/general/)
-2. [Salt Edge Client Dashboard](https://www.saltedge.com/clients/dashboard)
-3. [Salt Edge API v5 Reference](https://docs.saltedge.com/account_information/v5/)
-4. [Salt Edge Partners API v1 Reference](https://docs.saltedge.com/partners/v1/)
+1. [Salt Edge Client Dashboard](https://www.saltedge.com/clients/dashboard)
+1. [Salt Edge API v5 Reference](https://docs.saltedge.com/account_information/v5/)
+1. [Salt Edge Partners API v1 Reference](https://docs.saltedge.com/partners/v1/)
 
 For more information, feel free to [contact us](https://www.saltedge.com/pages/contact)
 ---

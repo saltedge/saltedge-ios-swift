@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.2.0] - 2019-09-18
+
+### Added.
+
+- Added `SEAuthorizeOAuthParams`
+- Added `authorize` endpoint in `OAuthRouter`
+- Added `connectionSecret` field in `SEOAuthResponse`
+- Added `disableProvidersSearch` field in `SEBaseSessionsParams`
+- Added `authorizeOAuthConnection` request in `SERequestManager`
+
+### Removed.
+
+- Removed `returnTo` field from `SEOAuthParams`
+- Removed `refresh` endpoint from `OAuthRouter`
+
 ## [3.1.4] - 2019-08-29
 
 ### Modified.

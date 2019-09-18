@@ -12,12 +12,13 @@ import SaltEdge
 private enum DefaultsKeys: String {
     case connections
     case customerSecret
+    case pendingOAuthConnectionSecret
 }
 
 struct UserDefaultsHelper {
     private static let suiteName = "com.saltedge.demo"
     
-    static var connections: [String]? {
+    static var connectionSecrets: [String]? {
         set {
             defaults.set(newValue, forKey: DefaultsKeys.connections.rawValue)
             defaults.synchronize()
@@ -34,6 +35,27 @@ struct UserDefaultsHelper {
         }
         get {
             return defaults.string(forKey: DefaultsKeys.customerSecret.rawValue)
+        }
+    }
+
+    static var pendingOAuthConnectionSecret: String? {
+        set {
+            defaults.set(newValue, forKey: DefaultsKeys.pendingOAuthConnectionSecret.rawValue)
+            defaults.synchronize()
+        }
+        get {
+            return defaults.string(forKey: DefaultsKeys.pendingOAuthConnectionSecret.rawValue)
+        }
+    }
+
+    static func append(connectionSecret: String) {
+        if var connections = connectionSecrets {
+            if !connections.contains(connectionSecret) {
+                connections.append(connectionSecret)
+                connectionSecrets = connections
+            }
+        } else {
+            connectionSecrets = [connectionSecret]
         }
     }
     

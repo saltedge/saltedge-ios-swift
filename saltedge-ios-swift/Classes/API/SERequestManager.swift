@@ -256,7 +256,7 @@ public class SERequestManager {
 
     // MARK: OAuth Providers
     /**
-     Creates a OAuth connection with given parameters.
+     Creates an OAuth connection with given parameters.
      
      - parameters:
          - params: The parameters of the OAuth connection that is to be created.
@@ -269,7 +269,21 @@ public class SERequestManager {
     }
 
     /**
-     Reconnects a OAuth connection with given parameters.
+     Authories an OAuth connection with given parameters.
+     
+     - parameters:
+     - secret: The secret of the OAuth connection to reconnect.
+     - params: The parameters of the OAuth connection that is to be authorized.
+     - completion: The code to be executed once the request has finished.
+     
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#oauth_providers-authorize)
+     */
+    public func authorizeOAuthConnection(with secret: String, params: SEAuthorizeOAuthParams, completion: SEHTTPResponse<SEConnection>) {
+        HTTPService<SEConnection>.makeRequest(OAuthRouter.authorize(secret, params), completion: completion)
+    }
+
+    /**
+     Reconnects an OAuth connection with given parameters.
      
      - parameters:
          - secret: The secret of the OAuth connection to reconnect.
@@ -307,7 +321,7 @@ public class SERequestManager {
             }
         } else {
             guard let connectionSecret = parameters["connection_secret"] else { return }
-            
+
             SEConnectionFetcher.handleOAuthConnection(connectionSecret: connectionSecret, fetchingDelegate: connectionFetchingDelegate)
         }
     }

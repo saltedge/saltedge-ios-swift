@@ -32,15 +32,3 @@ public struct SEConnectSessionResponse: Decodable {
         case connectUrl = "connect_url"
     }
 }
-
-public struct SEOAuthResponse: Decodable {
-    public let token: String
-    public let expiresAt: Date
-    public let redirectUrl: String
-    
-    enum CodingKeys: String, CodingKey {
-        case token
-        case expiresAt = "expires_at"
-        case redirectUrl = "redirect_url"
-    }
-}

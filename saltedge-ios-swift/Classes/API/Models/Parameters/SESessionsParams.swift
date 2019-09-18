@@ -26,6 +26,7 @@ import Foundation
 public class SEBaseSessionsParams: Encodable, ParametersEncodable {
     public let customFields: String?
     public let dailyRefresh: Bool?
+    public let disableProvidersSearch: Bool?
     public let fromDate: Date?
     public let toDate: Date?
     public let returnConnectionId: Bool?
@@ -40,6 +41,7 @@ public class SEBaseSessionsParams: Encodable, ParametersEncodable {
     init(attempt: SEAttempt? = nil,
          customFields: String? = nil,
          dailyRefresh: Bool? = nil,
+         disableProvidersSearch: Bool? = nil,
          fromDate: Date? = nil,
          toDate: Date? = nil,
          returnConnectionId: Bool? = nil,
@@ -52,6 +54,7 @@ public class SEBaseSessionsParams: Encodable, ParametersEncodable {
         self.attempt = attempt
         self.customFields = customFields
         self.dailyRefresh = dailyRefresh
+        self.disableProvidersSearch = disableProvidersSearch
         self.fromDate = fromDate
         self.toDate = toDate
         self.returnConnectionId = returnConnectionId
@@ -67,6 +70,7 @@ public class SEBaseSessionsParams: Encodable, ParametersEncodable {
         case attempt = "attempt"
         case customFields = "custom_fields"
         case dailyRefresh = "daily_refresh"
+        case disableProvidersSearch = "disable_provider_search"
         case fromDate = "from_date"
         case toDate = "to_date"
         case returnConnectionId = "return_connection_id"
@@ -88,6 +92,7 @@ public class SEConnectSessionsParams: SEBaseSessionsParams {
     public init(allowedCountries: [String]? = nil,
                 attempt: SEAttempt? = nil,
                 providerCode: String? = nil,
+                disableProvidersSearch: Bool? = nil,
                 customFields: String? = nil,
                 dailyRefresh: Bool? = nil,
                 fromDate: Date? = nil,

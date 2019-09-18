@@ -33,7 +33,7 @@ class ConnectionsViewController: UIViewController {
     }
     
     func refreshConnections() {
-        guard let connectionsSecrets = UserDefaultsHelper.connections else { return }
+        guard let connectionsSecrets = UserDefaultsHelper.connectionSecrets else { return }
         
         connections = []
         tableView.reloadData()

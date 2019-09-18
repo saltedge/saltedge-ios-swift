@@ -67,7 +67,7 @@ class CreateViewController: UIViewController {
                 consent: SEConsent(scopes: ["account_details", "transactions_details"]),
                 countryCode: provider.countryCode,
                 providerCode: provider.code,
-                returnTo: AppDelegate.applicationURLString
+                attempt: SEAttempt(returnTo: AppDelegate.applicationURLString)
             )
             SERequestManager.shared.createOAuthConnection(params: params) { response in
                 self.handleOAuthResponse(response)
@@ -265,13 +265,13 @@ extension CreateViewController: SEConnectionFetchingDelegate {
     
     func successfullyFinishedFetching(connection: SEConnection) {
         HUD.hide(animated: true)
-        if var connections = UserDefaultsHelper.connections {
+        if var connections = UserDefaultsHelper.connectionSecrets {
             if !connections.contains(connection.secret) {
                 connections.append(connection.secret)
-                UserDefaultsHelper.connections = connections
+                UserDefaultsHelper.connectionSecrets = connections
             }
         } else {
-            UserDefaultsHelper.connections = [connection.secret]
+            UserDefaultsHelper.connectionSecrets = [connection.secret]
         }
         switchToConnectionsController()
     }
