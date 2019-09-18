@@ -67,7 +67,7 @@ class CreateViewController: UIViewController {
                 consent: SEConsent(scopes: ["account_details", "transactions_details"]),
                 countryCode: provider.countryCode,
                 providerCode: provider.code,
-                attempt: SEAttempt(returnTo: AppDelegate.applicationURLString)
+                attempt: SEAttempt(returnTo: AppDelegate.returnToApplicationUrl)
             )
             SERequestManager.shared.createOAuthConnection(params: params) { response in
                 self.handleOAuthResponse(response)
@@ -91,7 +91,7 @@ class CreateViewController: UIViewController {
         HUD.show(.labeledProgress(title: "Reconnecting Connection", subtitle: nil))
 
         if provider.isOAuth {
-            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+            let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.returnToApplicationUrl))
 
             SERequestManager.shared.refreshConnection(with: connection.secret, params: params, fetchingDelegate: self) { response in
                 switch response {

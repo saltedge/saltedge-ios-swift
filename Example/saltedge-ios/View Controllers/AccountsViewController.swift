@@ -181,7 +181,7 @@ final class AccountsViewController: UIViewController {
     private func refreshConnectionUsingAPI() {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
 
-        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.returnToApplicationUrl))
 
         SERequestManager.shared.refreshConnection(
             with: connection.secret,

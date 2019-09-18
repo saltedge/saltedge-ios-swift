@@ -13,7 +13,7 @@ import PKHUD
 
 final class ConnectViewController: UIViewController {
     private var provider: SEProvider?
-    private lazy var attempt = SEAttempt(returnTo: "http://httpbin.org/")
+    private lazy var attempt = SEAttempt(returnTo: AppDelegate.returnToApplicationUrl)
     private lazy var consent = SEConsent(scopes: ["account_details", "transactions_details"])
     
     @IBOutlet weak var webView: SEWebView!
@@ -31,11 +31,7 @@ final class ConnectViewController: UIViewController {
 
                 weakSelf.provider = provider
 
-                if provider.isOAuth {
-                    weakSelf.requestOAuthToken()
-                } else {
-                    weakSelf.requestToken()
-                }
+                weakSelf.requestToken()
             }
         ) else { return }
 
@@ -72,22 +68,6 @@ final class ConnectViewController: UIViewController {
         } else {
             createSession()
         }
-    }
-    
-    private func requestOAuthToken() {
-        let params = SEConnectSessionsParams(
-            attempt: SEAttempt(returnTo: AppDelegate.applicationURLString),
-            providerCode: provider?.code,
-            disableProvidersSearch: true,
-            consent: consent
-        )
-
-        SERequestManager.shared.createConnectSession(
-            params: params,
-            completion: { [weak self] response in
-                self?.handleConnectSessionResponse(response)
-            }
-        )
     }
 
     private func handleConnectSessionResponse(_ response: SEResult<SEResponse<SEConnectSessionResponse>>) {

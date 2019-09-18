@@ -269,7 +269,7 @@ public class SERequestManager {
     }
 
     /**
-     Authories an OAuth connection with given parameters.
+     Authorizes an OAuth connection with given parameters.
      
      - parameters:
      - secret: The secret of the OAuth connection to reconnect.

@@ -12,7 +12,6 @@ import SaltEdge
 private enum DefaultsKeys: String {
     case connections
     case customerSecret
-    case pendingOAuthConnectionSecret
 }
 
 struct UserDefaultsHelper {
@@ -35,16 +34,6 @@ struct UserDefaultsHelper {
         }
         get {
             return defaults.string(forKey: DefaultsKeys.customerSecret.rawValue)
-        }
-    }
-
-    static var pendingOAuthConnectionSecret: String? {
-        set {
-            defaults.set(newValue, forKey: DefaultsKeys.pendingOAuthConnectionSecret.rawValue)
-            defaults.synchronize()
-        }
-        get {
-            return defaults.string(forKey: DefaultsKeys.pendingOAuthConnectionSecret.rawValue)
         }
     }
 
