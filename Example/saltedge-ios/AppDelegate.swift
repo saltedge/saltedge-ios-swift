@@ -12,7 +12,7 @@ import SaltEdge
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    static let applicationURLString: String = "saltedge-api-swift-demo://home.local"; // the URL has to have a host, otherwise won't be a valid URL on the backend
+    static let returnToApplicationUrl: String = "saltedge://sdk.example" // the URL has to have a host, otherwise won't be a valid URL on the backend
 
     var window: UIWindow?
 

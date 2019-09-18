@@ -1,5 +1,5 @@
 //
-//  OAuthRouter.swift
+//  SEOauthResponse.swift
 //
 //  Copyright (c) 2019 Salt Edge. https://saltedge.com
 //
@@ -23,38 +23,16 @@
 
 import Foundation
 
-enum OAuthRouter: Routable {
-    case create(SECreateOAuthParams)
-    case authorize(ConnectionSecret, SEAuthorizeOAuthParams)
-    case reconnect(ConnectionSecret, SEReconnectOAuthParams)
-    
-    var method: HTTPMethod {
-        switch self {
-        case .authorize: return .put
-        default: return .post
-        }
-    }
-    
-    var query: String {
-        switch self {
-        case .create: return "oauth_providers/create"
-        case .authorize: return "oauth_providers/authorize"
-        case .reconnect: return "oauth_providers/reconnect"
-        }
-    }
-    
-    var headers: Headers {
-        switch self {
-        case .create: return SEHeaders.cached.sessionHeaders
-        case .authorize(let secret, _), .reconnect(let secret, _): return SEHeaders.cached.with(connectionSecret: secret)
-        }
-    }
-    
-    var parameters: ParametersEncodable? {
-        switch self {
-        case .create(let params): return params
-        case .authorize(_, let params): return params
-        case .reconnect(_, let params): return params
-        }
+public struct SEOAuthResponse: Decodable {
+    public let token: String
+    public let expiresAt: Date
+    public let redirectUrl: String
+    public let connectionSecret: String
+
+    enum CodingKeys: String, CodingKey {
+        case token
+        case expiresAt = "expires_at"
+        case redirectUrl = "redirect_url"
+        case connectionSecret = "connection_secret"
     }
 }

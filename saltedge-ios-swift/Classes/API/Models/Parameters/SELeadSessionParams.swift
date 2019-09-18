@@ -26,7 +26,6 @@ import Foundation
 public class SELeadSessionParams: SEConnectSessionsParams {
     public let categorization: String?
     public let returnConnectionSearch: Bool?
-    public let disableProvidersSearch: Bool?
     public let skipProviderSelect: Bool?
 
     public init(consent: SEConsent,
@@ -51,7 +50,6 @@ public class SELeadSessionParams: SEConnectSessionsParams {
                 showConsentConfirmation: Bool? = nil) {
         self.categorization = categorization
         self.returnConnectionSearch = returnConnectionSearch
-        self.disableProvidersSearch = disableProvidersSearch
         self.skipProviderSelect = skipProviderSelect
 
         super.init(attempt: attempt,
@@ -80,7 +78,6 @@ public class SELeadSessionParams: SEConnectSessionsParams {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(categorization, forKey: .categorization)
         try container.encodeIfPresent(returnConnectionSearch, forKey: .returnConnectionSearch)
-        try container.encodeIfPresent(disableProvidersSearch, forKey: .disableProvidersSearch)
         try container.encodeIfPresent(skipProviderSelect, forKey: .skipProviderSelect)
 
         try super.encode(to: encoder)

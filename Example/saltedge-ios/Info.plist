@@ -27,7 +27,7 @@
 			<string>com.saltedge.Salt-Edge-API-Swift-Demo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>SaltEdge-API-Swift-Demo</string>
+				<string>saltedge</string>
 			</array>
 		</dict>
 	</array>

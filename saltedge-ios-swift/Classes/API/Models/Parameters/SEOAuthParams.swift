@@ -24,7 +24,6 @@
 import Foundation
 
 public class SEBasicOAuthParams: Encodable, ParametersEncodable {
-    public let returnTo: String
     public let dailyRefresh: Bool?
     public let customFields: String?
     public let fromDate: Date?
@@ -34,8 +33,7 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
     public let categorize: Bool?
     public let includeFakeProvider: Bool?
     
-    public init(returnTo: String,
-                dailyRefresh: Bool? = nil,
+    public init(dailyRefresh: Bool? = nil,
                 customFields: String? = nil,
                 fromDate: Date? = nil,
                 toDate: Date? = nil,
@@ -43,7 +41,6 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
                 returnConnectionId: Bool? = nil,
                 categorize: Bool? = nil,
                 includeFakeProvider: Bool? = nil) {
-        self.returnTo = returnTo
         self.dailyRefresh = dailyRefresh
         self.customFields = customFields
         self.fromDate = fromDate
@@ -55,7 +52,6 @@ public class SEBasicOAuthParams: Encodable, ParametersEncodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case returnTo = "return_to"
         case dailyRefresh = "daily_refresh"
         case customFields = "custom_fields"
         case fromDate = "from_date"
@@ -77,7 +73,6 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
                 countryCode: String,
                 providerCode: String,
                 attempt: SEAttempt? = nil,
-                returnTo: String,
                 dailyRefresh: Bool? = nil,
                 customFields: String? = nil,
                 fromDate: Date? = nil,
@@ -91,8 +86,7 @@ public class SECreateOAuthParams: SEBasicOAuthParams {
         self.countryCode = countryCode
         self.attempt = attempt
         
-        super.init(returnTo: returnTo,
-                   dailyRefresh: dailyRefresh,
+        super.init(dailyRefresh: dailyRefresh,
                    customFields: customFields,
                    fromDate: fromDate,
                    toDate: toDate,
@@ -126,7 +120,6 @@ public class SEReconnectOAuthParams: SEBasicOAuthParams {
     public let excludeAccounts: [Int]?
     
     public init(consent: SEConsent,
-                returnTo: String,
                 attempt: SEAttempt? = nil,
                 dailyRefresh: Bool? = nil,
                 customFields: String? = nil,
@@ -141,8 +134,7 @@ public class SEReconnectOAuthParams: SEBasicOAuthParams {
         self.attempt = attempt
         self.excludeAccounts = excludeAccounts
         
-        super.init(returnTo: returnTo,
-                   dailyRefresh: dailyRefresh,
+        super.init(dailyRefresh: dailyRefresh,
                    customFields: customFields,
                    fromDate: fromDate,
                    toDate: toDate,
@@ -165,5 +157,17 @@ public class SEReconnectOAuthParams: SEBasicOAuthParams {
         try container.encodeIfPresent(excludeAccounts, forKey: .excludeAccounts)
 
         try super.encode(to: encoder)
+    }
+}
+
+public class SEAuthorizeOAuthParams: Encodable, ParametersEncodable {
+    public let queryString: String
+
+    public init(queryString: String) {
+        self.queryString = queryString
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case queryString = "query_string"
     }
 }

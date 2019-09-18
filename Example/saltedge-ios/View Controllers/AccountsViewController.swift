@@ -103,8 +103,9 @@ final class AccountsViewController: UIViewController {
                 switch response {
                 case .success(let value):
                     guard let weakSelf = self else { return }
+
                     if value.data.removed {
-                        weakSelf.removeConnection()
+                        weakSelf.removeConnections()
                         weakSelf.navigationController?.popViewController(animated: true)
                     }
                     HUD.hide(animated: true)
@@ -116,11 +117,11 @@ final class AccountsViewController: UIViewController {
     }
 
     private func removeConnections() {
-        var connections = UserDefaultsHelper.connections
+        var connections = UserDefaultsHelper.connectionSecrets
 
         if let index = connections?.firstIndex(of: connection.secret) {
             connections?.remove(at: index)
-            UserDefaultsHelper.connections = connections
+            UserDefaultsHelper.connectionSecrets = connections
         }
     }
 
@@ -180,7 +181,7 @@ final class AccountsViewController: UIViewController {
     private func refreshConnectionUsingAPI() {
         HUD.show(.labeledProgress(title: "Refreshing...", subtitle: nil))
 
-        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.applicationURLString))
+        let params = SEConnectionRefreshParams(attempt: SEAttempt(returnTo: AppDelegate.returnToApplicationUrl))
 
         SERequestManager.shared.refreshConnection(
             with: connection.secret,
