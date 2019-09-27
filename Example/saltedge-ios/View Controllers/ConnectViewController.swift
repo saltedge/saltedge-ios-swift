@@ -36,6 +36,7 @@ final class ConnectViewController: UIViewController {
         ) else { return }
 
         let navVC = UINavigationController(rootViewController: providersVC)
+        navVC.modalPresentationStyle = .fullScreen
 
         present(navVC, animated: true)
     }

@@ -54,6 +54,7 @@ class CreateViewController: UIViewController {
         }) else { return }
         
         let navVC = UINavigationController(rootViewController: providersVC)
+        navVC.modalPresentationStyle = .fullScreen
         
         present(navVC, animated: true)
     }
