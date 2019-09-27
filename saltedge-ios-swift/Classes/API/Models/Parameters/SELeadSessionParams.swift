@@ -34,7 +34,7 @@ public class SELeadSessionParams: SEConnectSessionsParams {
                 providerCode: String? = nil,
                 categorization: String? = nil,
                 returnConnectionSearch: Bool? = nil,
-                disableProvidersSearch: Bool? = nil,
+                disableProviderSearch: Bool? = nil,
                 skipProviderSelect: Bool? = nil,
                 attempt: SEAttempt? = nil,
                 customFields: String? = nil,
@@ -70,7 +70,6 @@ public class SELeadSessionParams: SEConnectSessionsParams {
     private enum CodingKeys: String, CodingKey {
         case categorization = "categorization"
         case returnConnectionSearch = "return_connection_search"
-        case disableProvidersSearch = "disable_providers_search"
         case skipProviderSelect = "skip_provider_select"
     }
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.1] - 2019-09-27
+
+### Fixed.
+
+- Fixed `disable_provider_search` field typo of the `SELeadSessionParams`
+
 ## [3.2.0] - 2019-09-18
 
 ### Added.
