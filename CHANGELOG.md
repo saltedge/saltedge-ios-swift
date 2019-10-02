@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.2] - 2019-10-02
+
+### Fixed.
+
+- SEWebView tinColor set to .black
+
 ## [3.2.1] - 2019-09-27
 
 ### Fixed.
