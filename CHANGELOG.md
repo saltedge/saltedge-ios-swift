@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.2] - 2019-10-02
+
+- SEWebView tinColor set to .black
+
+### Fixed.
+
+- Fixed `disable_provider_search` field typo of the `SELeadSessionParams`
+
 ## [3.2.1] - 2019-09-27
 
 ### Fixed.
