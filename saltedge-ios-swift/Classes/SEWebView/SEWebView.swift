@@ -50,6 +50,7 @@ open class SEWebView: WKWebView {
         super.init(frame: frame, configuration: WKWebViewConfiguration())
         navigationDelegate = self
         uiDelegate = self
+        tintColor = .black
         allowsBackForwardNavigationGestures = true
     }
     
@@ -57,6 +58,7 @@ open class SEWebView: WKWebView {
         super.init(coder: aDecoder)
         navigationDelegate = self
         uiDelegate = self
+        tintColor = .black
         allowsBackForwardNavigationGestures = true
     }
 
