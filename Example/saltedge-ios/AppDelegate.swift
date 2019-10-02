@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let appId: String = "R4Qw517-RL9FI5f2_xZeechnO1wduKAbUfkts7bV4vY"
-        let appSecret: String = "Ylhr7TdW8uf-rpPbaUyJOSMqmiR_2qDMCz__tblPOZ8"
+        let appId: String = "your-app-id"
+        let appSecret: String = "your-app-secret"
         let customerId: String = "customer-secret"
 
         // By default SSL Pinning is enabled, to disable it use:
