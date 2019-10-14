@@ -23,7 +23,7 @@
 
 import Foundation
 
-public class SELeadSessionParams: SEConnectSessionsParams {
+open class SELeadSessionParams: SEConnectSessionsParams {
     public let categorization: String?
     public let returnConnectionSearch: Bool?
     public let skipProviderSelect: Bool?
@@ -73,7 +73,7 @@ public class SELeadSessionParams: SEConnectSessionsParams {
         case skipProviderSelect = "skip_provider_select"
     }
 
-    public override func encode(to encoder: Encoder) throws {
+    open override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(categorization, forKey: .categorization)
         try container.encodeIfPresent(returnConnectionSearch, forKey: .returnConnectionSearch)
