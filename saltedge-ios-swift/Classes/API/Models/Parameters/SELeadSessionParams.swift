@@ -24,11 +24,13 @@
 import Foundation
 
 open class SELeadSessionParams: SEConnectSessionsParams {
+    public let customerId: String?
     public let categorization: String?
     public let returnConnectionSearch: Bool?
     public let skipProviderSelect: Bool?
 
     public init(consent: SEConsent,
+                customerId: String? = nil,
                 allowedCountries: [String]? = nil,
                 credentialsStrategy: String? = nil,
                 providerCode: String? = nil,
@@ -48,6 +50,7 @@ open class SELeadSessionParams: SEConnectSessionsParams {
                 includeFakeProviders: Bool? = nil,
                 lostConnectionNotify: Bool? = nil,
                 showConsentConfirmation: Bool? = nil) {
+        self.customerId = customerId
         self.categorization = categorization
         self.returnConnectionSearch = returnConnectionSearch
         self.skipProviderSelect = skipProviderSelect
@@ -68,6 +71,7 @@ open class SELeadSessionParams: SEConnectSessionsParams {
     }
 
     private enum CodingKeys: String, CodingKey {
+        case customerId = "customer_id"
         case categorization = "categorization"
         case returnConnectionSearch = "return_connection_search"
         case skipProviderSelect = "skip_provider_select"
@@ -75,6 +79,7 @@ open class SELeadSessionParams: SEConnectSessionsParams {
 
     open override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(customerId, forKey: .customerId)
         try container.encodeIfPresent(categorization, forKey: .categorization)
         try container.encodeIfPresent(returnConnectionSearch, forKey: .returnConnectionSearch)
         try container.encodeIfPresent(skipProviderSelect, forKey: .skipProviderSelect)
