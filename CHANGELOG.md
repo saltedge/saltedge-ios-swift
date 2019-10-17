@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.4] - 2019-10-17
+
+### Changed
+
+- Opened lead session parameters (`SELeadSessionParams`)
+- Added `customerId` to `SELeadSessionParams`
+
 ## [3.2.3] - 2019-10-02
 
 ### Fixed.
