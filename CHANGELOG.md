@@ -4,7 +4,20 @@
 
 ### Removed.
 
-- Removed SaltEdge Partners API Supports
+- Removed SaltEdge Partners API support
+
+## [3.2.4] - 2019-10-17
+
+### Changed
+
+- Opened lead session parameters (`SELeadSessionParams`)
+- Added `customerId` to `SELeadSessionParams`
+
+## [3.2.3] - 2019-10-02
+
+### Fixed.
+
+- SEWebView tinColor set to .black
 
 ## [3.2.1] - 2019-09-27
 

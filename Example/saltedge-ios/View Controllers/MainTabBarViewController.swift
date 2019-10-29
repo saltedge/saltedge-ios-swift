@@ -21,7 +21,7 @@ final class MainTabBarViewController: UITabBarController {
         let createVc = storyboard.instantiateViewController(withIdentifier: "CreateViewController")
         let connectionsVc = storyboard.instantiateViewController(withIdentifier: "ConnectionsViewController")
 
-        var controllers = [
+        let controllers = [
             UINavigationController(rootViewController: connectVc),
             UINavigationController(rootViewController: createVc),
             UINavigationController(rootViewController: connectionsVc)
