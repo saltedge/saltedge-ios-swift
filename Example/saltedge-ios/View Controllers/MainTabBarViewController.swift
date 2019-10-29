@@ -18,17 +18,14 @@ final class MainTabBarViewController: UITabBarController {
     private func setupViewControllers() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let connectVc = storyboard.instantiateViewController(withIdentifier: "ConnectViewController")
+        let createVc = storyboard.instantiateViewController(withIdentifier: "CreateViewController")
         let connectionsVc = storyboard.instantiateViewController(withIdentifier: "ConnectionsViewController")
 
         var controllers = [
             UINavigationController(rootViewController: connectVc),
+            UINavigationController(rootViewController: createVc),
             UINavigationController(rootViewController: connectionsVc)
         ]
-
-        if !SERequestManager.shared.isPartner {
-            let createVc = storyboard.instantiateViewController(withIdentifier: "CreateViewController")
-            controllers.insert(UINavigationController(rootViewController: createVc), at: 1)
-        }
 
         viewControllers = controllers
     }

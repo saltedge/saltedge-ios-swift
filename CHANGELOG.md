@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0] - 2019-10-29
+
+### Removed.
+
+- Removed SaltEdge Partners API Supports
+
 ## [3.2.1] - 2019-09-27
 
 ### Fixed.

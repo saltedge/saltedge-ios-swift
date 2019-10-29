@@ -22,6 +22,11 @@ class ProvidersViewController: UIViewController {
     @IBAction func backPressed(_ sender: Any) {
         dismiss(animated: true)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        HUD.show(.labeledProgress(title: "Fetching Providers", subtitle: nil))
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +37,7 @@ class ProvidersViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
-        
-        HUD.show(.labeledProgress(title: "Fetching Providers", subtitle: nil))
+
         SERequestManager.shared.getProviders { [weak self] response in
             switch response {
             case .success(let value):
