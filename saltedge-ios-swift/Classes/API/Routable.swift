@@ -26,7 +26,6 @@ import Foundation
 struct APIEndpoints {
     static let rootURL: URL = URL(string: "https://www.saltedge.com")!
     static let baseURL: URL = rootURL.appendingPathComponent("api/v5")
-    static let partnersURL: URL = rootURL.appendingPathComponent("api/partners/v1")
 }
 
 enum HTTPMethod: String {
@@ -71,6 +70,6 @@ extension Routable {
     }
 
     var url: URL {
-        return SERequestManager.shared.isPartner ? APIEndpoints.partnersURL : APIEndpoints.baseURL
+        return APIEndpoints.baseURL
     }
 }

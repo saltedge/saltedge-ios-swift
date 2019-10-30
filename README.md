@@ -1,7 +1,7 @@
 # Salt Edge iOS / macOS Swift SDK and iOS Example application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS / macOS app.
-Last SDK version (3+) supports Salt Edge API v5 and Salt Edge Partners API v1.
+Last SDK version (3+) supports Salt Edge API v5.
 
 ## Requirements
 
@@ -12,10 +12,10 @@ Last SDK version (3+) supports Salt Edge API v5 and Salt Edge Partners API v1.
 
 #### Add the pod to your `Podfile`  
 
-for Salt Edge API v5 or Salt Edge Partners API v1 use
+for Salt Edge API v5 use
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.2.4'
+pod 'SaltEdge-iOS-Swift', '~> 3.3.0'
 ```
 
 for Salt Edge API v4 (***Deprecated***) use 
@@ -40,14 +40,8 @@ To setup Salt Edge API, call in `AppDelegate.swift`:
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-To setup Salt Edge Partners API, call in `AppDelegate.swift`:
-```swift
-SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
-```
-
 *Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page (Eligable only for Salt Edge API).
-If you want to use Salt Edge Partners API, you should ask `appId` and `appSecret` from [Salt Edge](https://www.saltedge.com/pages/contact).
-`customerId` - it is the unique identifier of the new customer (Not needed for Partners API).
+`customerId` - it is the unique identifier of the new customer.
 
 ## SEWebView
 
@@ -169,10 +163,8 @@ Models contained within the components:
 * `SEError`
 * `SEProviderField`
 * `SEProviderFieldOption`
-* `SEPartnerConsent`
 
-For a supplementary description of the models listed above that is not included in the sources docs, feel free to visit the [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/) or
-[Salt Edge Partners API Reference](https://docs.saltedge.com/partners/v1/)
+For a supplementary description of the models listed above that is not included in the sources docs, feel free to visit the [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/)
 
 ### Models extra
 
@@ -209,16 +201,11 @@ To setup Salt Edge API, call:
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-To setup Salt Edge Partners API, call:
-```swift
-SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
-```
-
 Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and corresponding App Secret in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51).
 
 ## Versioning
 
-The current version of the SDK is [3.2.4](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.2.4), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.3.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.3.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
@@ -242,7 +229,6 @@ See the [LICENSE](LICENSE) file.
 1. [Salt Edge API General](https://docs.saltedge.com/general/)
 1. [Salt Edge Client Dashboard](https://www.saltedge.com/clients/dashboard)
 1. [Salt Edge API v5 Reference](https://docs.saltedge.com/account_information/v5/)
-1. [Salt Edge Partners API v1 Reference](https://docs.saltedge.com/partners/v1/)
 
 For more information, feel free to [contact us](https://www.saltedge.com/pages/contact)
 ---

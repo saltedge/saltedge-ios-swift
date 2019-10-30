@@ -44,25 +44,20 @@ final class AccountsViewController: UIViewController {
         let remove = UIAlertAction(title: "Remove", style: .destructive) { [weak self] action in
             self?.removeConnection()
         }
-        actionSheet.addAction(cancel)
-        actionSheet.addAction(remove)
+        let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
+            self?.chooseMethodForAction(for: .reconnect)
+        }
+        let refresh = UIAlertAction(title: "Refresh", style: .default) { [weak self] action in
+            self?.chooseMethodForAction(for: .refresh)
+        }
+        let viewAttempts = UIAlertAction(title: "View Attempts", style: .default) { [weak self] action in
+            guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(connectionSecret: weakSelf.connection.secret) else { return }
+            
+            weakSelf.navigationController?.pushViewController(attemtsVC, animated: true)
+        }
 
-        if !SERequestManager.shared.isPartner {
-            let reconnect = UIAlertAction(title: "Reconnect", style: .default) { [weak self] action in
-                self?.chooseMethodForAction(for: .reconnect)
-            }
-            let refresh = UIAlertAction(title: "Refresh", style: .default) { [weak self] action in
-                self?.chooseMethodForAction(for: .refresh)
-            }
-            let viewAttempts = UIAlertAction(title: "View Attempts", style: .default) { [weak self] action in
-                guard let weakSelf = self, let attemtsVC = AttemptsViewController.create(connectionSecret: weakSelf.connection.secret) else { return }
-                
-                weakSelf.navigationController?.pushViewController(attemtsVC, animated: true)
-            }
-
-            for action in [reconnect, refresh, viewAttempts] {
-                actionSheet.addAction(action)
-            }
+        for action in [reconnect, refresh, viewAttempts, cancel, remove] {
+            actionSheet.addAction(action)
         }
 
         present(actionSheet, animated: true)
@@ -95,23 +90,18 @@ final class AccountsViewController: UIViewController {
 
     private func removeConnection() {
         HUD.show(.labeledProgress(title: "Removing connection", subtitle: nil))
-        if SERequestManager.shared.isPartner {
-            removeConnection()
-            navigationController?.popViewController(animated: true)
-        } else {
-            SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
-                switch response {
-                case .success(let value):
-                    guard let weakSelf = self else { return }
+        SERequestManager.shared.removeConnection(with: connection.secret) { [weak self] response in
+            switch response {
+            case .success(let value):
+                guard let weakSelf = self else { return }
 
-                    if value.data.removed {
-                        weakSelf.removeConnections()
-                        weakSelf.navigationController?.popViewController(animated: true)
-                    }
-                    HUD.hide(animated: true)
-                case .failure(let error):
-                    HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
+                if value.data.removed {
+                    weakSelf.removeConnections()
+                    weakSelf.navigationController?.popViewController(animated: true)
                 }
+                HUD.hide(animated: true)
+            case .failure(let error):
+                HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
             }
         }
     }

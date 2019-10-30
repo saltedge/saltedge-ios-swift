@@ -106,36 +106,22 @@ final class ConnectViewController: UIViewController {
     }
 
     private func switchToConnectionsController() {
-        tabBarController?.selectedIndex = SERequestManager.shared.isPartner ? 1 : 2
+        tabBarController?.selectedIndex = 2
     }
 
     private func createSession() {
         guard let provider = provider else { return }
 
-        if SERequestManager.shared.isPartner {
-            let leadSessionParams = SELeadSessionParams(
-                consent: consent,
-                providerCode: provider.code,
-                attempt: attempt,
-                javascriptCallbackType: "iframe"
-            )
+        let connectSessionsParams = SEConnectSessionsParams(
+            attempt: attempt,
+            providerCode: provider.code,
+            javascriptCallbackType: "iframe",
+            consent: consent
+        )
 
-            // Check if SERequestManager will call handleConnectSessionResponse
-            SERequestManager.shared.createLeadSession(params: leadSessionParams) { [weak self] response in
-                self?.handleLeadSessionResponse(response)
-            }
-        } else {
-            let connectSessionsParams = SEConnectSessionsParams(
-                attempt: attempt,
-                providerCode: provider.code,
-                javascriptCallbackType: "iframe",
-                consent: consent
-            )
-
-            // Check if SERequestManager will call handleConnectSessionResponse
-            SERequestManager.shared.createConnectSession(params: connectSessionsParams) { [weak self] response in
-                self?.handleConnectSessionResponse(response)
-            }
+        // Check if SERequestManager will call handleConnectSessionResponse
+        SERequestManager.shared.createConnectSession(params: connectSessionsParams) { [weak self] response in
+            self?.handleConnectSessionResponse(response)
         }
     }
 }

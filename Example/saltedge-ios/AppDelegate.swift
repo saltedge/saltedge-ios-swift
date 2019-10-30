@@ -58,17 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
 
-        // NOTE: Use this method for setting Salt Edge API v5.
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
-
-        // NOTE: Use this method for setting Salt Edge Partners API v1.
-        // SERequestManager.shared.setPartner(appId: appId, appSecret: appSecret)
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = MainTabBarViewController()
-        
-        guard !SERequestManager.shared.isPartner else { return true }
 
         if let secret = UserDefaultsHelper.customerSecret {
             SERequestManager.shared.set(customerSecret: secret)
