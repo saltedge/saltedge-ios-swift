@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1] - 2020-03-06
+
+### Added.
+
+- Added logoURL to SEProvider model
+
+
 ## [3.3.0] - 2019-10-29
 
 ### Removed.
