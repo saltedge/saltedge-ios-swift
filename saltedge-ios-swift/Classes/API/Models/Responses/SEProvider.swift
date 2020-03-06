@@ -35,6 +35,7 @@ public struct SEProvider: Decodable {
     public let instruction: String
     public let homeURL: String
     public let loginURL: String
+    public let logoURL: String
     public let countryCode: String
     public let refreshTimeout: Int
     public let holderInfo: [String]
@@ -58,6 +59,7 @@ public struct SEProvider: Decodable {
         case instruction = "instruction"
         case homeURL = "home_url"
         case loginURL = "login_url"
+        case logoURL = "logo_url"
         case countryCode = "country_code"
         case refreshTimeout = "refresh_timeout"
         case holderInfo = "holder_info"
