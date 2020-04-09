@@ -24,6 +24,7 @@
 import Foundation
 
 public struct SEProviderParams: URLEncodable, ParametersEncodable {
+    public let perPage: String
     public let fromId: Int?
     public let fromDate: Date?
     public let countryCode: String?
@@ -31,12 +32,14 @@ public struct SEProviderParams: URLEncodable, ParametersEncodable {
     public let includeFakeProviders: Bool?
     public let includeProviderFields: Bool?
     
-    public init(fromId: Int? = nil,
+    public init(perPage: String = "1000",
+                fromId: Int? = nil,
                 fromDate: Date? = nil,
                 countryCode: String? = nil,
                 mode: String? = nil,
                 includeFakeProviders: Bool? = nil,
                 includeProviderFields: Bool? = nil) {
+        self.perPage = perPage
         self.fromId = fromId
         self.fromDate = fromDate
         self.countryCode = countryCode

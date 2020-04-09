@@ -26,7 +26,7 @@ import Foundation
 public struct SEError: Decodable {
     public let errorClass: String
     public let errorMessage: String
-    public let documentationUrl: String
+    public let documentationUrl: String?
 
     private enum CodingKeys: String, CodingKey {
         case error = "error"
@@ -43,6 +43,6 @@ public struct SEError: Decodable {
         let error = try container.nestedContainer(keyedBy: ErrorCodingKeys.self, forKey: .error)
         errorClass = try error.decode(String.self, forKey: .errorClass)
         errorMessage = try error.decode(String.self, forKey: .errorMessage)
-        documentationUrl = try error.decode(String.self, forKey: .documentationUrl)
+        documentationUrl = try error.decodeIfPresent(String.self, forKey: .documentationUrl)
     }
 }
