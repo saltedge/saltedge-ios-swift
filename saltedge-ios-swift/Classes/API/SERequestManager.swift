@@ -518,13 +518,13 @@ public class SERequestManager {
      - parameters:
          - connection_id: Optional. The id of the connection containing the consents
          - customer_id: Optional. The id of the customer containing the consents. Note: Will be ignored if connection_id is present.
-         - from_id: Optional. The id from which the next page of consents starts.
+         - params: Optional constraints set to the fetch query. You can set **from_id** to fetch paginated results manually. **next_id** could be obtained from response meta.
          - completion: The code to be executed once the request has finished.
 
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#consents-list)
      */
-    public func getConsents(params: SEConsentsListParams, completion: SEHTTPResponse<[SEConsent]>) {
-        HTTPService<[SEConsent]>.makeRequest(ConsentRouter.list(params), completion: completion)
+    public func getConsents(params: SEConsentsListParams?, completion: SEHTTPResponse<[SEConsent]>) {
+        HTTPPaginatedService<SEConsent>.makeRequest(ConsentRouter.list(params), completion: completion)
     }
 
     /**
@@ -559,29 +559,31 @@ public class SERequestManager {
 
     // MARK: Attempt
     /**
-     Returns a paginated list of all attempts for a certain connection.
-     
-     - parameters:
-         - connectionSecret: The secret of the connection whose attempts will be requested.
-         - completion: The code to be executed once the request has finished.
-     
-     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-list)
-     */
-    public func getAttempts(for connectionSecret: String, completion: SEHTTPResponse<[SEAttempt]>) {
-        HTTPService<[SEAttempt]>.makeRequest(AttemptRouter.list(connectionSecret), completion: completion)
-    }
-    
-    /**
      Returns all attempts for a certain connection.
      
      - parameters:
          - connectionSecret: The secret of the connection whose attempts will be requested.
+         - params: Optional constraints set to the fetch query. You can set **from_id** to fetch paginated results manually. **next_id** could be obtained from response meta.
          - completion: The code to be executed once the request has finished.
      
      [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-list)
      */
-    public func getAllAttempts(for connectionSecret: String, completion: SEHTTPResponse<[SEAttempt]>) {
-        HTTPPaginatedService<SEAttempt>.makeRequest(AttemptRouter.list(connectionSecret), completion: completion)
+    public func getAttempts(for connectionSecret: String, params: SEAttemptParams? = nil, completion: SEHTTPResponse<[SEAttempt]>) {
+        HTTPService<[SEAttempt]>.makeRequest(AttemptRouter.list(connectionSecret, params), completion: completion)
+    }
+    
+    /**
+     Returns a paginated list of all attempts for a certain connection.
+     
+     - parameters:
+         - connectionSecret: The secret of the connection whose attempts will be requested.
+         - params: Optional constraints set to the fetch query. You can set **from_id** to fetch paginated results manually. **next_id** could be obtained from response meta.
+         - completion: The code to be executed once the request has finished.
+     
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#attempts-list)
+     */
+    public func getAllAttempts(for connectionSecret: String, params: SEAttemptParams, completion: SEHTTPResponse<[SEAttempt]>) {
+        HTTPPaginatedService<SEAttempt>.makeRequest(AttemptRouter.list(connectionSecret, params), completion: completion)
     }
     
     /**

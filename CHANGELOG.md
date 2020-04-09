@@ -1,11 +1,20 @@
 # Changelog
 
+## [3.3.2] - 2020-04-09
+
+### Added
+
+- Added `per_page` parameter in `SEProviderParams`, `SEAccountParams`, `SETransactionParams`, `SEConsentsListParams`, `SEAttemptParams`. Default value is 1000.
+
+### Changed
+
+- Made `documentation_url` field optional for `SEError`
+
 ## [3.3.1] - 2020-03-06
 
 ### Added.
 
 - Added logoURL to SEProvider model
-
 
 ## [3.3.0] - 2019-10-29
 

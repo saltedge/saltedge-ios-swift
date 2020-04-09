@@ -1,7 +1,7 @@
 //
-//  ConsentRouter.swift
+//  SEAttemptParams.swift
 //
-//  Copyright (c) 2019 Salt Edge. https://saltedge.com
+//  Copyright (c) 2020 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,17 @@
 
 import Foundation
 
-typealias ConsentId = String
+public struct SEAttemptParams: URLEncodable, ParametersEncodable {
+    let perPage: String
+    let fromId: Int?
 
-enum ConsentRouter: Routable {
-    case list(SEConsentsListParams?)
-    case show(ConsentId, SEBaseConsentsParams)
-    case revoke(ConsentId, SEBaseConsentsParams)
-
-    var method: HTTPMethod {
-        switch self {
-        case .list, .show: return .get
-        case .revoke: return .put
-        }
+    public init(perPage: String = "1000", fromId: Int?) {
+        self.perPage = perPage
+        self.fromId = fromId
     }
 
-    var query: String {
-        switch self {
-        case .list: return "consents"
-        case .show(let id, _): return "consents/\(id)"
-        case .revoke(let id, _): return "consents/\(id)/revoke"
-        }
-    }
-
-    var headers: Headers {
-        return SEHeaders.cached.sessionHeaders
-    }
-
-    var parameters: ParametersEncodable? {
-        switch self {
-        case .list(let params): return params
-        case .show(_, let params), .revoke(_, let params): return params
-        }
+    enum CodingKeys: String, CodingKey {
+        case perPage = "per_page"
+        case fromId = "from_id"
     }
 }

@@ -36,6 +36,7 @@ class ParametersEncodableSpec: QuickSpec {
 
                 let expectedParams = SERequestParams(data: params)
                 let encoder = JSONEncoder()
+                encoder.outputFormatting = .sortedKeys
                 encoder.dateEncodingStrategy = .iso8601
                 let expectedData = try! encoder.encode(expectedParams)
 

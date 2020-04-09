@@ -43,6 +43,7 @@ extension ParametersEncodable where Self: Encodable {
         let params = SERequestParams(data: self)
         
         let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
         encoder.dateEncodingStrategy = .iso8601
         return try encoder.encode(params)
     }

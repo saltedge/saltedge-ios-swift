@@ -17,15 +17,31 @@ class DateUtilsSpec: QuickSpec {
                 context("when date string is given") {
                     it("should return date from string in yyyyMMdd format") {
                         let dateString = "2018-01-28"
-                        let expecteDate = DateComponents(calendar: Calendar.current, year: 2018, month: 1, day: 28).date!
 
-                        expect(DateFormatter.yyyyMMdd.date(from: dateString)).to(equal(expecteDate))
+                        var dateComponents = DateComponents()
+                        dateComponents.year = 2018
+                        dateComponents.month = 1
+                        dateComponents.day = 28
+                        dateComponents.timeZone = TimeZone.utc
+
+                        let calendar = Calendar(identifier: .iso8601)
+                        let expectedDate = calendar.date(from: dateComponents)
+
+                        expect(DateFormatter.yyyyMMdd.date(from: dateString)).to(equal(expectedDate))
                     }
                 }
 
                 context("when date given") {
                     it("should return string from date in yyyyMMdd format") {
-                        let date = DateComponents(calendar: Calendar.current, year: 2018, month: 1, day: 28).date!
+                        var dateComponents = DateComponents()
+                        dateComponents.year = 2018
+                        dateComponents.month = 1
+                        dateComponents.day = 28
+                        dateComponents.timeZone = TimeZone.utc
+
+                        let calendar = Calendar(identifier: .iso8601)
+                        let date = calendar.date(from: dateComponents)!
+
                         let expectedString = "2018-01-28"
                         
                         expect(DateFormatter.yyyyMMdd.string(from: date)).to(equal(expectedString))
@@ -35,7 +51,15 @@ class DateUtilsSpec: QuickSpec {
 
             describe("time") {
                 it("should return string from date in time format") {
-                    let date = DateComponents(calendar: Calendar.current, hour: 3, minute: 20, second: 30).date!
+                    var dateComponents = DateComponents()
+                    dateComponents.timeZone = TimeZone.utc
+                    dateComponents.hour = 03
+                    dateComponents.minute = 20
+                    dateComponents.second = 30
+
+                    let calendar = Calendar(identifier: .iso8601)
+                    let date = calendar.date(from: dateComponents)!
+
                     let expectedString = "03:20:30"
 
                     expect(DateFormatter.time.string(from: date)).to(equal(expectedString))

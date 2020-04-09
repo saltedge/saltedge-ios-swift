@@ -21,10 +21,12 @@ class URLEncodableSpec: QuickSpec {
             it("should return array of URLQueryItem") {
                 let params = TestParamURLEncodable(id: 1, someName: "some name")
                 
-                let expectedQueryItems = [URLQueryItem(name: "id", value: "\(params.id)"),
-                                          URLQueryItem(name: "some_name", value: params.someName) ]
+                let expectedQueryItems = [
+                    URLQueryItem(name: "id", value: "\(params.id)"),
+                    URLQueryItem(name: "some_name", value: params.someName)
+                ]
                 
-                expect((params.encode() as! [URLQueryItem])).to(equal(expectedQueryItems))
+                expect(Set(params.encode() as! [URLQueryItem])).to(equal(Set(expectedQueryItems)))
             }
         }
     }

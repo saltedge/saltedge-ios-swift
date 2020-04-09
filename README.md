@@ -5,17 +5,17 @@ Last SDK version (3+) supports Salt Edge API v5.
 
 ## Requirements
 
-- iOS 10.0+ / macOS 10.12+
-- Swift 4+
+- iOS 11.0+ / macOS 10.12+
+- Swift 5+
 
-## Installation with CocoaPods
+## Installation via CocoaPods
 
 #### Add the pod to your `Podfile`  
 
 for Salt Edge API v5 use
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.3.1'
+pod 'SaltEdge-iOS-Swift', '~> 3.3.2'
 ```
 
 for Salt Edge API v4 (***Deprecated***) use 
@@ -205,7 +205,7 @@ Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and c
 
 ## Versioning
 
-The current version of the SDK is [3.3.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.3.1), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.3.2](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.3.2), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 ## Security
 
