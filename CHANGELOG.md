@@ -4,7 +4,7 @@
 
 ### Added
 
-- Added `per_page` parameter in `SEProviderParams`. Default value is 1000.
+- Added `per_page` parameter in `SEProviderParams`, `SEAccountParams`, `SETransactionParams`. Default value is 1000.
 
 ### Changed
 
