@@ -5,7 +5,7 @@ Last SDK version (3+) supports Salt Edge API v5.
 
 ## Requirements
 
-- iOS 11.0+ / macOS 10.12+
+- iOS 11.0+ / macOS 10.13+
 - Swift 5+
 
 ## Installation via CocoaPods

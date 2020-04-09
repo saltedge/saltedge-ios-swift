@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/saltedge/saltedge-ios-swift.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
-  s.osx.deployment_target = '10.12'
+  s.osx.deployment_target = '10.13'
   s.swift_version = '5'
   s.module_name = 'SaltEdge'
   s.dependency 'TrustKit'
