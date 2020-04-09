@@ -44,12 +44,15 @@ public class SEBaseConsentsParams: Encodable, ParametersEncodable {
 }
 
 public class SEConsentsListParams: SEBaseConsentsParams {
+    public let perPage: String
     public let fromId: String?
 
-    public init(fromId: String? = nil,
+    public init(perPage: String = "1000",
+                fromId: String? = nil,
                 id: String? = nil,
                 connectionId: String? = nil,
                 customerId: String? = nil) {
+        self.perPage = perPage
         self.fromId = fromId
 
         super.init(id: id, connectionId: connectionId, customerId: customerId)
