@@ -1,3 +1,12 @@
+![CocoaPods Compatible](https://img.shields.io/cocoapods/v/SaltEdge-iOS-Swift.svg?style=flat)
+[![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40saltedge)](http://twitter.com/saltedge)
+
+<p align="center">
+  <a href="https://www.saltedge.com/products/spectre">
+    <img src="https://raw.githubusercontent.com/saltedge/sca-identity-service-example/master/docs/images/saltedge_logo.png" alt="Salt Egde Logo" width="96" height="96">
+  </a>
+</p>
+
 # Salt Edge iOS / macOS Swift SDK and iOS Example application
 
 A handful of classes to help you interact with the Salt Edge API from your iOS / macOS app.
@@ -232,4 +241,4 @@ See the [LICENSE](LICENSE) file.
 
 For more information, feel free to [contact us](https://www.saltedge.com/pages/contact)
 ---
-Copyright © 2014 - 2019 Salt Edge Inc. https://www.saltedge.com
+Copyright © 2014 - 2020 Salt Edge Inc. https://www.saltedge.com
