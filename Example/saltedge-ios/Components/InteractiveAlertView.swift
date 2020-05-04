@@ -18,7 +18,7 @@ final class InteractiveAlertView: UIView {
         return label
     }()
 
-    private let webView = UIWebView()
+    private let webView = WKWebView()
     private let indicator = UIActivityIndicatorView()
 
     private var textField: UITextField = {
@@ -103,7 +103,7 @@ private extension InteractiveAlertView {
     }
 
     func setupWebView(with html: String) {
-        webView.delegate = self
+        webView.navigationDelegate = self
 
         addSubview(webView)
         webView.addSubview(indicator)
@@ -158,8 +158,8 @@ private extension InteractiveAlertView {
     }
 }
 
-extension InteractiveAlertView: UIWebViewDelegate {
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+extension InteractiveAlertView: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         indicator.stopAnimating()
     }
 }

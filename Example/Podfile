@@ -1,9 +1,11 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 
 target 'saltedge-ios_Example' do
   pod 'SaltEdge-iOS-Swift', :path => '../'
   pod 'PKHUD', '~> 5.0'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImageSVGKitPlugin'
 
   target 'saltedge-ios_Tests' do
     inherit! :search_paths
