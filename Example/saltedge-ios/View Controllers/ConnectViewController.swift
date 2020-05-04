@@ -91,20 +91,6 @@ final class ConnectViewController: UIViewController {
         }
     }
 
-    private func handleLeadSessionResponse(_ response: SEResult<SEResponse<SELeadSessionResponse>>) {
-        switch response {
-        case .success(let value):
-            HUD.hide(animated: true)
-            if let url = URL(string: value.data.redirectUrl) {
-                let request = URLRequest(url: url)
-                webView.load(request)
-                webView.isHidden = false
-            }
-        case .failure(let error):
-            HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
-        }
-    }
-
     private func switchToConnectionsController() {
         tabBarController?.selectedIndex = 2
     }

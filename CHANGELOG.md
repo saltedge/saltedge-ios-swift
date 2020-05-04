@@ -1,12 +1,18 @@
 # Changelog
 
+## [3.3.3] - 2020-05-04
+
+### Removed.
+
+- Removed deprecated files
+
 ## [3.3.2] - 2020-04-09
 
-### Added
+### Added.
 
 - Added `per_page` parameter in `SEProviderParams`, `SEAccountParams`, `SETransactionParams`, `SEConsentsListParams`, `SEAttemptParams`. Default value is 1000.
 
-### Changed
+### Changed.
 
 - Made `documentation_url` field optional for `SEError`
 
