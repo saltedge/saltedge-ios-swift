@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.4] - 2020-06-23  
+
+### Added.  
+
+- Added `theme` and `override_credentials_strategy` into `SESessionsParams`
+  
 ## [3.3.3] - 2020-05-04
 
 ### Removed.
