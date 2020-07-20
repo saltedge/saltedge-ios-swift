@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.5] - 2020-07-20  
+
+### Changed.  
+
+- Downgraded SDK target iOS version to 10.+
+
 ## [3.3.4] - 2020-06-23  
 
 ### Added.  
