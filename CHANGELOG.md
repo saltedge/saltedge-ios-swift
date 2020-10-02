@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.6] - 2020-10-02 
+
+### Added.
+
+- Added missed attributes to `SEProvider`.
+
 ## [3.3.5] - 2020-07-20  
 
 ### Changed.  
