@@ -86,15 +86,17 @@ public class SEConnectionRefreshParams: SEExtendedConnectionParams {
     public let attempt: SEAttempt?
     public let categorization: String?
 
-    public init(attempt: SEAttempt? = nil,
-                categorization: String? = nil,
-                fromDate: Date? = nil,
-                toDate: Date? = nil,
-                dailyRefresh: Bool? = nil,
-                locale: String? = nil,
-                includeFakeProviders: Bool? = nil,
-                categorize: Bool? = nil,
-                storeCredentials: Bool? = nil) {
+    public init(
+        attempt: SEAttempt? = nil,
+        dailyRefresh: Bool? = nil,
+        includeFakeProviders: Bool? = nil,
+        categorization: String? = nil,
+        fromDate: Date? = nil,
+        toDate: Date? = nil,
+        locale: String? = nil,
+        categorize: Bool? = nil,
+        storeCredentials: Bool? = nil
+    ) {
         self.attempt = attempt
         self.categorization = categorization
 
