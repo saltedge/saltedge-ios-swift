@@ -1,7 +1,7 @@
 //
 //  SEAttempt.swift
 //
-//  Copyright (c) 2019 Salt Edge. https://saltedge.com
+//  Copyright (c) 2020 Salt Edge. https://saltedge.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -53,36 +53,42 @@ public struct SEAttempt: Codable {
     public let lastStage: SEStage?
     public let stages: [SEStage]?
     public let returnTo: String?
+    public let fromDate: Date?
+    public let toDate: Date?
 
-    public init(id: String? = nil,
-                fetchScopes: [String]? = nil,
-                apiMode: String? = nil,
-                apiVersion: String? = nil,
-                automaticFetch: Bool? = nil,
-                dailyRefresh: Bool? = nil,
-                categorize: Bool? = nil,
-                createdAt: Date? = nil,
-                customFields: [String: String]? = nil,
-                deviceType: String? = nil,
-                remoteIp: String? = nil,
-                excludeAccounts: [Int]? = nil,
-                failAt: Date? = nil,
-                failErrorClass: String? = nil,
-                failMessage: String? = nil,
-                finished: Bool? = nil,
-                finishedRecent: Bool? = nil,
-                interactive: Bool? = nil,
-                locale: String? = nil,
-                partial: Bool? = nil,
-                storeCredentials: Bool? = nil,
-                successAt: Date? = nil,
-                updatedAt: Date? = nil,
-                showConsentConfirmation: Bool? = nil,
-                consentTypes: [String]? = nil,
-                consentGivenAt: Date? = nil,
-                lastStage: SEStage? = nil,
-                stages: [SEStage]? = nil,
-                returnTo: String? = nil) {
+    public init(
+        id: String? = nil,
+        fetchScopes: [String]? = nil,
+        apiMode: String? = nil,
+        apiVersion: String? = nil,
+        automaticFetch: Bool? = nil,
+        dailyRefresh: Bool? = nil,
+        categorize: Bool? = nil,
+        createdAt: Date? = nil,
+        customFields: [String: String]? = nil,
+        deviceType: String? = nil,
+        remoteIp: String? = nil,
+        excludeAccounts: [Int]? = nil,
+        failAt: Date? = nil,
+        failErrorClass: String? = nil,
+        failMessage: String? = nil,
+        finished: Bool? = nil,
+        finishedRecent: Bool? = nil,
+        interactive: Bool? = nil,
+        locale: String? = nil,
+        partial: Bool? = nil,
+        storeCredentials: Bool? = nil,
+        successAt: Date? = nil,
+        updatedAt: Date? = nil,
+        showConsentConfirmation: Bool? = nil,
+        consentTypes: [String]? = nil,
+        consentGivenAt: Date? = nil,
+        lastStage: SEStage? = nil,
+        stages: [SEStage]? = nil,
+        returnTo: String? = nil,
+        fromDate: Date? = nil,
+        toDate: Date? = nil
+    ) {
         self.id = id
         self.fetchScopes = fetchScopes
         self.apiMode = apiMode
@@ -112,6 +118,8 @@ public struct SEAttempt: Codable {
         self.lastStage = lastStage
         self.stages = stages
         self.returnTo = returnTo
+        self.fromDate = fromDate
+        self.toDate = toDate
     }
     
     enum CodingKeys: String, CodingKey {
@@ -144,5 +152,7 @@ public struct SEAttempt: Codable {
         case lastStage = "last_stage"
         case stages = "stages"
         case returnTo = "return_to"
+        case fromDate = "from_date"
+        case toDate = "to_date"
     }
 }

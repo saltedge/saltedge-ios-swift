@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.7] - 2020-10-07 
+
+### Added.
+
+- Added missed attributes to `SEAttempt`.
+
+
 ## [3.3.6] - 2020-10-02 
 
 ### Added.

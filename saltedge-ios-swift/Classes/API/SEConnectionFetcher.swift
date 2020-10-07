@@ -26,7 +26,11 @@ import Foundation
 class SEConnectionFetcher {
     private static let pollingInterval: Double = 3.0
 
-    static func createConnection(with params: SEConnectionParams, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
+    static func createConnection(
+        with params: SEConnectionParams,
+        fetchingDelegate: SEConnectionFetchingDelegate,
+        completion: SEHTTPResponse<SEConnection>
+    ) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.create(params)) { response in
             switch response {
             case .success(let value):
@@ -37,7 +41,13 @@ class SEConnectionFetcher {
         }
     }
 
-    static func updateConnectionStatus(with params: SEConnectionUpdateStatusParams, id: String, secret: String, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
+    static func updateConnectionStatus(
+        with params: SEConnectionUpdateStatusParams,
+        id: String,
+        secret: String,
+        fetchingDelegate: SEConnectionFetchingDelegate,
+        completion: SEHTTPResponse<SEConnection>
+    ) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.update(params, id, secret)) { response in
             switch response {
             case .success(let value):
@@ -48,7 +58,12 @@ class SEConnectionFetcher {
         }
     }
 
-    static func reconnectConnection(secret: String, params: SEConnectionReconnectParams, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
+    static func reconnectConnection(
+        secret: String,
+        params: SEConnectionReconnectParams,
+        fetchingDelegate: SEConnectionFetchingDelegate,
+        completion: SEHTTPResponse<SEConnection>
+    ) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.reconnect(params, secret)) { response in
             switch response {
             case .success(let value):
@@ -59,7 +74,12 @@ class SEConnectionFetcher {
         }
     }
 
-    static func refreshConnection(secret: String, params: SEConnectionRefreshParams? = nil, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
+    static func refreshConnection(
+        secret: String,
+        params: SEConnectionRefreshParams? = nil,
+        fetchingDelegate: SEConnectionFetchingDelegate,
+        completion: SEHTTPResponse<SEConnection>
+    ) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.refresh(params, secret)) { response in
             switch response {
             case .success(let value):
@@ -70,7 +90,12 @@ class SEConnectionFetcher {
         }
     }
 
-    static func interactiveConnection(with params: SEConnectionInteractiveParams, secret: String, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
+    static func interactiveConnection(
+        with params: SEConnectionInteractiveParams,
+        secret: String,
+        fetchingDelegate: SEConnectionFetchingDelegate,
+        completion: SEHTTPResponse<SEConnection>
+    ) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.interactive(params, secret)) { response in
             switch response {
             case .success(let value):

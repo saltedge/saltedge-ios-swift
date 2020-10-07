@@ -50,7 +50,7 @@ public class SERequestManager {
      - parameters:
          - customerSecret: The string identifying the customer.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#customers-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#customers-create)
      */
     public func set(customerSecret: String) {
         SEHeaders.cached.set(customerSecret: customerSecret)
@@ -74,7 +74,7 @@ public class SERequestManager {
      }
      ```
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#providers-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#providers-list)
      */
     public func getProviders(with params: SEProviderParams? = nil, completion: SEHTTPResponse<[SEProvider]>) {
         HTTPService<[SEProvider]>.makeRequest(ProviderRouter.list(params), completion: completion)
@@ -87,7 +87,7 @@ public class SERequestManager {
          - params: Optional constraints set to the fetch query.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#providers-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#providers-list)
      */
     public func getAllProviders(with params: SEProviderParams? = nil, completion: SEHTTPResponse<[SEProvider]>) {
         HTTPPaginatedService<SEProvider>.makeRequest(ProviderRouter.list(params), completion: completion)
@@ -102,7 +102,7 @@ public class SERequestManager {
 
      - warning: **code** cannot be nil.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#providers-show)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#providers-show)
      */
     public func getProvider(code: String, completion: SEHTTPResponse<SEProvider>) {
         HTTPService<SEProvider>.makeRequest(ProviderRouter.show(code), completion: completion)
@@ -115,7 +115,7 @@ public class SERequestManager {
      - parameters:
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#countries-list)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#countries-list)
      */
     public func getCountries(completion: SEHTTPResponse<[SECountry]>) {
         HTTPService<[SECountry]>.makeRequest(CountryRouter.list, completion: completion)
@@ -129,7 +129,7 @@ public class SERequestManager {
          - params: Parameters needed to create new customer.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#customers-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#customers-create)
      */
     public func createCustomer(with params: SECustomerParams, completion: SEHTTPResponse<SECustomer>) {
         HTTPService<SECustomer>.makeRequest(CustomerRouter.create(params), completion: completion)
@@ -145,7 +145,7 @@ public class SERequestManager {
          - completion: The code to be executed once the request has finished.
 
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-create)
      */
     public func createConnection(with params: SEConnectionParams, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
         SEConnectionFetcher.createConnection(with: params, fetchingDelegate: fetchingDelegate, completion: completion)
@@ -161,7 +161,7 @@ public class SERequestManager {
         - fetchingDelegate: The delegate of the connection creation process that can respond to certain events.
         - completion: The code to be executed once the request has finished.
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-create)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-update)
      */
     public func updateConnectionUpdateStatus(with params: SEConnectionUpdateStatusParams, id: String, secret: String, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
         SEConnectionFetcher.updateConnectionStatus(with: params, id: id, secret: secret, fetchingDelegate: fetchingDelegate, completion: completion)
@@ -174,7 +174,7 @@ public class SERequestManager {
          - connectionSecret: The secret of the connection which is to be fetched.
          - completion: The code to be executed once the request has finished.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-show)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-show)
      */
     public func getConnection(with secret: String, completion: SEHTTPResponse<SEConnection>) {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.show(secret), completion: completion)
@@ -191,7 +191,7 @@ public class SERequestManager {
      - warning: **credentials** in SEReconnectSessionsParams cannot be nil.
      
 
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-reconnect)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-reconnect)
      */
     public func reconnectConnection(with secret: String, with params: SEConnectionReconnectParams, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
         SEConnectionFetcher.reconnectConnection(secret: secret, params: params, fetchingDelegate: fetchingDelegate, completion: completion)
@@ -209,7 +209,7 @@ public class SERequestManager {
      - warning: **credentials** in SEConnectionInteractiveParams cannot be nil.
      
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-interactive)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-interactive)
      */
     public func confirmConnection(with secret: String, params: SEConnectionInteractiveParams, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
         SEConnectionFetcher.interactiveConnection(with: params, secret: secret, fetchingDelegate: fetchingDelegate, completion: completion)
@@ -226,7 +226,7 @@ public class SERequestManager {
 
      - warning: Only automatic connection can be refreshed.
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-refresh)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-refresh)
      */
     public func refreshConnection(with secret: String, params: SEConnectionRefreshParams? = nil, fetchingDelegate: SEConnectionFetchingDelegate, completion: SEHTTPResponse<SEConnection>) {
         SEConnectionFetcher.refreshConnection(secret: secret, params: params, fetchingDelegate: fetchingDelegate, completion: completion)
@@ -240,7 +240,7 @@ public class SERequestManager {
          - completion: The code to be executed once the request has finished.
      
      
-     [Salt Edge API Reference](https://docs.saltedge.com/reference/#logins-remove)
+     [Salt Edge API Reference](https://docs.saltedge.com/account_information/v5/#connections-remove)
      */
     public func removeConnection(with secret: String, completion: SEHTTPResponse<SERemovedConnectionResponse>) {
         HTTPService<SERemovedConnectionResponse>.makeRequest(ConnectionRouter.remove(secret), completion: completion)
