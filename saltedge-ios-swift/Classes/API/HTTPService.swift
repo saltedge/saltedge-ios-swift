@@ -128,18 +128,18 @@ struct HTTPPaginatedService<T: Decodable> {
         }
     }
 }
-    
+
 struct HTTPService<T: Decodable> {
     static func makeRequest(_ request: Routable, completion: SEHTTPResponse<T>) {
         let urlRequest = request.asURLRequest()
         
         makeRequest(urlRequest, completion: completion)
     }
-    
+
     static func makeRequest(_ request: URLRequest, completion: SEHTTPResponse<T>) {
         let task = SessionManager.shared.dataTask(with: request) { data, response, error in
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            decoder.dateDecodingStrategyFormatters = [DateFormatter.yyyyMMdd, DateFormatter.iso8601DateTime]
             
             let (data, error) = handleResponse(from: data, error: error, decoder: decoder)
             
@@ -183,4 +183,28 @@ func handleResponse(from data: Data?, error: Error?, decoder: JSONDecoder) -> (D
     }
     
     return (jsonData, nil)
+}
+
+private extension JSONDecoder {
+    var dateDecodingStrategyFormatters: [DateFormatter]? {
+        get {
+            return nil
+        }
+        set {
+            guard let formatters = newValue else { return }
+
+            self.dateDecodingStrategy = .custom { decoder in
+                let container = try decoder.singleValueContainer()
+                let dateString = try container.decode(String.self)
+
+                for formatter in formatters {
+                    if let date = formatter.date(from: dateString) {
+                        return date
+                    }
+                }
+
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateString)")
+            }
+        }
+    }
 }

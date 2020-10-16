@@ -31,6 +31,14 @@ extension DateFormatter {
         return formatter
     }()
 
+    static let iso8601DateTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.timeZone = TimeZone.utc
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
+
     static let time: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss"

@@ -49,6 +49,28 @@ class DateUtilsSpec: QuickSpec {
                 }
             }
 
+            describe("iso8601DateTime") {
+                context("when date string is given") {
+                    it("should return date from string in iso8601DateTime format") {
+                        let dateString = "2020-10-16T14:31:21Z"
+
+                        var dateComponents = DateComponents()
+                        dateComponents.year = 2020
+                        dateComponents.month = 10
+                        dateComponents.day = 16
+                        dateComponents.hour = 14
+                        dateComponents.minute = 31
+                        dateComponents.second = 21
+                        dateComponents.timeZone = TimeZone.utc
+
+                        let calendar = Calendar(identifier: .iso8601)
+                        let expectedDate = calendar.date(from: dateComponents)
+
+                        expect(DateFormatter.iso8601DateTime.date(from: dateString)).to(equal(expectedDate))
+                    }
+                }
+            }
+
             describe("time") {
                 it("should return string from date in time format") {
                     var dateComponents = DateComponents()

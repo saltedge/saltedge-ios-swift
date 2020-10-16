@@ -27,8 +27,7 @@ public class SEBaseConnectionParams: Encodable, ParametersEncodable {
     public let fromDate: Date?
     public let toDate: Date?
     
-    public init(fromDate: Date? = nil,
-                toDate: Date? = nil) {
+    public init(fromDate: Date? = nil, toDate: Date? = nil) {
         self.fromDate  = fromDate
         self.toDate    = toDate
     }
