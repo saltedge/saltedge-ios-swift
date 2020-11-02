@@ -5,7 +5,7 @@ PODS:
   - Nimble (9.0.0)
   - PKHUD (5.3.0)
   - Quick (3.0.0)
-  - SaltEdge-iOS-Swift (3.3.8):
+  - SaltEdge-iOS-Swift (3.3.9):
     - TrustKit
   - SDWebImage (5.9.2):
     - SDWebImage/Core (= 5.9.2)
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
-  SaltEdge-iOS-Swift: 903862be01f04aee7f0d03a031d8795efe133f6e
+  SaltEdge-iOS-Swift: 60d155e14e4c6de2cbf27348d7b4ace9b1d6e6d5
   SDWebImage: 0b42b8719ab0c5257177d5894306e8a336b21cbb
   SDWebImageSVGKitPlugin: 06a811c05b9e839982baeb5251d15fe7a79abb82
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac

@@ -57,17 +57,18 @@ public struct SEProvider: Decodable {
     public let createdAt: String
     public let updatedAt: String
     public let requiredFields: [SEProviderField]?
+    public let interactiveFields: [SEProviderField]?
     
     public var isOAuth: Bool {
         return mode == "oauth"
     }
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case code = "code"
-        case name = "name"
-        case mode = "mode"
-        case status = "status"
+        case id
+        case code
+        case name
+        case mode
+        case status
         case automaticFetch = "automatic_fetch"
         case customerNotifiedOnSignIn = "customer_notified_on_sign_in"
         case interactive = "interactive"
@@ -80,10 +81,10 @@ public struct SEProvider: Decodable {
         case refreshTimeout = "refresh_timeout"
         case holderInfo = "holder_info"
         case maxConsentDays = "max_consent_days"
-        case timezone = "timezone"
+        case timezone
         case maxInteractiveDelay = "max_interactive_delay"
         case optionalInteractivity = "optional_interactivity"
-        case regulated = "regulated"
+        case regulated
         case maxFetchInterval = "max_fetch_interval"
         case supportedFetchScopes = "supported_fetch_scopes"
         case supportedAccountExtraFields = "supported_account_extra_fields"
@@ -96,6 +97,45 @@ public struct SEProvider: Decodable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case requiredFields = "required_fields"
+        case interactiveFields = "interactive_fields"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        code = try container.decode(String.self, forKey: .code)
+        name = try container.decode(String.self, forKey: .name)
+        mode = try container.decode(String.self, forKey: .mode)
+        status = try container.decode(String.self, forKey: .status)
+        automaticFetch = try container.decode(Bool.self, forKey: .automaticFetch)
+        customerNotifiedOnSignIn = try container.decode(Bool.self, forKey: .customerNotifiedOnSignIn)
+        interactive = try container.decode(Bool.self, forKey: .interactive)
+        identificationMode = try container.decode(String.self, forKey: .identificationMode)
+        instruction = try container.decode(String.self, forKey: .instruction)
+        homeURL = try container.decode(String.self, forKey: .homeURL)
+        loginURL = try container.decode(String.self, forKey: .loginURL)
+        logoURL = try container.decode(String.self, forKey: .logoURL)
+        countryCode = try container.decode(String.self, forKey: .countryCode)
+        refreshTimeout = try container.decode(Int.self, forKey: .refreshTimeout)
+        holderInfo = try container.decode([String].self, forKey: .holderInfo)
+        maxConsentDays = try container.decodeIfPresent(Int.self, forKey: .maxConsentDays)
+        timezone = try container.decode(String.self, forKey: .timezone)
+        maxInteractiveDelay = try container.decode(Int.self, forKey: .maxInteractiveDelay)
+        optionalInteractivity = try container.decode(Bool.self, forKey: .optionalInteractivity)
+        regulated = try container.decode(Bool.self, forKey: .regulated)
+        maxFetchInterval = try container.decode(Int.self, forKey: .maxFetchInterval)
+        supportedFetchScopes = try container.decode([String].self, forKey: .supportedFetchScopes)
+        supportedAccountExtraFields = try container.decode([String].self, forKey: .supportedAccountExtraFields)
+        supportedTransactionExtraFields = try container.decode([String].self, forKey: .supportedTransactionExtraFields)
+        supportedAccountNatures = try container.decode([String].self, forKey: .supportedAccountNatures)
+        supportedAccountTypes = try container.decode([String].self, forKey: .supportedAccountTypes)
+        identificationCodes = try container.decode([String].self, forKey: .identificationCodes)
+        bicCodes = try container.decode([String].self, forKey: .bicCodes)
+        supportedIframeEmbedding = try container.decode(Bool.self, forKey: .supportedIframeEmbedding)
+        createdAt = try container.decode(String.self, forKey: .createdAt)
+        updatedAt = try container.decode(String.self, forKey: .updatedAt)
+        requiredFields = try container.decodeIfPresent([SEProviderField].self, forKey: .requiredFields)
+        interactiveFields = try container.decodeIfPresent([SEProviderField].self, forKey: .interactiveFields)
     }
 }
 
