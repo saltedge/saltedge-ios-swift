@@ -61,6 +61,67 @@ SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 *Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page (Eligable only for Salt Edge API).
 `customerId` - it is the unique identifier of the new customer.
 
+## SERequestManager
+
+A class designed with convenience methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (Connections, Transactions, Accounts, et al.), for requesting connect url for connecting, reconnecting and refreshing Connections via a `SEWebView`, and also for connecting Connections via the REST API.
+
+Each successful request via `SERequestManager` returns `SEResponse` containing `data` and `meta`.
+
+Each failed request returns standard Swift `Error` .
+
+Use the manager to interact with the provided API:
+
+```swift
+let connectionParams = SEConnectionParams(
+    consent: SEConsent(scopes: ["account_details", "transactions_details"]),
+    countryCode: "XF",
+    providerCode: "fakebank_simple_xf",
+    credentials: ["login": "username", "password": "secret"]
+)
+SERequestManager.shared.createConnection(with: connectionParams) { response in
+    switch response {
+    case .success(let value):
+        // value.data is a valid SEConnection
+    case .failure(let error):
+        // Handle error
+    }
+}
+```
+
+## Get customer secret
+
+To access the Salt Edge SDK functionality, it is necсessary to get a [Customer secret](https://docs.saltedge.com/account_information/v5/#customers-create). To get a customer secret, you can make a request via `SERequestManager`.
+
+After successful request, you should link the received customer secret with the request manager:
+
+```swift
+SERequestManager.shared.set(customerSecret: "received-customer-secret")
+```
+
+**Note:** You must save the received customer secret in you storage(e.g. UserDefaults) and for all future Salt Edge SDK usage, you should link the stored customer secret.
+
+### Example
+
+```swift
+let defaults = UserDefaults.standard
+if let secret = defaults.string(forKey: "customerSecret") {
+    SERequestManager.shared.set(customerSecret: secret)
+} else {
+    let params = SECustomerParams(identifier: "your-customer-unique-id")
+    SERequestManager.shared.createCustomer(with: params) { response in
+        switch response {
+        case .success(let value):
+            // Save customer secret to your storage and then link it with API manager
+            defaults.set(value.data.secret, forKey: "customerSecret")
+
+            SERequestManager.shared.set(customerSecret: value.data.secret)
+            case .failure(let error):
+            // Handle error
+        }
+    }
+}
+```
+
 ## SEWebView
 
 A small `WKWebView` subclass for using [Salt Edge Connect](https://docs.saltedge.com/account_information/v5/#salt_edge_connect) within your iOS app.
