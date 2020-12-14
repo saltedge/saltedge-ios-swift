@@ -58,12 +58,12 @@ To setup Salt Edge API, call in `AppDelegate.swift`:
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-*Note*: You can find your `appId` and `appSecret` in at your [secrets](https://www.saltedge.com/clients/profile/secrets) page (Eligable only for Salt Edge API).
-`customerId` - it is the unique identifier of the new customer.
+*Note*: You can find your `appId` and `appSecret` on your [secrets](https://www.saltedge.com/clients/profile/secrets) page (Eligible only for Salt Edge API).
+`customerId` - is the unique identifier of the new customer.
 
 ## SERequestManager
 
-A class designed with convenience methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (Connections, Transactions, Accounts, et al.), for requesting connect url for connecting, reconnecting and refreshing Connections via a `SEWebView`, and also for connecting Connections via the REST API.
+A class designed with convenient methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (Connections, Transactions, Accounts, etc.), for requesting connect url for creating, reconnecting and refreshing Connections via a `SEWebView`, and also for creating Connections via the REST API.
 
 Each successful request via `SERequestManager` returns `SEResponse` containing `data` and `meta`.
 
@@ -181,53 +181,11 @@ SERequestManager.shared.createConnectSession(params: connectSessionParams) { res
 
 ```
 
-## SEAPIRequestManager
-
-A class designed with convenience methods for interacting with and querying the Salt Edge API. Contains methods for fetching entities (Connections, Transactions, Accounts, et al.), for requesting connect url for connecting, reconnecting and refreshing Connections via a `SEWebView`, and also for connecting Connections via the REST API.
-
-Each successful request via `SEAPIRequestManager` returns `SEResponse` containing `data` and `meta`.
-
-Each failed request returns standard Swift `Error` .
-
-### Example
-
-```swift
-let params = SECustomerParams(identifier: "your-customer-unique-id")
-SERequestManager.shared.createCustomer(with: params) { response in
-	switch response {
-	case .success(let value):
-		// Save customer secret to your storage and the link it with API manager
-		SERequestManager.shared.set(customerSecret: value.data.secret)
-	case .failure(let error):
-		// Handle error
-	}
-}
-```
-
-Use the manager to interact with the provided API:
-
-```swift
-let connectionParams = SEConnectionParams(
-    consent: SEConsent(scopes: ["account_details", "transactions_details"]),
-    countryCode: "XF",
-    providerCode: "fakebank_simple_xf",
-    credentials: ["login": "username", "password": "secret"]
-)
-SERequestManager.shared.createConnection(with: connectionParams) { response in
-    switch response {
-    case .success(let value):
-	    // value.data is a valid SEConnection
-    case .failure(let error):
-    	// Handle error
-    }
-}
-```
-
 ## Models
 
-There are some provided models for serializing the objects received in the API responses. These represent the Providers, Connections, Accounts, Transactions, provider fields and their options. Whenever you request a resource that returns one of these types, they will always get serialized into Swift structs. For instance, the `getAllTransactions(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>)` method has a `SEResponse` containing `data` and `meta` where `data` is `[SETransaction]` in it's success callback.
+There are some provided models for serializing the objects received in the API responses. These represent the Providers, Connections, Accounts, Transactions, provider fields and their options. Whenever you request a resource that returns one of these types, they will always get serialized into Swift structures. For instance, the `getAllTransactions(for connectionSecret: String, params: SETransactionParams? = nil, completion: SEHTTPResponse<[SETransaction]>)` method has a `SEResponse` containing `data` and `meta` where `data` is `[SETransaction]` in it's success callback.
 
-Models contained within the components:
+Models, contained within the components:
 
 * `SEProvider`
 * `SEConnection`
@@ -247,7 +205,7 @@ For a supplementary description of the models listed above that is not included 
 
 ### Models extra
 
-Some of models has `extra` field of type `[String: Any]`. In case you need to get any field, you may do next:
+Some of models have `extra` field of type `[String: Any]`. In case you need to get any field, you can do the following:
 
 ```swift
 let account = SEAccount()
@@ -257,7 +215,7 @@ guard let accountExtra = account.extra else { return }
 let anyValue = accountExtra["string_key"]
 ```
 
-Some of key-pairs has predifinied extensions:
+Some of key-pairs have predifinied extensions:
 
 ```swift
 let transaction = SETransaction()
@@ -273,7 +231,7 @@ Documentation is available for all of the components. Use quick documentation (A
 
 ## Running the demo
 
-To run the demo app contained in here, you have to set the demo with your App ID, App Secret and choose desired API.
+To run the contained here demo app, you have to set the demo with your App ID, App Secret and choose desired API.
 
 To setup Salt Edge API, call:
 ```swift
@@ -288,7 +246,7 @@ The current version of the SDK is [3.3.9](https://github.com/saltedge/saltedge-i
 
 ## Security
 
-The SDK use SSL pinning enabled. That means that every API request that originates in `SEAPIRequestManager` will have SSL certificate validation.
+The SDK uses SSL pinning. This means that every API request that originates in `SEAPIRequestManager` will have SSL certificate validation.
 
 #### Since version 1.1.0
 
