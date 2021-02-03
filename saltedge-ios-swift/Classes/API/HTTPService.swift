@@ -156,7 +156,7 @@ struct HTTPService<T: Decodable> {
             }
         }
 
-        if (SERequestManager.shared.sslPinningEnabled) {
+        if SERequestManager.shared.sslPinningEnabled {
             TrustKitHelper.setup { error in
                 if let error = error {
                     completion?(.failure(error))

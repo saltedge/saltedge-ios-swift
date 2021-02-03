@@ -103,7 +103,7 @@ final class ConnectViewController: UIViewController {
             vc.preferredBarTintColor = .systemBlue
             vc.preferredControlTintColor = .white
         }
-        UIWindow.topViewController?.present(vc, animated: true, completion: nil)
+        UIApplication.topViewController?.present(vc, animated: true)
     }
 
     private func createSession() {

@@ -45,13 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let connectionSecret = url.connectionSecret {
            UserDefaultsHelper.append(connectionSecret: connectionSecret)
         }
-        
-        if let safariVc = UIWindow.topViewController as? SFSafariViewController {
+
+        if let safariVc = UIApplication.topViewController as? SFSafariViewController {
             safariVc.dismiss(animated: true)
         }
 
         if let connectVC = connectViewController {
-            connectVC.dismiss(animated: true)
 
             let alert = UIAlertController(title: "Redirect", message: "Redirect finished.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))

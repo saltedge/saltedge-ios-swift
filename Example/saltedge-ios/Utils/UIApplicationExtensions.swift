@@ -8,9 +8,8 @@
 
 import UIKit
 
-extension UIWindow {
+extension UIApplication {
     static var topViewController: UIViewController? {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.window?.rootViewController as? UITabBarController
+        return shared.windows.first?.rootViewController
     }
 }
