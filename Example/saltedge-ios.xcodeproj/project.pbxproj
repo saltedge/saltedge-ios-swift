@@ -13,6 +13,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		95316E0325CAAD0400FAB796 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95316E0225CAAD0400FAB796 /* UIWindowExtensions.swift */; };
 		9D0E7BA222F426C9002D4DE9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E7BA122F426C9002D4DE9 /* MainTabBarViewController.swift */; };
 		9D98546D230FF7C300913C3D /* InteractiveAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D98546C230FF7C300913C3D /* InteractiveAlertView.swift */; };
 		AE05129D201F3EE1000E5F64 /* OptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE05129C201F3EE1000E5F64 /* OptionsButton.swift */; };
@@ -71,6 +72,7 @@
 		85538029745105922B2922DF /* SaltEdge-iOS-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "SaltEdge-iOS-Swift.podspec"; path = "../SaltEdge-iOS-Swift.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9091C52E7B273302ABC0152C /* Pods_saltedge_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_saltedge_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9272D600EC690297D58E6E14 /* Pods-saltedge-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-saltedge-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-saltedge-ios_Example/Pods-saltedge-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		95316E0225CAAD0400FAB796 /* UIWindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowExtensions.swift; sourceTree = "<group>"; };
 		9D0E7BA122F426C9002D4DE9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		9D536B3222526F4E00410CF2 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		9D98546C230FF7C300913C3D /* InteractiveAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveAlertView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				AE299B4220178F440033FCFB /* UserDefaultsHelper.swift */,
 				AEEF47A2201B82CE0076CD98 /* StringExtensions.swift */,
 				FAC9BA6D22B2402200310F6B /* LocaleExtensions.swift */,
+				95316E0225CAAD0400FAB796 /* UIWindowExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				AE299B492017A8F80033FCFB /* TransactionsViewController.swift in Sources */,
 				AE299B4E2017AD4E0033FCFB /* TransactionTableViewCell.swift in Sources */,
 				AEEF47A3201B82CE0076CD98 /* StringExtensions.swift in Sources */,
+				95316E0325CAAD0400FAB796 /* UIWindowExtensions.swift in Sources */,
 				AE9F52CA20164A7A0057FE09 /* CreateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

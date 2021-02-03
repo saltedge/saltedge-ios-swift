@@ -8,8 +8,9 @@
 
 import UIKit
 import SaltEdge
-import WebKit
 import PKHUD
+import WebKit
+import SafariServices
 
 final class ConnectViewController: UIViewController {
     private var provider: SEProvider?
@@ -70,6 +71,10 @@ final class ConnectViewController: UIViewController {
             createSession()
         }
     }
+    
+    func switchToConnectionsController() {
+        tabBarController?.selectedIndex = 2
+    }
 
     private func handleConnectSessionResponse(_ response: SEResult<SEResponse<SEConnectSessionResponse>>) {
         switch response {
@@ -79,8 +84,8 @@ final class ConnectViewController: UIViewController {
             guard let url = URL(string: value.data.connectUrl) else { return }
 
             // Check if provider mode is "oauth". Then try to open it in external browser or app.
-            if let provider = self.provider, provider.isOAuth, UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
+            if let provider = self.provider, provider.isOAuth {
+                openLinkInSafari(url)
             } else {
                 let request = URLRequest(url: url)
                 webView.load(request)
@@ -90,9 +95,15 @@ final class ConnectViewController: UIViewController {
             HUD.flash(.labeledError(title: "Error", subtitle: error.localizedDescription), delay: 3.0)
         }
     }
-
-    private func switchToConnectionsController() {
-        tabBarController?.selectedIndex = 2
+    
+    private func openLinkInSafari(_ redirectURL: URL) {
+        let vc = SFSafariViewController(url: redirectURL)
+        vc.modalPresentationStyle = .overCurrentContext
+        if #available(iOS 10.0, *) {
+            vc.preferredBarTintColor = .systemBlue
+            vc.preferredControlTintColor = .white
+        }
+        UIWindow.topViewController?.present(vc, animated: true, completion: nil)
     }
 
     private func createSession() {

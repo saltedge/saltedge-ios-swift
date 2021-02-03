@@ -36,6 +36,10 @@ extension URL {
         
         return parameters
     }
+    
+    public var connectionSecret: String? {
+        return queryParameters?["connection_secret"]
+    }
 }
 
 // MARK: SEWebView URL extensions

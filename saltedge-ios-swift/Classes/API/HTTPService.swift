@@ -77,7 +77,7 @@ private class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
                     completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
             let serverTrust = challenge.protectionSpace.serverTrust {
-            
+
             guard isSSLPinningEnabled else {
                 completionHandler(.useCredential, URLCredential(trust: serverTrust))
                 return
@@ -156,12 +156,16 @@ struct HTTPService<T: Decodable> {
             }
         }
 
-        TrustKitHelper.setup { error in
-            if let error = error {
-                completion?(.failure(error))
-            } else {
-                task.resume()
+        if (SERequestManager.shared.sslPinningEnabled) {
+            TrustKitHelper.setup { error in
+                if let error = error {
+                    completion?(.failure(error))
+                } else {
+                    task.resume()
+                }
             }
+        } else {
+            task.resume()
         }
     }
 }
