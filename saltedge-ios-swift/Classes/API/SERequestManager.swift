@@ -28,8 +28,10 @@ public class SERequestManager {
     private init() {}
 
     public static let shared = SERequestManager()
+    public var sslPinningEnabled: Bool = true
     
     public func set(sslPinningEnabled: Bool) {
+        self.sslPinningEnabled = sslPinningEnabled
         SessionManager.initializeManager(isSSLPinningEnabled: sslPinningEnabled)
     }
     

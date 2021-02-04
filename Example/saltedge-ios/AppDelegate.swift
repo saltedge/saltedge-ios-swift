@@ -9,18 +9,17 @@
 import UIKit
 import PKHUD
 import SaltEdge
+import SafariServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static let returnToApplicationUrl: String = "saltedge://sdk.example" // the URL has to have a host, otherwise won't be a valid URL on the backend
+    static let customerIdPrefix: String = "ios-sdk-customer-identifier"
 
     var window: UIWindow?
 
     var tabBar: UITabBarController? {
-        if let tabBar = window?.rootViewController as? UITabBarController {
-            return tabBar
-        }
-        return nil
+        return window?.rootViewController as? UITabBarController
     }
     
     var createViewController: CreateViewController? {
@@ -42,6 +41,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+        if let connectionSecret = url.connectionSecret {
+           UserDefaultsHelper.append(connectionSecret: connectionSecret)
+        }
+
+        if let safariVc = UIApplication.topViewController as? SFSafariViewController {
+            safariVc.dismiss(animated: true)
+        }
+
+        if let connectVC = connectViewController {
+
+            let alert = UIAlertController(title: "Redirect", message: "Redirect finished.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            connectVC.present(alert, animated: true)
+            connectVC.switchToConnectionsController()
+        }
+
         if let createVC = createViewController {
             HUD.show(.labeledProgress(title: "Fetching OAuth Connection", subtitle: nil))
             SERequestManager.shared.handleOpen(url: url, connectionFetchingDelegate: createVC)
@@ -51,9 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let appId: String = "your-app-id"
-        let appSecret: String = "your-app-secret"
-        let customerId: String = "customer-secret"
+        let appId: String = "application-id"
+        let appSecret: String = "application-secret"
 
         // By default SSL Pinning is enabled, to disable it use:
         // SERequestManager.shared.set(sslPinningEnabled: false)
@@ -67,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let secret = UserDefaultsHelper.customerSecret {
             SERequestManager.shared.set(customerSecret: secret)
         } else {
-            let params = SECustomerParams(identifier: customerId)
+            let params = SECustomerParams(identifier: "\(AppDelegate.customerIdPrefix)-\(UUID().uuidString)")
             SERequestManager.shared.createCustomer(with: params) { response in
                 switch response {
                 case .success(let value):
