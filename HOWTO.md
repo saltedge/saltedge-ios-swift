@@ -1,6 +1,7 @@
 # How To...
   
-* [Connect OAuth provider with Client Keys](#connect-oauth-provider-with-client-keys)
+* [Connect OAuth provider with Client Keys](#connect-oauth-provider-with-client-keys)  
+* [App-2-App redirect](#app-2-app-redirect)  
 
 ---
 ## Connect OAuth provider with Client Keys
@@ -71,6 +72,23 @@ Read about it in [Salt Edge Documentation](https://docs.saltedge.com/general/#cl
             return true
         }
     ```
+  
+## App-2-App redirect  
 
+The most common case of Salt Edge Connect usage is when TPP application initiate connect of Account and opens Salt Edge Connect url in WKWebView.
+There are a lot of banks which require authentication/authorization in bank applications, but in that case redirection outside of saltedge.com will remain in WKWebView and flow will get stuck.
+  
+First solution is to open all Salt Edge Connect URL's (or URL's for `oauth` providers) in external browser/application.  
+![app-2-app redirect base flow](/docs/app-2-app-1.png)  
+  
+Second solution is to open Salt Edge Connect in the WKWebView and handle all redirections outside Salt Edge (saltedge.com) and open them in external browser/application.  
+![app-2-app redirect hybrid flow](/docs/app-2-app-2.png)  
+  
+Instead of WKWebView you can open url in SFSafariViewController.  
+  
+After successful authentication user will be redirected back to TPP app. 
+We propose to use deep-link with custom scheme (like: `mytpp://domain.name/action`) as return url. 
+Same type of deeplink uniquely identify your application in the system and eliminate doubts where to redirect, as well as they are easy to implement.  
+  
 ---
-Copyright © 2014 - 2019 Salt Edge Inc. https://www.saltedge.com
+Copyright © 2014 Salt Edge Inc. https://www.saltedge.com
