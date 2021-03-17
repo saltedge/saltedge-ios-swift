@@ -155,7 +155,7 @@ class CreateViewController: UIViewController {
         }
     }
     
-    private func createRequiredFields(for fields: [SERequiredProviderField]) {
+    private func createRequiredFields(for fields: [SEProviderField]) {
         fieldsStackView.arrangedSubviews.forEach { fieldsStackView.removeArrangedSubview($0) }
         
         fieldsStackView.axis = .vertical
