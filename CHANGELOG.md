@@ -1,11 +1,16 @@
 # Changelog
 
+## [3.3.11] - 2021-03-17
+
+### Fixed.
+
+- Fixed parsing of `interactive_fields` and `required_fileds` in `SEProvider`. 
+
 ## [3.3.10] - 2021-02-03
 
 ### Fixed.
 
 - Fixed SSL pinning.
-
 
 ## [3.3.9] - 2020-11-02
 

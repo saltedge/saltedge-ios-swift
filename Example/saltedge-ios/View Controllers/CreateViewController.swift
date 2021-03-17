@@ -144,7 +144,7 @@ class CreateViewController: UIViewController {
                 self?.provider = value.data
                 
                 guard let requiredFields = value.data.requiredFields else { return }
-                
+                                
                 self?.createRequiredFields(for: requiredFields)
                 self?.descriptionLabel.text = value.data.instruction
                 HUD.hide(animated: true)
@@ -155,7 +155,7 @@ class CreateViewController: UIViewController {
         }
     }
     
-    private func createRequiredFields(for fields: [SEProviderField]) {
+    private func createRequiredFields(for fields: [SERequiredProviderField]) {
         fieldsStackView.arrangedSubviews.forEach { fieldsStackView.removeArrangedSubview($0) }
         
         fieldsStackView.axis = .vertical

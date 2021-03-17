@@ -56,8 +56,8 @@ public struct SEProvider: Decodable {
     public let supportedIframeEmbedding: Bool
     public let createdAt: String
     public let updatedAt: String
-    public let requiredFields: [SEProviderField]?
-    public let interactiveFields: [SEProviderField]?
+    public let requiredFields: [SERequiredProviderField]?
+    public let interactiveFields: [SEInteractiveProviderField]?
     
     public var isOAuth: Bool {
         return mode == "oauth"
@@ -134,12 +134,43 @@ public struct SEProvider: Decodable {
         supportedIframeEmbedding = try container.decode(Bool.self, forKey: .supportedIframeEmbedding)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
-        requiredFields = try container.decodeIfPresent([SEProviderField].self, forKey: .requiredFields)
-        interactiveFields = try container.decodeIfPresent([SEProviderField].self, forKey: .interactiveFields)
+        requiredFields = try container.decodeIfPresent([SERequiredProviderField].self, forKey: .requiredFields)
+        interactiveFields = try container.decodeIfPresent([SEInteractiveProviderField].self, forKey: .interactiveFields)
     }
 }
 
-public struct SEProviderField: Decodable {
+public struct SEInteractiveProviderField: Decodable {
+    public let nature: String
+    public let name: String
+    public let englishName: String
+    public let localizedName: String
+    public let purpleOptional: Bool
+    public let position: Int
+    public let extra: [String: Any]
+    
+    enum CodingKeys: String, CodingKey {
+        case nature = "nature"
+        case name = "name"
+        case englishName = "english_name"
+        case localizedName = "localized_name"
+        case purpleOptional = "optional"
+        case position = "position"
+        case extra = "extra"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nature = try container.decode(String.self, forKey: .nature)
+        name = try container.decode(String.self, forKey: .name)
+        englishName = try container.decode(String.self, forKey: .englishName)
+        localizedName = try container.decode(String.self, forKey: .localizedName)
+        purpleOptional = try container.decode(Bool.self, forKey: .purpleOptional)
+        position = try container.decode(Int.self, forKey: .position)
+        extra = try container.decode([String: Any].self, forKey: .extra)
+    }
+}
+
+public struct SERequiredProviderField: Decodable {
     public let nature: String
     public let name: String
     public let englishName: String

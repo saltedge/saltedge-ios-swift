@@ -12,6 +12,7 @@ import SaltEdge
 final class OptionsButton: UIButton {
     let availableOptions: [SEProviderFieldOption]
     let fieldName: String
+
     init(availableOptions: [SEProviderFieldOption], fieldName: String) {
         self.availableOptions = availableOptions
         self.fieldName = fieldName
