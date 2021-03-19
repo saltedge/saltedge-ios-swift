@@ -144,7 +144,7 @@ class CreateViewController: UIViewController {
                 self?.provider = value.data
                 
                 guard let requiredFields = value.data.requiredFields else { return }
-                
+                                
                 self?.createRequiredFields(for: requiredFields)
                 self?.descriptionLabel.text = value.data.instruction
                 HUD.hide(animated: true)

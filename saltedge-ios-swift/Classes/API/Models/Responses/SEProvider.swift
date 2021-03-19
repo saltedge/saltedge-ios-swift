@@ -146,6 +146,7 @@ public struct SEProviderField: Decodable {
     public let localizedName: String
     public let purpleOptional: Bool
     public let position: Int
+    public let extra: [String: Any]
     public let fieldOptions: [SEProviderFieldOption]?
     
     enum CodingKeys: String, CodingKey {
@@ -155,7 +156,20 @@ public struct SEProviderField: Decodable {
         case localizedName = "localized_name"
         case purpleOptional = "optional"
         case position = "position"
+        case extra = "extra"
         case fieldOptions = "field_options"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nature = try container.decode(String.self, forKey: .nature)
+        name = try container.decode(String.self, forKey: .name)
+        englishName = try container.decode(String.self, forKey: .englishName)
+        localizedName = try container.decode(String.self, forKey: .localizedName)
+        purpleOptional = try container.decode(Bool.self, forKey: .purpleOptional)
+        position = try container.decode(Int.self, forKey: .position)
+        extra = try container.decode([String: Any].self, forKey: .extra)
+        fieldOptions = try container.decodeIfPresent([SEProviderFieldOption].self, forKey: .fieldOptions)
     }
 }
 
