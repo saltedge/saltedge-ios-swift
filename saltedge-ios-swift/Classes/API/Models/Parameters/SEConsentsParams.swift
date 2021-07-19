@@ -24,7 +24,7 @@
 
 import Foundation
 
-public class SEBaseConsentsParams: Encodable, ParametersEncodable {
+public class SEBaseConsentsParams: URLEncodable, ParametersEncodable {
     public let id: String?
     public let connectionId: String?
     public let customerId: String?
