@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.14] - 2021-07-19
+
+### Fixed.
+
+- Fixed `SEBaseConsentsParams` to be url encodable
+
 ## [3.3.13] - 2021-03-17
 
 ### Fixed.
