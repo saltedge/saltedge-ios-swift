@@ -39,19 +39,33 @@ protocol DictionaryRepresentable {
 
 extension DictionaryRepresentable {
     var dictionaryRepresentation: [String: Any] {
-        let mirror = Mirror(reflecting: self)
-        var result: [String: Any] = [:]
-        
-        for attribute in mirror.children {
-            if let label = attribute.label,
-                let value = unwrap(attribute.value) {
-                result[label.toSnakeCase] = value
+        Mirror(reflecting: self).toDictionary
+    }
+}
+
+private extension Mirror {
+    var toDictionary: [String: Any] {
+        var result = [String: Any]()
+
+        // Properties of the current instance
+        for attribute in children {
+            if let propertyName = attribute.label,
+               let value = unwrap(attribute.value) {
+                result[propertyName.toSnakeCase] = value
             }
         }
+
+        // Adding properties of the superclass
+        if let parent = superclassMirror {
+            for (propertyName, value) in parent.toDictionary {
+                result[propertyName] = value
+            }
+        }
+
         return result
     }
-    
-    private func unwrap(_ any: Any) -> Any? {
+
+    func unwrap(_ any: Any) -> Any? {
         let mi = Mirror(reflecting: any)
         if mi.displayStyle != .optional {
             return any
@@ -75,5 +89,3 @@ private extension String {
         return result
     }
 }
-
-
