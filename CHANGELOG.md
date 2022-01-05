@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.4.0] - 2022-01-05
+
+### Fixed.
+
+- Fixed dictionary encoding
+
 ## [3.3.14] - 2021-07-19
 
 ### Fixed.
