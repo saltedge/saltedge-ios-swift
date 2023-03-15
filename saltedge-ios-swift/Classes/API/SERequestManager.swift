@@ -28,12 +28,6 @@ public class SERequestManager {
     private init() {}
 
     public static let shared = SERequestManager()
-    public var sslPinningEnabled: Bool = true
-    
-    public func set(sslPinningEnabled: Bool) {
-        self.sslPinningEnabled = sslPinningEnabled
-        SessionManager.initializeManager(isSSLPinningEnabled: sslPinningEnabled)
-    }
     
     /**
      Links your Client ID and App Secret to the request manager. All outgoing requests will have the proper app-related HTTP headers set by default.

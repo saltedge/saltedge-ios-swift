@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.0] - 2023-03-15
+
+### Changed.
+
+- Removed SSL Pinning.
+
 ## [3.4.0] - 2022-01-05
 
 ### Fixed.

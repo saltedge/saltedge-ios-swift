@@ -22,7 +22,6 @@
 //  THE SOFTWARE.
 
 import Foundation
-import TrustKit
 
 /**
  Used to represent whether a request was successful or encountered an error.
@@ -36,58 +35,6 @@ import TrustKit
 public enum SEResult<T: Decodable> {
     case success(T)
     case failure(Error)
-}
-
-struct SessionManager {
-    static var shared: URLSession {
-        guard sharedManager == nil else { return sharedManager }
-        
-        initializeManager()
-        return sharedManager
-    }
-    
-    private static var sharedManager: URLSession!
-    
-    static func initializeManager(isSSLPinningEnabled: Bool = true) {
-        sharedManager = createSession(isSSLPinningEnabled: isSSLPinningEnabled)
-    }
-    
-    static func createSession(isSSLPinningEnabled: Bool = true) -> URLSession {
-        let config: URLSessionConfiguration = .default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-    
-        return URLSession(
-            configuration: config,
-            delegate: URLSessionPinningDelegate(isSSLPinningEnabled: isSSLPinningEnabled),
-            delegateQueue: nil
-        )
-    }
-}
-
-private class URLSessionPinningDelegate: NSObject, URLSessionDelegate {
-    let isSSLPinningEnabled: Bool
-    
-    init(isSSLPinningEnabled: Bool) {
-        self.isSSLPinningEnabled = isSSLPinningEnabled
-        super.init()
-    }
-  
-    func urlSession(_ session: URLSession,
-                    didReceive challenge: URLAuthenticationChallenge,
-                    completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Swift.Void) {
-        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
-            let serverTrust = challenge.protectionSpace.serverTrust {
-
-            guard isSSLPinningEnabled else {
-                completionHandler(.useCredential, URLCredential(trust: serverTrust))
-                return
-            }
-            
-            if !TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completionHandler) {
-                completionHandler(.performDefaultHandling, nil)
-            }
-        }
-    }
 }
 
 /**
@@ -137,7 +84,11 @@ struct HTTPService<T: Decodable> {
     }
 
     static func makeRequest(_ request: URLRequest, completion: SEHTTPResponse<T>) {
-        let task = SessionManager.shared.dataTask(with: request) { data, response, error in
+        // NOTE: Uncomment this to debug response data
+        // let urlString = request.url?.absoluteString ?? ""
+        // print("🚀 Running request: \(request.httpMethod ?? "") - \(urlString)")
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategyFormatters = [DateFormatter.yyyyMMdd, DateFormatter.iso8601DateTime]
             
@@ -148,6 +99,9 @@ struct HTTPService<T: Decodable> {
                 return
             }
 
+            // NOTE: Uncomment this to debug response data
+            // print("Response: ", String(data: jsonData, encoding: .utf8))
+
             do {
                 let model = try decoder.decode(SEResponse<T>.self, from: jsonData)
                 DispatchQueue.main.async { completion?(.success(model)) }
@@ -156,17 +110,7 @@ struct HTTPService<T: Decodable> {
             }
         }
 
-        if SERequestManager.shared.sslPinningEnabled {
-            TrustKitHelper.setup { error in
-                if let error = error {
-                    completion?(.failure(error))
-                } else {
-                    task.resume()
-                }
-            }
-        } else {
-            task.resume()
-        }
+        task.resume()
     }
 }
 
@@ -174,13 +118,16 @@ func handleResponse(from data: Data?, error: Error?, decoder: JSONDecoder) -> (D
     if let error = error {
         return (nil, error)
     }
-    
+
     guard let jsonData = data else {
         // -1017 -- The connection cannot parse the server’s response.
         let error = NSError(domain: "", code: -1017, userInfo: [NSLocalizedDescriptionKey : "Data was not retrieved from request"]) as Error
         return (nil, error)
     }
-    
+
+    // NOTE: Uncomment this to debug response data
+    // print("Error Response: ", String(data: jsonData, encoding: .utf8))
+
     if let error = try? decoder.decode(SEError.self, from: jsonData) {
         let err = NSError(domain: error.errorClass, code: 0, userInfo: [NSLocalizedDescriptionKey : error.errorMessage]) as Error
         return (jsonData, err)

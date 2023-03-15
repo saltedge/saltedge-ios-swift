@@ -70,9 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appId: String = "application-id"
         let appSecret: String = "application-secret"
 
-        // By default SSL Pinning is enabled, to disable it use:
-        // SERequestManager.shared.set(sslPinningEnabled: false)
-
         SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -88,7 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .success(let value):
                     UserDefaultsHelper.customerSecret = value.data.secret
                     SERequestManager.shared.set(customerSecret: value.data.secret)
-                case .failure(let error): print(error)
+                case .failure(let error):
+                    print(error)
                 }
             }
         }
