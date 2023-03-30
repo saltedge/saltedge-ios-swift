@@ -46,12 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            UserDefaultsHelper.append(connectionSecret: connectionSecret)
         }
 
-        if let safariVc = UIApplication.topViewController as? SFSafariViewController {
+        if let safariVc = UIApplication.shared.keyWindow?.rootViewController as? SFSafariViewController {
             safariVc.dismiss(animated: true)
         }
 
         if let connectVC = connectViewController {
-
             let alert = UIAlertController(title: "Redirect", message: "Redirect finished.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
             connectVC.present(alert, animated: true)
