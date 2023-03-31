@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.1] - 2023-03-31
+
+### Added.
+
+- Added parsing of `interactive_fields_options` in `SEStage`.
+
 ## [3.5.0] - 2023-03-15
 
 ### Changed.

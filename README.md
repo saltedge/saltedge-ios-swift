@@ -33,7 +33,7 @@ Last SDK version (3+) supports Salt Edge API v5.
 for Salt Edge API v5 use
 
 ```ruby
-pod 'SaltEdge-iOS-Swift', '~> 3.5.0'
+pod 'SaltEdge-iOS-Swift', '~> 3.5.1'
 ```
 
 for Salt Edge API v4 (***Deprecated***) use 
@@ -238,11 +238,11 @@ To setup Salt Edge API, call:
 SERequestManager.shared.set(appId: appId, appSecret: appSecret)
 ```
 
-Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and corresponding App Secret in [AppDelegate.swift:49-51](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L49-L51).
+Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and corresponding App Secret in [AppDelegate.swift:69-72](https://github.com/saltedge/saltedge-ios-swift/blob/master/Example/saltedge-ios/AppDelegate.swift#L69-L72).
 
 ## Versioning
 
-The current version of the SDK is [3.5.0](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.5.0), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
+The current version of the SDK is [3.5.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.5.1), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
 #### Since version 1.1.0
 
