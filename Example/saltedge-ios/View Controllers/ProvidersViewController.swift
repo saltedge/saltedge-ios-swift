@@ -37,7 +37,7 @@ class ProvidersViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
 
-        SERequestManager.shared.getProviders { [weak self] response in
+        SERequestManager.shared.getAllProviders { [weak self] response in
             switch response {
             case .success(let value):
                 HUD.hide(animated: true)
