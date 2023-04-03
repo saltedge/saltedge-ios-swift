@@ -248,7 +248,9 @@ extension CreateViewController: SEConnectionFetchingDelegate {
     
     func interactiveInputRequested(for connection: SEConnection) {
         HUD.hide(animated: true)
-        print("Interactive fields options: ", connection.lastAttempt.lastStage?.interactiveFieldsOptions)
+        if let interactiveFieldsOptions = connection.lastAttempt.lastStage?.interactiveFieldsOptions {
+            print("Interactive fields options: ", interactiveFieldsOptions)
+        }
         showInteractiveAlertView(title: connection.providerName,
                                  message: connection.lastAttempt.lastStage?.interactiveHtml?.htmlToString,
                                  fields: connection.lastAttempt.lastStage?.interactiveFieldsNames) { credentials in
