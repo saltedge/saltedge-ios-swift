@@ -244,10 +244,6 @@ Set up the `appId`,  `appSecret` and `customerId` constants to your App ID and c
 
 The current version of the SDK is [3.5.1](https://github.com/saltedge/saltedge-ios-swift/releases/tag/3.5.1), and supports the latest available version of Salt Edge API. Any backward-incompatible changes in the API will result in changes to the SDK.
 
-#### Since version 1.1.0
-
-The SDK has moved to [HTTP Public Key Pinning (HPKP)](https://docs.saltedge.com/general/#security)
-
 ## Changelog
 
 See the [Changelog](CHANGELOG.md) file.
