@@ -34,6 +34,7 @@ class SEConnectionFetcher {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.create(params)) { response in
             switch response {
             case .success(let value):
+                completion?(.success(value))
                 self.requestPolling(for: value.data, fetchingDelegate: fetchingDelegate)
             case .failure(let error):
                 completion?(.failure(error))
