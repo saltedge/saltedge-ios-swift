@@ -10,7 +10,7 @@ let package = Package(
    targets: [
        .target(
            name: "SaltEdge",
-           path: "SaltEdge"
+           path: "saltedge-ios-swift/Classes"
        )
    ]
 )
