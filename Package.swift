@@ -1,0 +1,1 @@
+.package(url: "https://github.com/Dobin-Pte-Ltd/saltedge-ios-swift.git", .branch("master"))
