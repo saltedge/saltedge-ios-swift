@@ -130,6 +130,7 @@ class SEConnectionFetcher {
     
     private static func handleSuccessPollResponse(for connection: SEConnection, fetchingDelegate: SEConnectionFetchingDelegate) {
         switch connection.stage {
+            
         case "interactive":
             fetchingDelegate.interactiveInputRequested(for: connection)
         case "finish":
@@ -139,6 +140,7 @@ class SEConnectionFetcher {
                 fetchingDelegate.successfullyFinishedFetching(connection: connection)
             }
         default:
+            fetchingDelegate.connectionStageDidChange(connection)
             self.requestPolling(for: connection, fetchingDelegate: fetchingDelegate)
         }
     }
