@@ -50,4 +50,9 @@ public protocol SEConnectionFetchingDelegate: class {
      - parameter connection: The connection which was successfully connected and finished fetching.
      */
     func successfullyFinishedFetching(connection: SEConnection)
+    
+    /**
+     Sent to delegate when the intermediate conneciton stage changes (not error, success or interactive)
+     */
+    func connectionStageDidChange(_ connection: SEConnection)
 }

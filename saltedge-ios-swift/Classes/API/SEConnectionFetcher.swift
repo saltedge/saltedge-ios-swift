@@ -34,6 +34,7 @@ class SEConnectionFetcher {
         HTTPService<SEConnection>.makeRequest(ConnectionRouter.create(params)) { response in
             switch response {
             case .success(let value):
+                completion?(.success(value))
                 self.requestPolling(for: value.data, fetchingDelegate: fetchingDelegate)
             case .failure(let error):
                 completion?(.failure(error))
@@ -129,6 +130,7 @@ class SEConnectionFetcher {
     
     private static func handleSuccessPollResponse(for connection: SEConnection, fetchingDelegate: SEConnectionFetchingDelegate) {
         switch connection.stage {
+            
         case "interactive":
             fetchingDelegate.interactiveInputRequested(for: connection)
         case "finish":
@@ -138,6 +140,7 @@ class SEConnectionFetcher {
                 fetchingDelegate.successfullyFinishedFetching(connection: connection)
             }
         default:
+            fetchingDelegate.connectionStageDidChange(connection)
             self.requestPolling(for: connection, fetchingDelegate: fetchingDelegate)
         }
     }
