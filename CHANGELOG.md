@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.5.2] - 2023-04-19
+
+### Added.
+
+- Added a success completion block on create connection in `SEConnectionFetcher`.
+
 ## [3.5.1] - 2023-03-31
 
 ### Added.
